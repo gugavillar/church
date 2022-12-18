@@ -6,24 +6,24 @@ import { Logo } from './Logo'
 import { MenuContent } from './MenuContent'
 
 type MenuProps = {
-  isLargerThan640: boolean
+  isLargerThan768: boolean
 }
 
-export const Menu = ({ isLargerThan640 }: MenuProps) => {
+export const Menu = ({ isLargerThan768 }: MenuProps) => {
   return (
     <Flex
       gap='4rem'
       width='100%'
-      {...(!isLargerThan640 && { justify: 'space-between' })}
+      {...(!isLargerThan768 && { justify: 'space-between' })}
     >
       <Logo />
-      {isLargerThan640 && (
+      {isLargerThan768 && (
         <VerticalDivider
           height='5rem'
           opacity='0.1'
         />
       )}
-      <MenuContent isLargerThan640={isLargerThan640} />
+      <MenuContent isLargerThan768={isLargerThan768} />
     </Flex>
   )
 }

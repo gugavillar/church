@@ -7,13 +7,13 @@ type ItemMenuProps = {
     url: string
     label: string
   }
-  isLargerThan640: boolean
+  isLargerThan768: boolean
 }
 
-export const ItemMenu = ({ item: { label, url }, isLargerThan640 }: ItemMenuProps) => {
+export const ItemMenu = ({ item: { label, url }, isLargerThan768 }: ItemMenuProps) => {
   const { asPath } = useRouter()
 
-  if (!isLargerThan640) {
+  if (!isLargerThan768) {
     return (
       <Text py='0.875rem'>
         <Link

@@ -12,13 +12,13 @@ export const itensMenu = [
 ] as const
 
 type MenuContentProps = {
-  isLargerThan640: boolean
+  isLargerThan768: boolean
 }
 
-export const MenuContent = ({ isLargerThan640 }: MenuContentProps) => {
+export const MenuContent = ({ isLargerThan768 }: MenuContentProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
 
-  if (!isLargerThan640) {
+  if (!isLargerThan768) {
     return (
       <Flex align='center'>
         <Button
@@ -37,7 +37,7 @@ export const MenuContent = ({ isLargerThan640 }: MenuContentProps) => {
           isOpen={isOpen}
           onClose={onClose}
           itensMenu={itensMenu}
-          isLargerThan640={isLargerThan640}
+          isLargerThan768={isLargerThan768}
         />
       </Flex>
     )
@@ -52,7 +52,7 @@ export const MenuContent = ({ isLargerThan640 }: MenuContentProps) => {
         <ItemMenu
           key={item.label}
           item={item}
-          isLargerThan640={isLargerThan640}
+          isLargerThan768={isLargerThan768}
         />
       ))}
     </Flex>

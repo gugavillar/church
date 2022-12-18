@@ -9,17 +9,17 @@ type NavbarProps = {
 }
 
 export const Navbar = ({ actionButton }: NavbarProps) => {
-  const [isLargerThan640] = useMediaQuery('(min-width: 640px)')
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)')
   return (
     <Flex
       bg='black'
       height='5rem'
       justify='space-between'
       align='center'
-      px={['2rem', '6.875rem']}
+      px={{ base: '2rem', md: '2rem', lg: '6.875rem' }}
     >
-      <Menu isLargerThan640={isLargerThan640} />
-      {isLargerThan640 && actionButton}
+      <Menu isLargerThan768={isLargerThan768} />
+      {isLargerThan768 && actionButton}
     </Flex>
   )
 }

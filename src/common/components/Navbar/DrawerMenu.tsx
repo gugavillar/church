@@ -7,10 +7,10 @@ type DrawerMenuProps = {
   isOpen: boolean
   onClose: () => void
   itensMenu: typeof itensMenu
-  isLargerThan640: boolean
+  isLargerThan768: boolean
 }
 
-export const DrawerMenu = ({ isOpen, onClose, itensMenu, isLargerThan640 }: DrawerMenuProps) => {
+export const DrawerMenu = ({ isOpen, onClose, itensMenu, isLargerThan768 }: DrawerMenuProps) => {
   return (
     <Drawer
       isOpen={isOpen}
@@ -23,7 +23,7 @@ export const DrawerMenu = ({ isOpen, onClose, itensMenu, isLargerThan640 }: Draw
         <DrawerBody mt='4rem'>
           {itensMenu.map((item) => (
             <ItemMenu
-              isLargerThan640={isLargerThan640}
+              isLargerThan768={isLargerThan768}
               key={item.label}
               item={item}
             />
