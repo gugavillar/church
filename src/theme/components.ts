@@ -71,6 +71,12 @@ export const Link = defineStyleConfig({
     fontWeight: '400',
     lineHeight: '1.1719rem'
   },
+  sizes: {
+    sm: {
+      color: 'black',
+      fontSize: 'sm'
+    }
+  },
   variants: {
     active: {
       color: 'primary',
