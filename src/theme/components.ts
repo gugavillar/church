@@ -14,7 +14,8 @@ export const Button = defineStyleConfig({
     flexDirection: 'row',
     gap: '1rem',
     alignItems: 'center',
-    borderRadius: '0.75rem'
+    borderRadius: '0.75rem',
+    textTransform: 'uppercase'
   },
   variants: {
     primary: {
