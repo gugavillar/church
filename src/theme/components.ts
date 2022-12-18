@@ -48,7 +48,7 @@ export const Input = defineStyleConfig({
         borderRadius: '0.25rem',
         height: '4rem',
         padding: '1.25rem',
-        fontSize: '1rem',
+        fontSize: 'xs',
         lineHeight: '1.5rem',
         color: 'black',
         _placeholder: {
@@ -59,5 +59,22 @@ export const Input = defineStyleConfig({
   },
   defaultProps: {
     variant: 'defaultInput'
+  }
+})
+
+export const Link = defineStyleConfig({
+  baseStyle: {
+    color: 'white',
+    fontSize: 'xs',
+    textTransform: 'uppercase',
+    fontWeight: '400',
+    lineHeight: '1.1719rem'
+  },
+  variants: {
+    active: {
+      color: 'primary',
+      textDecoration: 'underline',
+      fontWeight: '700'
+    }
   }
 })
