@@ -40,7 +40,7 @@ export const MenuContent = ({ isLargerThan768, children }: MenuContentProps) => 
 
   return (
     <Flex
-      gap='3rem'
+      gap={12}
       align='center'
     >
       {children}

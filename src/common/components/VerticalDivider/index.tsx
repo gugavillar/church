@@ -1,7 +1,7 @@
 import { Center, Divider, FlexProps } from '@chakra-ui/react'
 
 type VerticalDividerProps = {
-  height?: string
+  height?: number | 'inherit'
 } & FlexProps
 
 export const VerticalDivider = ({ height = 'inherit', ...props }: VerticalDividerProps) => {

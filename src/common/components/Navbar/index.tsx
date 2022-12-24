@@ -14,10 +14,10 @@ export const Navbar = ({ actionButton }: NavbarProps) => {
     <Flex
       as='nav'
       bg='black'
-      height='5rem'
+      height={20}
       justify='space-between'
       align='center'
-      px={{ base: '2rem', md: '2rem', lg: '6.875rem' }}
+      px={{ base: 4, md: 4, lg: '6.875rem' }}
     >
       <Menu isLargerThan768={isLargerThan768} />
       {isLargerThan768 && actionButton}

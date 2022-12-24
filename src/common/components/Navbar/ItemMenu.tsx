@@ -15,9 +15,9 @@ export const ItemMenu = ({ item: { label, url }, isLargerThan768 }: ItemMenuProp
 
   if (!isLargerThan768) {
     return (
-      <Text py='0.875rem'>
+      <Text py={2}>
         <Link
-          size='sm'
+          size='xs'
           href={url}
           {...(asPath.includes(url) && { variant: 'active' })}
         >

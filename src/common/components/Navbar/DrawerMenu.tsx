@@ -18,7 +18,7 @@ export const DrawerMenu = ({ isOpen, onClose, children }: DrawerMenuProps) => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerBody mt='4rem'>{children}</DrawerBody>
+        <DrawerBody mt={16}>{children}</DrawerBody>
       </DrawerContent>
     </Drawer>
   )

@@ -14,14 +14,14 @@ type MenuProps = {
 export const Menu = ({ isLargerThan768 }: MenuProps) => {
   return (
     <Flex
-      gap='4rem'
+      gap={16}
       width='100%'
       {...(!isLargerThan768 && { justify: 'space-between' })}
     >
       <Logo />
       {isLargerThan768 && (
         <VerticalDivider
-          height='5rem'
+          height={20}
           opacity='0.1'
         />
       )}
