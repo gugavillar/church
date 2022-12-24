@@ -72,9 +72,8 @@ export const Link = defineStyleConfig({
     lineHeight: '1.1719rem'
   },
   sizes: {
-    sm: {
-      color: 'black',
-      fontSize: 'sm'
+    xs: {
+      color: 'black'
     }
   },
   variants: {
