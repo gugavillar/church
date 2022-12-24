@@ -12,6 +12,7 @@ export const Navbar = ({ actionButton }: NavbarProps) => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)')
   return (
     <Flex
+      as='nav'
       bg='black'
       height='5rem'
       justify='space-between'

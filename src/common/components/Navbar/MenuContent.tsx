@@ -1,21 +1,16 @@
 import { List } from 'phosphor-react'
+import { ReactNode } from 'react'
 
 import { Button, Flex, useDisclosure } from '@chakra-ui/react'
 
 import { DrawerMenu } from './DrawerMenu'
-import { ItemMenu } from './ItemMenu'
-
-export const itensMenu = [
-  { label: 'Home', url: '/' },
-  { label: 'About us', url: '/sobre-nos' },
-  { label: 'Sermon', url: '/sermoes' }
-] as const
 
 type MenuContentProps = {
   isLargerThan768: boolean
+  children: ReactNode
 }
 
-export const MenuContent = ({ isLargerThan768 }: MenuContentProps) => {
+export const MenuContent = ({ isLargerThan768, children }: MenuContentProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
 
   if (!isLargerThan768) {
@@ -36,9 +31,9 @@ export const MenuContent = ({ isLargerThan768 }: MenuContentProps) => {
         <DrawerMenu
           isOpen={isOpen}
           onClose={onClose}
-          itensMenu={itensMenu}
-          isLargerThan768={isLargerThan768}
-        />
+        >
+          {children}
+        </DrawerMenu>
       </Flex>
     )
   }
@@ -48,13 +43,7 @@ export const MenuContent = ({ isLargerThan768 }: MenuContentProps) => {
       gap='3rem'
       align='center'
     >
-      {itensMenu.map((item) => (
-        <ItemMenu
-          key={item.label}
-          item={item}
-          isLargerThan768={isLargerThan768}
-        />
-      ))}
+      {children}
     </Flex>
   )
 }

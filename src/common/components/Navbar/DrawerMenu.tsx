@@ -1,16 +1,14 @@
-import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 
-import { ItemMenu } from './ItemMenu'
-import { itensMenu } from './MenuContent'
+import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay } from '@chakra-ui/react'
 
 type DrawerMenuProps = {
   isOpen: boolean
   onClose: () => void
-  itensMenu: typeof itensMenu
-  isLargerThan768: boolean
+  children: ReactNode
 }
 
-export const DrawerMenu = ({ isOpen, onClose, itensMenu, isLargerThan768 }: DrawerMenuProps) => {
+export const DrawerMenu = ({ isOpen, onClose, children }: DrawerMenuProps) => {
   return (
     <Drawer
       isOpen={isOpen}
@@ -20,15 +18,7 @@ export const DrawerMenu = ({ isOpen, onClose, itensMenu, isLargerThan768 }: Draw
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerBody mt='4rem'>
-          {itensMenu.map((item) => (
-            <ItemMenu
-              isLargerThan768={isLargerThan768}
-              key={item.label}
-              item={item}
-            />
-          ))}
-        </DrawerBody>
+        <DrawerBody mt='4rem'>{children}</DrawerBody>
       </DrawerContent>
     </Drawer>
   )
