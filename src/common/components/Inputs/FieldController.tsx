@@ -4,40 +4,32 @@ import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from '@chakr
 
 import { IfComponent } from '@common/components'
 
-type InputControllerProps = {
+type FieldControllerProps = {
   label: string
-  isError: boolean
+  error: string
   children: ReactNode
   isRequired?: boolean
-  errorMessage?: string
   helperText?: string
 }
 
-export const InputController = ({
-  isError,
-  isRequired,
-  children,
-  label,
-  errorMessage,
-  helperText
-}: InputControllerProps) => {
+export const FieldController = ({ error, isRequired, children, label, helperText }: FieldControllerProps) => {
   return (
     <FormControl
       {...(isRequired && { isRequired })}
-      isInvalid={isError}
+      isInvalid={Boolean(error)}
     >
       <FormLabel fontSize='sm'>{label}</FormLabel>
 
       {children}
 
       <IfComponent
-        conditional={Boolean(helperText)}
+        conditional={Boolean(helperText) && !Boolean(error)}
         component={<FormHelperText>{helperText}</FormHelperText>}
       />
 
       <IfComponent
-        conditional={Boolean(errorMessage)}
-        component={<FormErrorMessage>{errorMessage}</FormErrorMessage>}
+        conditional={Boolean(error)}
+        component={<FormErrorMessage>{error}</FormErrorMessage>}
       />
     </FormControl>
   )
