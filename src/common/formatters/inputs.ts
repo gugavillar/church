@@ -1,5 +1,5 @@
 export const fieldFormatCelPhone = (value: string) => {
-  if (!value) return
+  if (!value) return null
   return value
     ?.replace(/\D/g, '')
     .replace(/^(\d)/, '($1')
@@ -9,7 +9,7 @@ export const fieldFormatCelPhone = (value: string) => {
 }
 
 export const fieldFormatPhone = (value: string) => {
-  if (!value) return
+  if (!value) return null
   return value
     ?.replace(/\D/g, '')
     .replace(/^(\d)/, '($1')
