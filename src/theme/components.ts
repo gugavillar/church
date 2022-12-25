@@ -42,24 +42,29 @@ export const Button = defineStyleConfig({
 })
 
 export const Input = defineStyleConfig({
+  baseStyle: {
+    field: {
+      _placeholder: {
+        color: 'black'
+      },
+      color: 'black'
+    }
+  },
   variants: {
-    defaultInput: {
+    outline: {
       field: {
-        border: 'none',
-        borderRadius: '0.25rem',
         height: '4rem',
-        padding: '1.25rem',
-        fontSize: 'xs',
+        border: 'none',
+        fontSize: 'sm',
         lineHeight: '1.5rem',
-        color: 'black',
-        _placeholder: {
-          color: 'black'
-        }
+        padding: '1.25rem',
+        bg: 'white',
+        borderRadius: '0.25rem'
       }
     }
   },
   defaultProps: {
-    variant: 'defaultInput'
+    variant: 'outline'
   }
 })
 

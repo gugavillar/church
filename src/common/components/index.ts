@@ -1,2 +1,5 @@
 export * from './Navbar'
 export * from './VerticalDivider'
+export * from './Wrapper'
+export * from './IfComponent'
+export * from './Inputs/PhoneInput'
