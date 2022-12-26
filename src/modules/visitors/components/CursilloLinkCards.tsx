@@ -11,11 +11,13 @@ const defaultHeightAndWidthForIcons = {
 const CARDS_OBJECTS = [
   {
     icon: <UserPlus {...defaultHeightAndWidthForIcons} />,
-    title: 'Adicionar Cursilhista'
+    title: 'Adicionar Cursilhista',
+    url: '/cursilho/adicionar_cursilhista'
   },
   {
     icon: <UserList {...defaultHeightAndWidthForIcons} />,
-    title: 'Listar Cursilhistas'
+    title: 'Listar Cursilhistas',
+    url: '/cursilho/listar_cursilhistas'
   }
 ]
 
@@ -25,8 +27,7 @@ export const CursilloLinkCards = () => {
       {CARDS_OBJECTS.map((card) => (
         <CardButton
           key={card.title}
-          icon={card.icon}
-          title={card.title}
+          cardProps={card}
         />
       ))}
     </Fragment>
