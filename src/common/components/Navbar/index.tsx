@@ -6,7 +6,7 @@ export const Navbar = () => {
   return (
     <Flex
       as='nav'
-      bg='black'
+      bg='gray'
       height={20}
       justify='space-between'
       align='center'
