@@ -11,23 +11,28 @@ const defaultHeightAndWidthForIcons = {
 const CARDS_OBJECTS = [
   {
     icon: <UserPlus {...defaultHeightAndWidthForIcons} />,
-    title: 'Adicionar Cursilhista',
-    url: '/cursilho/adicionar_cursilhista'
+    title: 'Inscreva-se aqui',
+    url: 'adicionar_cursilhista'
   },
   {
     icon: <UserList {...defaultHeightAndWidthForIcons} />,
-    title: 'Listar Cursilhistas',
-    url: '/cursilho/listar_cursilhistas'
+    title: 'Listar inscritos',
+    url: 'listar_cursilhistas'
   }
 ]
 
-export const CursilloLinkCards = () => {
+type CursilloLinkCardsPros = {
+  gender: 'masculino' | 'feminino'
+}
+
+export const CursilloLinkCards = ({ gender }: CursilloLinkCardsPros) => {
   return (
     <Fragment>
       {CARDS_OBJECTS.map((card) => (
         <CardButton
           key={card.title}
           cardProps={card}
+          gender={gender}
         />
       ))}
     </Fragment>
