@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { memo } from 'react'
 
-import { Link as ChakraLink } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 
 type ItemMenuProps = {
   url: string
@@ -17,15 +17,16 @@ export const ItemMenu = memo(({ label, url, activeUrl }: ItemMenuProps) => {
       href={url}
       passHref
     >
-      <ChakraLink
+      <Text
+        as='span'
         display={{ base: 'block', md: 'block', lg: 'flex' }}
         py={{ base: 2, md: 2 }}
-        variant={{ base: 'base', md: 'base', lg: 'lg' }}
+        variant={{ base: 'baseurl', md: 'baseurl', lg: 'lg' }}
         {...(isHomeLabel && { variant: 'active' })}
         {...(activeUrl.includes(labelLowerCase) && { variant: 'active' })}
       >
         {label}
-      </ChakraLink>
+      </Text>
     </Link>
   )
 })
