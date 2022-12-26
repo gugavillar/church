@@ -20,7 +20,8 @@
       "@common/*": ["src/common/*"],
       "@formatters/*": ["src/common/formatters/*"],
       "@services/*": ["src/common/services/*"],
-      "@validations/*": ["src/common/validations/*"]
+      "@validations/*": ["src/common/validations/*"],
+      "@visitors/*": ["src/modules/visitors/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
