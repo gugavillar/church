@@ -4,11 +4,11 @@ import { Box, Button, Container } from '@chakra-ui/react'
 
 import { Navbar } from '@common/components'
 
-type WrapperProps = {
+type LayoutProps = {
   children: ReactNode
 }
 
-export const Wrapper = ({ children }: WrapperProps) => {
+export default function Layout({ children }: LayoutProps) {
   return (
     <Box>
       <Navbar actionButton={<Button>Contate-nos</Button>} />
