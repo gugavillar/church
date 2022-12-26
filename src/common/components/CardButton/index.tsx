@@ -1,13 +1,21 @@
+import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 
 import { Card, CardBody, CardFooter, Divider, Heading, Flex } from '@chakra-ui/react'
 
 type CardButtonProps = {
-  icon: ReactNode
-  title: string
+  cardProps: {
+    icon: ReactNode
+    title: string
+    url: string
+  }
 }
 
-export const CardButton = ({ icon, title }: CardButtonProps) => {
+export const CardButton = ({ cardProps }: CardButtonProps) => {
+  const { push } = useRouter()
+
+  const handleNavigateTo = (url: string) => push(url)
+
   return (
     <Card
       bg='white'
@@ -20,17 +28,20 @@ export const CardButton = ({ icon, title }: CardButtonProps) => {
           align='center'
           justify='center'
         >
-          {icon}
+          {cardProps.icon}
         </Flex>
       </CardBody>
       <Divider />
-      <CardFooter justifyContent='center'>
+      <CardFooter
+        justifyContent='center'
+        onClick={() => handleNavigateTo(cardProps.url)}
+      >
         <Heading
           as='h3'
           fontSize='md'
           textAlign='center'
         >
-          {title}
+          {cardProps.title}
         </Heading>
       </CardFooter>
     </Card>
