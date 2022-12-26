@@ -19,11 +19,11 @@ export const Button = defineStyleConfig({
   },
   variants: {
     primary: {
-      background: 'primary',
+      background: 'white',
       width: '11.375rem',
       ...defaultVariantProps,
       _hover: {
-        background: 'primary_hover'
+        background: 'whiteAlpha.800'
       }
     },
     secondary: {
@@ -68,24 +68,26 @@ export const Input = defineStyleConfig({
   }
 })
 
-export const Link = defineStyleConfig({
-  baseStyle: {
-    fontSize: 'xs',
-    textTransform: 'uppercase',
-    fontWeight: '400',
-    lineHeight: '1.1719rem'
-  },
+export const Text = defineStyleConfig({
   variants: {
     active: {
-      color: 'primary',
       textDecoration: 'underline',
-      fontWeight: '700'
+      fontWeight: '700',
+      textTransform: 'uppercase'
     },
-    base: {
-      color: 'black'
+    baseurl: {
+      color: 'black',
+      fontSize: 'xs',
+      textTransform: 'uppercase',
+      fontWeight: '400',
+      lineHeight: '1.1719rem'
     },
     lg: {
-      color: 'white'
+      color: 'white',
+      fontSize: 'xs',
+      textTransform: 'uppercase',
+      fontWeight: '400',
+      lineHeight: '1.1719rem'
     }
   }
 })

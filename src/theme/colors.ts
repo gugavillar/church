@@ -4,7 +4,8 @@ export const colors = {
     primary: '#ffd2a4',
     primary_hover: '#f2c79b',
     light_orange: '#fff5eb',
-    grey: '#f5f2f0',
+    background: '#f5f2f0',
+    gray: '#545d68',
     white: '#ffffff'
   }
 }
