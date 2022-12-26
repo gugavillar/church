@@ -1,13 +1,16 @@
+import { useRouter } from 'next/router'
+
 import { Flex } from '@chakra-ui/react'
 
 import { VerticalDivider } from '@common/components'
 
-import { itensMenu } from './constants'
+import { ITENS_MENU } from './constants'
 import { ItemMenu } from './ItemMenu'
 import { Logo } from './Logo'
 import { MenuContent } from './MenuContent'
 
 export const Menu = () => {
+  const { pathname } = useRouter()
   return (
     <Flex
       gap={16}
@@ -21,11 +24,12 @@ export const Menu = () => {
         display={{ base: 'none', md: 'none', lg: 'flex' }}
       />
       <MenuContent>
-        {itensMenu.map((item) => (
+        {ITENS_MENU.map((item) => (
           <ItemMenu
             key={item.label}
             label={item.label}
             url={item.url}
+            activeUrl={pathname}
           />
         ))}
       </MenuContent>
