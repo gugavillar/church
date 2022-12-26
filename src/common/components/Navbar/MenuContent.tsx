@@ -1,21 +1,25 @@
 import { List } from 'phosphor-react'
-import { ReactNode } from 'react'
+import { Fragment, ReactNode, useMemo } from 'react'
 
 import { Button, Flex, useDisclosure } from '@chakra-ui/react'
 
 import { DrawerMenu } from './DrawerMenu'
 
 type MenuContentProps = {
-  isLargerThan768: boolean
   children: ReactNode
 }
 
-export const MenuContent = ({ isLargerThan768, children }: MenuContentProps) => {
+export const MenuContent = ({ children }: MenuContentProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
 
-  if (!isLargerThan768) {
-    return (
-      <Flex align='center'>
+  const memoChildren = useMemo(() => children, [children])
+
+  return (
+    <Fragment>
+      <Flex
+        align='center'
+        display={{ base: 'flex', md: 'flex', lg: 'none' }}
+      >
         <Button
           arial-label='Menu principal'
           variant='outline'
@@ -32,18 +36,16 @@ export const MenuContent = ({ isLargerThan768, children }: MenuContentProps) => 
           isOpen={isOpen}
           onClose={onClose}
         >
-          {children}
+          {memoChildren}
         </DrawerMenu>
       </Flex>
-    )
-  }
-
-  return (
-    <Flex
-      gap={12}
-      align='center'
-    >
-      {children}
-    </Flex>
+      <Flex
+        gap={12}
+        align='center'
+        display={{ base: 'none', md: 'none', lg: 'flex' }}
+      >
+        {memoChildren}
+      </Flex>
+    </Fragment>
   )
 }

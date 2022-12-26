@@ -70,22 +70,22 @@ export const Input = defineStyleConfig({
 
 export const Link = defineStyleConfig({
   baseStyle: {
-    color: 'white',
     fontSize: 'xs',
     textTransform: 'uppercase',
     fontWeight: '400',
     lineHeight: '1.1719rem'
-  },
-  sizes: {
-    xs: {
-      color: 'black'
-    }
   },
   variants: {
     active: {
       color: 'primary',
       textDecoration: 'underline',
       fontWeight: '700'
+    },
+    base: {
+      color: 'black'
+    },
+    lg: {
+      color: 'white'
     }
   }
 })

@@ -1,10 +1,12 @@
+import { memo } from 'react'
+
 import { Center, Divider, FlexProps } from '@chakra-ui/react'
 
 type VerticalDividerProps = {
   height?: number | 'inherit'
 } & FlexProps
 
-export const VerticalDivider = ({ height = 'inherit', ...props }: VerticalDividerProps) => {
+export const VerticalDivider = memo(({ height = 'inherit', ...props }: VerticalDividerProps) => {
   return (
     <Center
       height={height}
@@ -13,4 +15,6 @@ export const VerticalDivider = ({ height = 'inherit', ...props }: VerticalDivide
       <Divider orientation='vertical' />
     </Center>
   )
-}
+})
+
+VerticalDivider.displayName = 'VerticalDivider'

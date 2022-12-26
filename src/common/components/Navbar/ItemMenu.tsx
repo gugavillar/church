@@ -1,38 +1,27 @@
 import { useRouter } from 'next/router'
+import { memo } from 'react'
 
-import { Link, Text } from '@chakra-ui/react'
+import { Link } from '@chakra-ui/react'
 
 type ItemMenuProps = {
-  item: {
-    url: string
-    label: string
-  }
-  isLargerThan768: boolean
+  url: string
+  label: string
 }
 
-export const ItemMenu = ({ item: { label, url }, isLargerThan768 }: ItemMenuProps) => {
+export const ItemMenu = memo(({ label, url }: ItemMenuProps) => {
   const { asPath } = useRouter()
-
-  if (!isLargerThan768) {
-    return (
-      <Text py={2}>
-        <Link
-          size='xs'
-          href={url}
-          {...(asPath.includes(url) && { variant: 'active' })}
-        >
-          {label}
-        </Link>
-      </Text>
-    )
-  }
 
   return (
     <Link
+      display={{ base: 'block', md: 'block', lg: 'flex' }}
+      py={{ base: 2, md: 2 }}
       href={url}
-      {...(asPath.includes(url) && { variant: 'active' })}
+      variant={{ base: 'base', md: 'base', lg: 'lg' }}
+      {...(url === asPath && { variant: 'active' })}
     >
       {label}
     </Link>
   )
-}
+})
+
+ItemMenu.displayName = 'ItemMenu'

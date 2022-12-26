@@ -1,15 +1,8 @@
-import { ReactNode } from 'react'
-
-import { Flex, useMediaQuery } from '@chakra-ui/react'
+import { Button, Flex } from '@chakra-ui/react'
 
 import { Menu } from './Menu'
 
-type NavbarProps = {
-  actionButton: ReactNode
-}
-
-export const Navbar = ({ actionButton }: NavbarProps) => {
-  const [isLargerThan768] = useMediaQuery('(min-width: 768px)')
+export const Navbar = () => {
   return (
     <Flex
       as='nav'
@@ -19,8 +12,8 @@ export const Navbar = ({ actionButton }: NavbarProps) => {
       align='center'
       px={{ base: 4, md: 4, lg: '6.875rem' }}
     >
-      <Menu isLargerThan768={isLargerThan768} />
-      {isLargerThan768 && actionButton}
+      <Menu />
+      <Button display={{ base: 'none', md: 'none', lg: 'flex' }}>Contate-nos</Button>
     </Flex>
   )
 }

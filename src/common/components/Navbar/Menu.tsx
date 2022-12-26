@@ -7,30 +7,25 @@ import { ItemMenu } from './ItemMenu'
 import { Logo } from './Logo'
 import { MenuContent } from './MenuContent'
 
-type MenuProps = {
-  isLargerThan768: boolean
-}
-
-export const Menu = ({ isLargerThan768 }: MenuProps) => {
+export const Menu = () => {
   return (
     <Flex
       gap={16}
       width='100%'
-      {...(!isLargerThan768 && { justify: 'space-between' })}
+      justify={{ base: 'space-between', md: 'space-between', lg: 'flex-start' }}
     >
       <Logo />
-      {isLargerThan768 && (
-        <VerticalDivider
-          height={20}
-          opacity='0.1'
-        />
-      )}
-      <MenuContent isLargerThan768={isLargerThan768}>
+      <VerticalDivider
+        height={20}
+        opacity='0.1'
+        display={{ base: 'none', md: 'none', lg: 'flex' }}
+      />
+      <MenuContent>
         {itensMenu.map((item) => (
           <ItemMenu
             key={item.label}
-            item={item}
-            isLargerThan768={isLargerThan768}
+            label={item.label}
+            url={item.url}
           />
         ))}
       </MenuContent>
