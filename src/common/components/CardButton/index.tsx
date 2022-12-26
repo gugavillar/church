@@ -35,6 +35,7 @@ export const CardButton = ({ cardProps }: CardButtonProps) => {
       <CardFooter
         justifyContent='center'
         onClick={() => handleNavigateTo(cardProps.url)}
+        cursor='pointer'
       >
         <Heading
           as='h3'
