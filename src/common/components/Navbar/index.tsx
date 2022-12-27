@@ -10,10 +10,15 @@ export const Navbar = () => {
       height={20}
       justify='space-between'
       align='center'
-      px={{ base: 4, md: 4, lg: '6.875rem' }}
+      px={{ base: 4, md: 4, lg: 32 }}
     >
       <Menu />
-      <Button display={{ base: 'none', md: 'none', lg: 'flex' }}>Contate-nos</Button>
+      <Button
+        variant='secondary'
+        display={{ base: 'none', md: 'none', lg: 'flex' }}
+      >
+        Contate-nos
+      </Button>
     </Flex>
   )
 }
