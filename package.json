@@ -17,6 +17,7 @@
     "@hookform/resolvers": "^2.9.10",
     "@next/font": "13.0.7",
     "axios": "^1.2.1",
+    "date-fns": "^2.29.3",
     "framer-motion": "^6",
     "next": "13.0.7",
     "phosphor-react": "^1.4.1",
