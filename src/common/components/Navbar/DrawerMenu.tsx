@@ -16,8 +16,8 @@ export const DrawerMenu = ({ isOpen, onClose, children }: DrawerMenuProps) => {
       placement='right'
     >
       <DrawerOverlay />
-      <DrawerContent>
-        <DrawerCloseButton />
+      <DrawerContent bg='gray'>
+        <DrawerCloseButton color='white' />
         <DrawerBody mt={16}>{children}</DrawerBody>
       </DrawerContent>
     </Drawer>
