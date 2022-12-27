@@ -19,20 +19,29 @@ export const Button = defineStyleConfig({
   },
   variants: {
     primary: {
-      background: 'white',
+      background: 'gray',
       width: '11.375rem',
+      color: 'white',
       ...defaultVariantProps,
       _hover: {
-        background: 'whiteAlpha.800'
+        opacity: 0.8,
+        _disabled: {
+          opacity: 0.4,
+          bg: 'gray'
+        }
       }
     },
     secondary: {
       background: 'black',
-      color: 'primary',
+      color: 'white',
       width: '13rem',
       ...defaultVariantProps,
       _hover: {
-        color: 'white'
+        opacity: 0.8,
+        _disabled: {
+          opacity: 0.4,
+          bg: 'black'
+        }
       }
     }
   },
