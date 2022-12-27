@@ -1,3 +1,4 @@
+import { isValid } from 'date-fns'
 import { validateCPF } from 'validations-br'
 
 import { validateZipCode } from '@common/services/validationsServices'
@@ -17,4 +18,9 @@ export const customValidateZipCode = async (zipCode: string) => {
   if (!zipCode || zipCode.length < 8) return
   const { data } = await validateZipCode(zipCode)
   return data
+}
+
+export const customValidateDate = (date: number) => {
+  if (!date) return false
+  return isValid(date)
 }
