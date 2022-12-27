@@ -19,8 +19,9 @@ export const CursilloFormInstructions = () => {
         LEIA COM ATENÇÃO ESTAS OBSERVAÇÕES, SÓ DEPOIS PREENCHA O FORMULÁRIO
       </Text>
       <OrderedList
-        maxW='85%'
         mx='auto'
+        px={4}
+        textAlign='justify'
       >
         <ListItem>
           O Cursilho destina-se a pessoas capazes de captar a mensagem cristã e comprometer-se com ela; Ser fermento do

@@ -23,6 +23,8 @@ export const CardButton = ({ cardProps, gender }: CardButtonProps) => {
       boxShadow='dark-lg'
       maxW={80}
       minW={80}
+      onClick={() => handleNavigateTo(cardProps.url)}
+      cursor='pointer'
     >
       <CardBody>
         <Flex
@@ -33,14 +35,10 @@ export const CardButton = ({ cardProps, gender }: CardButtonProps) => {
         </Flex>
       </CardBody>
       <Divider />
-      <CardFooter
-        justifyContent='center'
-        onClick={() => handleNavigateTo(cardProps.url)}
-        cursor='pointer'
-      >
+      <CardFooter justifyContent='center'>
         <Heading
-          as='h3'
-          fontSize='md'
+          as='h4'
+          fontSize='sm'
           textAlign='center'
         >
           {cardProps.title}

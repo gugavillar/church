@@ -8,7 +8,13 @@ const Cursillo = () => {
   return (
     <Fragment>
       <Box mb={8}>
-        <Heading mb={6}>Cursilho Feminino</Heading>
+        <Heading
+          as='h3'
+          fontSize='md'
+          mb={6}
+        >
+          Cursilho Feminino
+        </Heading>
         <SimpleGrid
           minChildWidth={64}
           spacing={8}
@@ -18,7 +24,13 @@ const Cursillo = () => {
         </SimpleGrid>
       </Box>
       <Box>
-        <Heading mb={6}>Cursilho Masculino</Heading>
+        <Heading
+          as='h3'
+          fontSize='md'
+          mb={6}
+        >
+          Cursilho Masculino
+        </Heading>
         <SimpleGrid
           minChildWidth={64}
           spacing={8}

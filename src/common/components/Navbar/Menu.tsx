@@ -13,7 +13,7 @@ export const Menu = () => {
   const { pathname } = useRouter()
   return (
     <Flex
-      gap={6}
+      gap={4}
       width='100%'
       justify={{ base: 'space-between', md: 'space-between', lg: 'flex-start' }}
     >
