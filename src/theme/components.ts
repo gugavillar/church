@@ -75,14 +75,7 @@ export const Text = defineStyleConfig({
       fontWeight: '700',
       textTransform: 'uppercase'
     },
-    baseurl: {
-      color: 'black',
-      fontSize: 'xs',
-      textTransform: 'uppercase',
-      fontWeight: '400',
-      lineHeight: '1.1719rem'
-    },
-    lg: {
+    navLink: {
       color: 'white',
       fontSize: 'xs',
       textTransform: 'uppercase',

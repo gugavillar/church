@@ -21,7 +21,7 @@ export const ItemMenu = memo(({ label, url, activeUrl }: ItemMenuProps) => {
         as='span'
         display={{ base: 'block', md: 'block', lg: 'flex' }}
         py={{ base: 2, md: 2 }}
-        variant={{ base: 'baseurl', md: 'baseurl', lg: 'lg' }}
+        variant='navLink'
         {...(isHomeLabel && { variant: 'active' })}
         {...(activeUrl.includes(labelLowerCase) && { variant: 'active' })}
       >
