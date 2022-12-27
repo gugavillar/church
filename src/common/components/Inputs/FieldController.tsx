@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from '@chakra-ui/react'
+import { FormControl, FormControlProps, FormErrorMessage, FormHelperText, FormLabel } from '@chakra-ui/react'
 
 import { IfComponent } from '@common/components'
 
-type FieldControllerProps = {
+type FieldControllerProps = FormControlProps & {
   label: string
   error: string
   children: ReactNode
@@ -12,11 +12,12 @@ type FieldControllerProps = {
   helperText?: string
 }
 
-export const FieldController = ({ error, isRequired, children, label, helperText }: FieldControllerProps) => {
+export const FieldController = ({ error, isRequired, children, label, helperText, ...props }: FieldControllerProps) => {
   return (
     <FormControl
       {...(isRequired && { isRequired })}
       isInvalid={Boolean(error)}
+      {...props}
     >
       <FormLabel fontSize='sm'>{label}</FormLabel>
 
