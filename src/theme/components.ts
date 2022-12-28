@@ -62,7 +62,7 @@ export const Input = defineStyleConfig({
   variants: {
     outline: {
       field: {
-        height: '4rem',
+        height: '3rem',
         border: 'none',
         fontSize: 'sm',
         lineHeight: '1.5rem',
@@ -91,5 +91,31 @@ export const Text = defineStyleConfig({
       fontWeight: '400',
       lineHeight: '1.1719rem'
     }
+  }
+})
+
+export const Select = defineStyleConfig({
+  baseStyle: {
+    field: {
+      _placeholder: {
+        color: 'black'
+      },
+      color: 'black'
+    }
+  },
+  variants: {
+    outline: {
+      field: {
+        height: '3rem',
+        border: 'none',
+        fontSize: 'sm',
+        lineHeight: '1.5rem',
+        bg: 'white',
+        borderRadius: '0.25rem'
+      }
+    }
+  },
+  defaultProps: {
+    variant: 'outline'
   }
 })
