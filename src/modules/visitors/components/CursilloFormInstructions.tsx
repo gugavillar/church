@@ -20,7 +20,7 @@ export const CursilloFormInstructions = () => {
       </Text>
       <OrderedList
         mx='auto'
-        px={4}
+        px={6}
         textAlign='justify'
       >
         <ListItem>
@@ -54,12 +54,11 @@ export const CursilloFormInstructions = () => {
         </ListItem>
       </OrderedList>
       <Flex
-        justify='space-between'
+        justify='space-evenly'
         color='red'
         mt={4}
         fontWeight={700}
         direction={{ base: 'column', md: 'column', lg: 'row' }}
-        maxW='80%'
         mx='auto'
         gap={{ base: 4, md: 4 }}
       >
