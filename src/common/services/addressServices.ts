@@ -1,7 +1,7 @@
 import { citiesApi } from '@common/provider/citiesApi'
 import { zipCodeApi } from '@common/provider/zipCodeApi'
 
-interface GetCitiesReturn {
+export interface GetCitiesReturn {
   label: string
   value: string
 }
