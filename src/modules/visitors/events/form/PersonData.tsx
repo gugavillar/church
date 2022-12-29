@@ -10,7 +10,7 @@ import { dateInputRegisterOptions, taxpayerInputRegisterOptions, phoneInputRegis
 import { NewCursilhistForm } from './NewCursilhist'
 
 type PersonDataProps = {
-  errors: FieldErrors
+  errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
   setValue: UseFormSetValue<NewCursilhistForm>
 }
