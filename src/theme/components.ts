@@ -119,3 +119,26 @@ export const Select = defineStyleConfig({
     variant: 'outline'
   }
 })
+
+export const Textarea = defineStyleConfig({
+  baseStyle: {
+    _placeholder: {
+      color: 'black'
+    },
+    color: 'black'
+  },
+  variants: {
+    outline: {
+      height: 32,
+      border: 'none',
+      fontSize: 'sm',
+      lineHeight: '1.5rem',
+      padding: '1.25rem',
+      bg: 'white',
+      borderRadius: '0.25rem'
+    }
+  },
+  defaultProps: {
+    variant: 'outline'
+  }
+})
