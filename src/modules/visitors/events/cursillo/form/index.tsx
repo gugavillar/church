@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Heading, Box, Flex, Button, Card, CardHeader, CardBody, Textarea } from '@chakra-ui/react'
@@ -10,6 +11,7 @@ import { BRAZILIAN_STATES, EDUCATION_LEVEL, MARITAL_STATUS, OCCUPATIONS } from '
 
 import { AddressData } from './AddressData'
 import { CloseRelative } from './CloseRelative'
+import { HealthData } from './HealthData'
 import { OccupationalData } from './OccupationalData'
 import { PersonData } from './PersonData'
 import { ReligionData } from './ReligionData'
@@ -19,7 +21,6 @@ export type NewCursilhistForm = {
   name: string
   likeToBeCalled: string
   birthDate: number
-  taxpayer: number
   phone: number
   email: string
   maritalStatus: typeof MARITAL_STATUS[number]['value']
@@ -34,17 +35,19 @@ export type NewCursilhistForm = {
     phone: string
     numberOfChildren: number
   }
-  closeRelative: {
+  closeRelative?: {
     name: string
     phone: string
   }
   religion: string
   church: string
-  howMuchTime: string
   education: typeof EDUCATION_LEVEL[number]['value']
   occupation: typeof OCCUPATIONS[number]['value']
   workplace: string
   workplacePhone: number
+  healthProblems: string
+  hasDietOuFoodRestriction: 'true' | 'false'
+  dietOuFoodRestriction?: string
   wish: string
 }
 
@@ -54,6 +57,8 @@ const NewCursilhist = () => {
   const { query } = useRouter()
   const {
     watch,
+    control,
+    unregister,
     register,
     setValue,
     handleSubmit,
@@ -62,8 +67,15 @@ const NewCursilhist = () => {
 
   const onSubmitHandle = (values: NewCursilhistForm) => console.log(values)
 
-  const maritalStatus = watch('maritalStatus')
+  const [maritalStatus, hasDietOuFoodRestriction] = watch(['maritalStatus', 'hasDietOuFoodRestriction'])
   const isMarriedPerson = !!maritalStatus && maritalStatus?.includes('Casado(a)')
+
+  useEffect(() => {
+    if (maritalStatus === 'Casado(a)') {
+      unregister('closeRelative')
+    }
+    unregister('spouse')
+  }, [maritalStatus, setValue, unregister])
 
   return (
     <Box>
@@ -124,6 +136,13 @@ const NewCursilhist = () => {
               register={register}
               errors={errors}
               setValue={setValue}
+            />
+            <HealthData
+              register={register}
+              errors={errors}
+              control={control}
+              hasDietOuFoodRestriction={hasDietOuFoodRestriction}
+              unregister={unregister}
             />
             <FieldController
               error={errors?.wish?.message as string}
