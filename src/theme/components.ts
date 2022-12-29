@@ -142,3 +142,23 @@ export const Textarea = defineStyleConfig({
     variant: 'outline'
   }
 })
+
+export const Radio = defineStyleConfig({
+  baseStyle: {
+    control: {
+      color: 'white',
+      width: 5,
+      height: 5
+    },
+    container: {
+      height: '3rem'
+    }
+  },
+  sizes: {
+    md: {
+      label: {
+        fontSize: '1.5rem'
+      }
+    }
+  }
+})
