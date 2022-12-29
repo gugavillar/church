@@ -3,7 +3,8 @@ export const MARITAL_STATUS = [
   { label: 'Casado(a)', value: 'Casado(a)' },
   { label: 'Separado(a)', value: 'Separado(a)' },
   { label: 'Divorciado(a)', value: 'Divorciado(a)' },
-  { label: 'Viúvo(a)', value: 'Viúvo(a)' }
+  { label: 'Viúvo(a)', value: 'Viúvo(a)' },
+  { label: 'União estável', value: 'União estável' }
 ] as const
 
 export const BRAZILIAN_STATES = [
