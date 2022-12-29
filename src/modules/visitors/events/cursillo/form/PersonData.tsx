@@ -7,7 +7,7 @@ import { FieldController } from '@common/components'
 import { MARITAL_STATUS } from '@common/constants'
 import { dateInputRegisterOptions, taxpayerInputRegisterOptions, phoneInputRegisterOptions } from '@common/formatters'
 
-import { NewCursilhistForm } from './NewCursilhist'
+import { NewCursilhistForm } from '.'
 
 type PersonDataProps = {
   errors: FieldErrors<NewCursilhistForm>

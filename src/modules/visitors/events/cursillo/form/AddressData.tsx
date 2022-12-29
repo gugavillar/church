@@ -7,7 +7,8 @@ import { FieldController } from '@common/components'
 import { zipCodeInputRegisterOptions } from '@common/formatters'
 
 import { CityAndStateData } from './CityAndStateData'
-import { NewCursilhistForm } from './NewCursilhist'
+
+import { NewCursilhistForm } from '.'
 
 type AddressDataProps = {
   errors: FieldErrors<NewCursilhistForm>
