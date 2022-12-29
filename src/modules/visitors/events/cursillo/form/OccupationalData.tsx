@@ -68,7 +68,7 @@ export const OccupationalData = ({ errors, register, setValue }: OccupationalDat
       >
         <FieldController
           error={errors?.workplace?.message as string}
-          label='Local de trabalho'
+          label='Nome da empresa que trabalha'
         >
           <Input
             type='text'
@@ -77,7 +77,7 @@ export const OccupationalData = ({ errors, register, setValue }: OccupationalDat
         </FieldController>
         <FieldController
           error={errors?.workplacePhone?.message as string}
-          label='Telefone do trabalho'
+          label='Telefone da empresa'
           maxW={{ base: 'full', md: 60, lg: 60 }}
         >
           <Input

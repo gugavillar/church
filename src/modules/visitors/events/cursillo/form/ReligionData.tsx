@@ -29,22 +29,11 @@ export const ReligionData = ({ errors, register }: ReligionDataProps) => {
       </FieldController>
       <FieldController
         error={errors?.church?.message as string}
-        label='Igreja que frequenta'
-        maxW={{ base: 'full', md: 56, lg: 56 }}
+        label='Igreja que frequenta atualmente'
       >
         <Input
           type='text'
           {...register('church')}
-        />
-      </FieldController>
-      <FieldController
-        error={errors?.church?.message as string}
-        label='Quanto tempo'
-        maxW={{ base: 'full', md: 48, lg: 48 }}
-      >
-        <Input
-          type='text'
-          {...register('howMuchTime')}
         />
       </FieldController>
     </Flex>

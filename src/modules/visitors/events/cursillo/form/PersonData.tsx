@@ -5,7 +5,7 @@ import { Flex, Input, Box, Select } from '@chakra-ui/react'
 import { FieldController } from '@common/components'
 
 import { MARITAL_STATUS } from '@common/constants'
-import { dateInputRegisterOptions, taxpayerInputRegisterOptions, phoneInputRegisterOptions } from '@common/formatters'
+import { dateInputRegisterOptions, phoneInputRegisterOptions } from '@common/formatters'
 
 import { NewCursilhistForm } from '.'
 
@@ -24,7 +24,7 @@ export const PersonData = ({ errors, register, setValue }: PersonDataProps) => {
       >
         <FieldController
           error={errors?.name?.message as string}
-          label='Nome'
+          label='Nome completo'
           isRequired
         >
           <Input
@@ -49,22 +49,9 @@ export const PersonData = ({ errors, register, setValue }: PersonDataProps) => {
         direction={{ base: 'column', md: 'row', lg: 'row' }}
       >
         <FieldController
-          error={errors?.taxpayer?.message as string}
-          label='CPF'
-          maxW={{ base: 'full', md: 'full', lg: 80 }}
-          isRequired
-        >
-          <Input
-            type='text'
-            {...register('taxpayer', { ...taxpayerInputRegisterOptions('taxpayer', setValue) })}
-          />
-        </FieldController>
-        <FieldController
           error={errors?.birthDate?.message as string}
           label='Data de nascimento'
-          maxW={{ base: 'full', md: 'full', lg: 80 }}
           isRequired
-          minW={{ base: 'full', md: 60, lg: 60 }}
         >
           <Input
             type='text'
@@ -74,7 +61,6 @@ export const PersonData = ({ errors, register, setValue }: PersonDataProps) => {
         <FieldController
           error={errors?.phone?.message as string}
           label='Telefone'
-          maxW={{ base: 'full', md: 'full', lg: 80 }}
           isRequired
         >
           <Input
@@ -91,7 +77,6 @@ export const PersonData = ({ errors, register, setValue }: PersonDataProps) => {
         <FieldController
           error={errors?.email?.message as string}
           label='Email'
-          isRequired
         >
           <Input
             type='email'

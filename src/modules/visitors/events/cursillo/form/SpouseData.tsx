@@ -51,7 +51,7 @@ export const SpouseData = ({ errors, register, setValue }: SpouseDataProps) => {
         <Input
           type='number'
           min={0}
-          {...register('spouse.numberOfChildren')}
+          {...register('spouse.numberOfChildren', { valueAsNumber: true })}
         />
       </FieldController>
     </Flex>
