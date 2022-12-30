@@ -11,16 +11,16 @@ type HealthDataProps = {
   errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
   control: Control<NewCursilhistForm>
-  hasDietOuFoodRestriction: 'true' | 'false'
+  hasDietOrFoodRestriction?: '1' | '0'
   unregister: UseFormUnregister<NewCursilhistForm>
 }
 
-export const HealthData = ({ errors, register, control, hasDietOuFoodRestriction, unregister }: HealthDataProps) => {
+export const HealthData = ({ errors, register, control, hasDietOrFoodRestriction, unregister }: HealthDataProps) => {
   useEffect(() => {
-    if (hasDietOuFoodRestriction === 'false') {
-      unregister('dietOuFoodRestriction')
+    if (hasDietOrFoodRestriction === '0') {
+      unregister('dietOrFoodRestriction')
     }
-  }, [hasDietOuFoodRestriction, unregister])
+  }, [hasDietOrFoodRestriction, unregister])
   return (
     <Fragment>
       <Flex
@@ -39,10 +39,11 @@ export const HealthData = ({ errors, register, control, hasDietOuFoodRestriction
         </FieldController>
         <FieldController
           label='Faz dieta ou restrição alimentar?'
-          error={errors?.dietOuFoodRestriction?.message as string}
+          error={errors?.dietOrFoodRestriction?.message as string}
+          isRequired
         >
           <Controller
-            name='hasDietOuFoodRestriction'
+            name='hasDietOrFoodRestriction'
             control={control}
             render={({ field }) => (
               <RadioGroup
@@ -53,8 +54,8 @@ export const HealthData = ({ errors, register, control, hasDietOuFoodRestriction
                   align='center'
                   gap={8}
                 >
-                  <Radio value='true'>Sim</Radio>
-                  <Radio value='false'>Não</Radio>
+                  <Radio value='1'>Sim</Radio>
+                  <Radio value='0'>Não</Radio>
                 </Flex>
               </RadioGroup>
             )}
@@ -62,16 +63,16 @@ export const HealthData = ({ errors, register, control, hasDietOuFoodRestriction
         </FieldController>
       </Flex>
       <IfComponent
-        conditional={hasDietOuFoodRestriction === 'true'}
+        conditional={hasDietOrFoodRestriction === '1'}
         component={
           <FieldController
             label='Descreva'
-            error={errors?.dietOuFoodRestriction?.message as string}
+            error={errors?.dietOrFoodRestriction?.message as string}
             mt={6}
           >
             <Textarea
               height={24}
-              {...register('dietOuFoodRestriction')}
+              {...register('dietOrFoodRestriction')}
             />
           </FieldController>
         }
