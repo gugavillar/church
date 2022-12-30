@@ -1,19 +1,19 @@
 import { List } from 'phosphor-react'
 import { Fragment, ReactNode, useMemo } from 'react'
 
-import { Button, Flex, useDisclosure } from '@chakra-ui/react'
+import { Button, Flex } from '@chakra-ui/react'
 
 import { DrawerMenu } from './DrawerMenu'
 
 type MenuContentProps = {
   children: ReactNode
+  isOpen: boolean
+  onOpen: () => void
+  onClose: () => void
 }
 
-export const MenuContent = ({ children }: MenuContentProps) => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
-
+export const MenuContent = ({ children, isOpen, onOpen, onClose }: MenuContentProps) => {
   const memoChildren = useMemo(() => children, [children])
-
   return (
     <Fragment>
       <Flex

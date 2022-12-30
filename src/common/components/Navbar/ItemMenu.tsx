@@ -7,15 +7,18 @@ type ItemMenuProps = {
   url: string
   label: string
   activeUrl: string
+  handleCloseDrawer: () => void
 }
 
-export const ItemMenu = memo(({ label, url, activeUrl }: ItemMenuProps) => {
+export const ItemMenu = memo(({ label, url, activeUrl, handleCloseDrawer }: ItemMenuProps) => {
   const labelLowerCase = label.toLowerCase()
   const isHomeLabel = label === 'Home' && activeUrl === '/'
+
   return (
     <Link
       href={url}
       passHref
+      onClick={handleCloseDrawer}
     >
       <Text
         as='span'
