@@ -33,13 +33,13 @@ export const SpouseData = ({ errors, register, setValue }: SpouseDataProps) => {
       </FieldController>
       <FieldController
         error={errors?.spouse?.phone?.message as string}
-        label='Telefone'
+        label='Celular'
         isRequired
         maxW={{ base: 'full', md: 56, lg: 56 }}
       >
         <Input
           type='text'
-          {...register('spouse.phone', { ...phoneInputRegisterOptions('spouse.phone', setValue, 'celPhone') })}
+          {...register('spouse.phone', { ...phoneInputRegisterOptions('spouse.phone', setValue) })}
         />
       </FieldController>
       <FieldController

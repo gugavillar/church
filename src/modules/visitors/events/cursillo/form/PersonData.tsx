@@ -60,12 +60,12 @@ export const PersonData = ({ errors, register, setValue }: PersonDataProps) => {
         </FieldController>
         <FieldController
           error={errors?.phone?.message as string}
-          label='Telefone'
+          label='Celular'
           isRequired
         >
           <Input
             type='text'
-            {...register('phone', { ...phoneInputRegisterOptions('phone', setValue, 'celPhone') })}
+            {...register('phone', { ...phoneInputRegisterOptions('phone', setValue) })}
           />
         </FieldController>
       </Flex>

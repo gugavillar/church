@@ -19,7 +19,7 @@ export const newCursilhistFormValidation = yup.object({
   phone: yup
     .number()
     .nullable()
-    .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value)))
+    .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value), 'celPhone'))
     .required(),
   email: yup.string().nullable().email(),
   maritalStatus: yup
@@ -34,7 +34,7 @@ export const newCursilhistFormValidation = yup.object({
         phone: yup
           .number()
           .nullable()
-          .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value)))
+          .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value), 'celPhone'))
           .required()
       })
       .required()
@@ -46,7 +46,7 @@ export const newCursilhistFormValidation = yup.object({
       phone: yup
         .number()
         .nullable()
-        .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value)))
+        .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value), 'celPhone'))
         .required(),
       numberOfChildren: yup.number().nullable().min(0, 'O número deve ser 0 ou maior que 0').required()
     })
@@ -69,7 +69,9 @@ export const newCursilhistFormValidation = yup.object({
   workplacePhone: yup
     .number()
     .nullable()
-    .test('is-valid-phone', 'Telefone inválido', (value) => (value ? customValidatePhone(String(value)) : true)),
+    .test('is-valid-phone', 'Telefone inválido', (value) =>
+      value ? customValidatePhone(String(value), 'both') : true
+    ),
   healthProblems: yup.string().nullable(),
   hasDietOrFoodRestriction: yup.boolean().required(),
   dietOrFoodRestriction: yup

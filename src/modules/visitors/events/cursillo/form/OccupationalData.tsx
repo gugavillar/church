@@ -82,7 +82,7 @@ export const OccupationalData = ({ errors, register, setValue }: OccupationalDat
         >
           <Input
             type='text'
-            {...register('workplacePhone', { ...phoneInputRegisterOptions('workplacePhone', setValue, 'phone') })}
+            {...register('workplacePhone', { ...phoneInputRegisterOptions('workplacePhone', setValue) })}
           />
         </FieldController>
       </Flex>
