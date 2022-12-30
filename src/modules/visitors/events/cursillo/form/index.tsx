@@ -22,25 +22,25 @@ import { SpouseData } from './SpouseData'
 export type NewCursilhistForm = {
   name: string
   likeToBeCalled: string
-  birthDate: number
-  phone: number
+  birthDate: number | null
+  phone: number | null
   email?: string
-  maritalStatus: typeof MARITAL_STATUS[number]['value']
-  zipCode: number
+  maritalStatus: typeof MARITAL_STATUS[number]['value'] | ''
+  zipCode: number | null
   street: string
-  number: number
+  number: string
   neighborhood: string
   city: string
-  state: typeof BRAZILIAN_STATES[number]['value']
+  state: typeof BRAZILIAN_STATES[number]['value'] | ''
   referencePoint?: string
   spouse?: {
     name: string
-    phone: string
-    numberOfChildren: number
+    phone: number | null
+    numberOfChildren: number | null
   }
   closeRelative?: {
     name: string
-    phone: string
+    phone: number | null
   }
   religion: string
   church: string
@@ -67,12 +67,46 @@ const NewCursilhist = () => {
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting }
   } = useForm<NewCursilhistForm>({
-    resolver: yupResolver(newCursilhistFormValidation)
+    resolver: yupResolver(newCursilhistFormValidation),
+    defaultValues: {
+      name: '',
+      likeToBeCalled: '',
+      birthDate: null,
+      phone: null,
+      email: '',
+      maritalStatus: '',
+      zipCode: null,
+      street: '',
+      number: '',
+      neighborhood: '',
+      city: '',
+      state: '',
+      referencePoint: undefined,
+      spouse: {
+        name: '',
+        phone: null,
+        numberOfChildren: null
+      },
+      closeRelative: {
+        name: '',
+        phone: null
+      },
+      religion: '',
+      church: '',
+      education: undefined,
+      occupation: undefined,
+      workplace: undefined,
+      workplacePhone: undefined,
+      healthProblems: undefined,
+      hasDietOrFoodRestriction: '0',
+      dietOrFoodRestriction: undefined,
+      wish: ''
+    }
   })
 
   const onSubmitHandle = (values: NewCursilhistForm) => console.log(values)
 
-  const [maritalStatus, hasDietOrFoodRestriction] = watch(['maritalStatus', 'hasDietOrFoodRestriction'])
+  const [maritalStatus, hasDietOrFoodRestriction, state] = watch(['maritalStatus', 'hasDietOrFoodRestriction', 'state'])
   const isMarriedPerson = !!maritalStatus && maritalStatus?.includes('Casado(a)')
 
   useEffect(() => {
@@ -132,6 +166,7 @@ const NewCursilhist = () => {
               register={register}
               errors={errors}
               setValue={setValue}
+              watchState={state}
             />
             <ReligionData
               register={register}

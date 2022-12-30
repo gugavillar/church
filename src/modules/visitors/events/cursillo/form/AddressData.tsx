@@ -1,10 +1,13 @@
+import { useCallback, useState } from 'react'
 import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-import { Box, Flex, Input } from '@chakra-ui/react'
+import { Box, Flex, Input, useToast } from '@chakra-ui/react'
 
 import { FieldController } from '@common/components'
 
+import { BRAZILIAN_STATES, ERROR_TOAST } from '@common/constants'
 import { zipCodeInputRegisterOptions } from '@common/formatters'
+import { getAddressFromZipCode } from '@common/services'
 
 import { CityAndStateData } from './CityAndStateData'
 
@@ -14,9 +17,42 @@ type AddressDataProps = {
   errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
   setValue: UseFormSetValue<NewCursilhistForm>
+  watchState: typeof BRAZILIAN_STATES[number]['value'] | ''
 }
 
-export const AddressData = ({ errors, register, setValue }: AddressDataProps) => {
+export const AddressData = ({ errors, register, setValue, watchState }: AddressDataProps) => {
+  const [cityFromAPI, setCityFromAPI] = useState('')
+
+  const toast = useToast()
+
+  const handleGetAddressData = useCallback(
+    async (zipCode: string) => {
+      if (zipCode.length < 9) return
+      const formatZipCode = zipCode.replace(/-/, '')
+      try {
+        const response = await getAddressFromZipCode(formatZipCode)
+        if (response.error) {
+          return toast({
+            ...ERROR_TOAST,
+            title: 'Cep não encontrado',
+            description: 'Caso esteja correto preencher os dados manualmente'
+          })
+        }
+        setCityFromAPI(response?.city)
+        setValue('state', response?.state, { shouldValidate: true })
+        setValue('street', response?.street, { shouldValidate: true })
+        setValue('neighborhood', response?.neighborhood, { shouldValidate: true })
+      } catch {
+        toast({
+          ...ERROR_TOAST,
+          title: 'Ocorreu uma falha',
+          description: 'Falha ao pegar os dados do cep'
+        })
+      }
+    },
+    [setValue, toast]
+  )
+
   return (
     <Box mt={6}>
       <Flex
@@ -32,6 +68,7 @@ export const AddressData = ({ errors, register, setValue }: AddressDataProps) =>
           <Input
             type='text'
             {...register('zipCode', { ...zipCodeInputRegisterOptions('zipCode', setValue) })}
+            onBlur={(event) => handleGetAddressData(event.target.value)}
           />
         </FieldController>
         <FieldController
@@ -42,6 +79,17 @@ export const AddressData = ({ errors, register, setValue }: AddressDataProps) =>
           <Input
             type='text'
             {...register('street')}
+          />
+        </FieldController>
+        <FieldController
+          error={errors?.number?.message as string}
+          label='N˚'
+          isRequired
+          maxW={{ base: 'full', md: 32, lg: 32 }}
+        >
+          <Input
+            type='text'
+            {...register('number')}
           />
         </FieldController>
       </Flex>
@@ -63,6 +111,9 @@ export const AddressData = ({ errors, register, setValue }: AddressDataProps) =>
         <CityAndStateData
           register={register}
           errors={errors}
+          watchState={watchState}
+          setValue={setValue}
+          cityFromAPI={cityFromAPI}
         />
       </Flex>
       <FieldController

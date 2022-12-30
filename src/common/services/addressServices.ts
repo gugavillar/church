@@ -12,7 +12,7 @@ export const getCities = async (uf: string): Promise<Array<GetCitiesReturn>> => 
   return data.map((city: { nome: string }) => ({ label: city.nome, value: city.nome }))
 }
 
-interface GetAddressFromZipCodeReturn {
+export interface GetAddressFromZipCodeReturn {
   street: string
   neighborhood: string
   city: string

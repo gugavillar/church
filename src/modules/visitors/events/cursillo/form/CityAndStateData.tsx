@@ -1,5 +1,5 @@
-import { useCallback, useState, Fragment } from 'react'
-import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import { useCallback, useState, Fragment, useEffect } from 'react'
+import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
 import { Select, useToast } from '@chakra-ui/react'
 
@@ -13,9 +13,12 @@ import { NewCursilhistForm } from '.'
 type CityAndStateDataProps = {
   errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
+  watchState: typeof BRAZILIAN_STATES[number]['value'] | ''
+  setValue: UseFormSetValue<NewCursilhistForm>
+  cityFromAPI: string
 }
 
-export const CityAndStateData = ({ errors, register }: CityAndStateDataProps) => {
+export const CityAndStateData = ({ errors, register, watchState, setValue, cityFromAPI }: CityAndStateDataProps) => {
   const [isLoadingCities, setIsLoadingCities] = useState(false)
   const [citiesFromUF, setCitiesFromUF] = useState<Array<GetCitiesReturn>>([])
 
@@ -39,6 +42,15 @@ export const CityAndStateData = ({ errors, register }: CityAndStateDataProps) =>
     },
     [toast]
   )
+
+  useEffect(() => {
+    watchState && handleGetCities(watchState)
+  }, [handleGetCities, watchState])
+
+  useEffect(() => {
+    citiesFromUF?.length && setValue('city', cityFromAPI)
+  }, [citiesFromUF?.length, setValue, cityFromAPI])
+
   return (
     <Fragment>
       <FieldController
