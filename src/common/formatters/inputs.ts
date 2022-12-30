@@ -82,7 +82,7 @@ export const zipCodeInputRegisterOptions: InputRegisterOptionsPhoneOrZipCodeOrTa
 export const dateInputRegisterOptions: InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (name, setValue) => ({
   onChange: (event: ChangeEvent<HTMLInputElement>) => setValue(name, fieldFormatDate(event.target.value)),
   setValueAs: (value) => {
-    if (!value) return null
+    if (!value || value?.length < 9) return null
     const [day, month, year] = value.split('/')
     return new Date(`${year}-${month}-${day}`).setHours(24, 0, 0)
   }
