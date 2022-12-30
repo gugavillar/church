@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -8,6 +9,7 @@ import { FieldController } from '@common/components'
 import { CursilloFormInstructions } from '@visitors/components'
 
 import { BRAZILIAN_STATES, EDUCATION_LEVEL, MARITAL_STATUS, OCCUPATIONS } from '@common/constants'
+import { newCursilhistFormValidation } from '@common/validations/events/cursillo'
 
 import { AddressData } from './AddressData'
 import { CloseRelative } from './CloseRelative'
@@ -22,10 +24,11 @@ export type NewCursilhistForm = {
   likeToBeCalled: string
   birthDate: number
   phone: number
-  email: string
+  email?: string
   maritalStatus: typeof MARITAL_STATUS[number]['value']
   zipCode: number
   street: string
+  number: number
   neighborhood: string
   city: string
   state: typeof BRAZILIAN_STATES[number]['value']
@@ -41,13 +44,13 @@ export type NewCursilhistForm = {
   }
   religion: string
   church: string
-  education: typeof EDUCATION_LEVEL[number]['value']
-  occupation: typeof OCCUPATIONS[number]['value']
-  workplace: string
-  workplacePhone: number
-  healthProblems: string
-  hasDietOuFoodRestriction: 'true' | 'false'
-  dietOuFoodRestriction?: string
+  education?: typeof EDUCATION_LEVEL[number]['value']
+  occupation?: typeof OCCUPATIONS[number]['value']
+  workplace?: string
+  workplacePhone?: number
+  healthProblems?: string
+  hasDietOrFoodRestriction: '1' | '0'
+  dietOrFoodRestriction?: string
   wish: string
 }
 
@@ -63,11 +66,13 @@ const NewCursilhist = () => {
     setValue,
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting }
-  } = useForm<NewCursilhistForm>()
+  } = useForm<NewCursilhistForm>({
+    resolver: yupResolver(newCursilhistFormValidation)
+  })
 
   const onSubmitHandle = (values: NewCursilhistForm) => console.log(values)
 
-  const [maritalStatus, hasDietOuFoodRestriction] = watch(['maritalStatus', 'hasDietOuFoodRestriction'])
+  const [maritalStatus, hasDietOrFoodRestriction] = watch(['maritalStatus', 'hasDietOrFoodRestriction'])
   const isMarriedPerson = !!maritalStatus && maritalStatus?.includes('Casado(a)')
 
   useEffect(() => {
@@ -110,11 +115,6 @@ const NewCursilhist = () => {
               errors={errors}
               setValue={setValue}
             />
-            <AddressData
-              register={register}
-              errors={errors}
-              setValue={setValue}
-            />
             {isMarriedPerson ? (
               <SpouseData
                 register={register}
@@ -128,6 +128,11 @@ const NewCursilhist = () => {
                 setValue={setValue}
               />
             )}
+            <AddressData
+              register={register}
+              errors={errors}
+              setValue={setValue}
+            />
             <ReligionData
               register={register}
               errors={errors}
@@ -141,13 +146,14 @@ const NewCursilhist = () => {
               register={register}
               errors={errors}
               control={control}
-              hasDietOuFoodRestriction={hasDietOuFoodRestriction}
+              hasDietOrFoodRestriction={hasDietOrFoodRestriction}
               unregister={unregister}
             />
             <FieldController
               error={errors?.wish?.message as string}
               label='Porque deseja fazer o cursilho'
               mt={6}
+              isRequired
             >
               <Textarea {...register('wish')} />
             </FieldController>
