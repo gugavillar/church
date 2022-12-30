@@ -1,3 +1,4 @@
+import { BRAZILIAN_STATES } from '@common/constants'
 import { citiesApi } from '@common/provider/citiesApi'
 import { zipCodeApi } from '@common/provider/zipCodeApi'
 
@@ -15,7 +16,7 @@ interface GetAddressFromZipCodeReturn {
   street: string
   neighborhood: string
   city: string
-  state: string
+  state: typeof BRAZILIAN_STATES[number]['value']
   add_on: string | null
   error: boolean
 }
