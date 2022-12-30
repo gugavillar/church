@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Heading, Box, Flex, Button, Card, CardHeader, CardBody, Textarea } from '@chakra-ui/react'
+import { Heading, Box, Flex, Button, Card, CardHeader, CardBody, Textarea, Text } from '@chakra-ui/react'
 
 import { FieldController } from '@common/components'
 import { CursilloFormInstructions } from '@visitors/components'
@@ -138,8 +138,14 @@ const NewCursilhist = () => {
           >
             Formulário de inscrição
           </Heading>
+          <Text
+            mt={4}
+            color='red'
+          >
+            Campos com * são obrigatórios
+          </Text>
         </CardHeader>
-        <CardBody>
+        <CardBody pt={0}>
           <Box
             as='form'
             onSubmit={handleSubmit(onSubmitHandle)}
