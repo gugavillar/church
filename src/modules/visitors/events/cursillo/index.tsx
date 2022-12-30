@@ -16,9 +16,10 @@ const Cursillo = () => {
           Cursilho Feminino
         </Heading>
         <SimpleGrid
-          minChildWidth={64}
+          columns={{ base: 1, md: 2, lg: 2 }}
           spacing={8}
           justifyItems='center'
+          alignItems='center'
         >
           <CursilloLinkCards gender='feminino' />
         </SimpleGrid>
@@ -32,7 +33,7 @@ const Cursillo = () => {
           Cursilho Masculino
         </Heading>
         <SimpleGrid
-          minChildWidth={64}
+          columns={{ base: 1, md: 2, lg: 2 }}
           spacing={8}
           justifyItems='center'
         >

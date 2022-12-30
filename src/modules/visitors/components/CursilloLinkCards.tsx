@@ -1,4 +1,4 @@
-import { UserPlus, UserList } from 'phosphor-react'
+import { UserPlus, UserList, Handshake, UsersThree } from 'phosphor-react'
 import { Fragment } from 'react'
 
 import { CardButton } from '@common/components'
@@ -11,13 +11,23 @@ const defaultHeightAndWidthForIcons = {
 const CARDS_OBJECTS = [
   {
     icon: <UserPlus {...defaultHeightAndWidthForIcons} />,
-    title: 'Inscreva-se aqui',
+    title: 'Inscrever-se',
     url: 'adicionar_cursilhista'
   },
   {
     icon: <UserList {...defaultHeightAndWidthForIcons} />,
-    title: 'Listar inscritos',
+    title: 'Cursilhistas inscritos',
     url: 'listar_cursilhistas'
+  },
+  {
+    icon: <Handshake {...defaultHeightAndWidthForIcons} />,
+    title: 'Voluntariar-se',
+    url: 'adicionar_voluntários'
+  },
+  {
+    icon: <UsersThree {...defaultHeightAndWidthForIcons} />,
+    title: 'Voluntários inscritos',
+    url: 'listar_voluntários'
   }
 ]
 
