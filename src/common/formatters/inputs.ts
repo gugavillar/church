@@ -50,20 +50,15 @@ export const fieldFormatDate = (value: string) => {
 
 type InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (
   name: string,
-  setValue: UseFormSetValue<any>,
-  phoneType?: 'celPhone' | 'phone'
+  setValue: UseFormSetValue<any>
 ) => {
   onChange: (event: ChangeEvent<HTMLInputElement>) => any
   setValueAs: (value: string) => number | null
 }
 
-export const phoneInputRegisterOptions: InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (
-  name,
-  setValue,
-  phoneType
-) => ({
+export const phoneInputRegisterOptions: InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (name, setValue) => ({
   onChange: (event: ChangeEvent<HTMLInputElement>) =>
-    phoneType === 'celPhone'
+    event?.target?.value?.length >= 15
       ? setValue(name, fieldFormatCelPhone(event.target.value))
       : setValue(name, fieldFormatPhone(event.target.value)),
   setValueAs: (value: string) => (!value ? null : Number(value?.replace(/\D/g, '')))
