@@ -1,1 +1,1 @@
-export { default } from '@visitors/events/Cursillo'
+export { default } from '@visitors/events/cursillo'
