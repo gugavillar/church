@@ -21,6 +21,7 @@ export const ReligionData = ({ errors, register }: ReligionDataProps) => {
       <FieldController
         error={errors?.religion?.message as string}
         label='Qual a sua religião'
+        isRequired
       >
         <Input
           type='text'
@@ -30,6 +31,7 @@ export const ReligionData = ({ errors, register }: ReligionDataProps) => {
       <FieldController
         error={errors?.church?.message as string}
         label='Igreja que frequenta atualmente'
+        isRequired
       >
         <Input
           type='text'
