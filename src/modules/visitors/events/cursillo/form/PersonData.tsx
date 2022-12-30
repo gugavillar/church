@@ -13,13 +13,14 @@ type PersonDataProps = {
   errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
   setValue: UseFormSetValue<NewCursilhistForm>
+  gender: 'masculino' | 'feminino'
 }
 
-export const PersonData = ({ errors, register, setValue }: PersonDataProps) => {
+export const PersonData = ({ errors, register, setValue, gender }: PersonDataProps) => {
   return (
     <Box>
       <Flex
-        gap={8}
+        gap={{ base: 6, md: 8, lg: 8 }}
         direction={{ base: 'column', md: 'column', lg: 'row' }}
       >
         <FieldController
@@ -34,7 +35,7 @@ export const PersonData = ({ errors, register, setValue }: PersonDataProps) => {
         </FieldController>
         <FieldController
           error={errors?.likeToBeCalled?.message as string}
-          label='Como gostaria de ser chamado(a)'
+          label={`Como gostaria de ser ${gender === 'masculino' ? 'chamado' : 'chamada'}`}
           isRequired
         >
           <Input
@@ -44,7 +45,7 @@ export const PersonData = ({ errors, register, setValue }: PersonDataProps) => {
         </FieldController>
       </Flex>
       <Flex
-        gap={8}
+        gap={{ base: 6, md: 8, lg: 8 }}
         mt={6}
         direction={{ base: 'column', md: 'row', lg: 'row' }}
       >
@@ -70,7 +71,7 @@ export const PersonData = ({ errors, register, setValue }: PersonDataProps) => {
         </FieldController>
       </Flex>
       <Flex
-        gap={8}
+        gap={{ base: 6, md: 8, lg: 8 }}
         mt={6}
         direction={{ base: 'column', md: 'column', lg: 'row' }}
       >

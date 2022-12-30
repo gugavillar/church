@@ -14,7 +14,7 @@ type ReligionDataProps = {
 export const ReligionData = ({ errors, register }: ReligionDataProps) => {
   return (
     <Flex
-      gap={8}
+      gap={{ base: 6, md: 8, lg: 8 }}
       mt={6}
       direction={{ base: 'column', md: 'row', lg: 'row' }}
     >

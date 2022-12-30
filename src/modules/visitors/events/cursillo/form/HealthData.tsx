@@ -25,7 +25,7 @@ export const HealthData = ({ errors, register, control, hasDietOrFoodRestriction
     <Fragment>
       <Flex
         mt={6}
-        gap={8}
+        gap={{ base: 6, md: 8, lg: 8 }}
         direction={{ base: 'column', md: 'row', lg: 'row' }}
       >
         <FieldController
@@ -52,7 +52,7 @@ export const HealthData = ({ errors, register, control, hasDietOrFoodRestriction
               >
                 <Flex
                   align='center'
-                  gap={8}
+                  gap={{ base: 6, md: 8, lg: 8 }}
                 >
                   <Radio value='1'>Sim</Radio>
                   <Radio value='0'>Não</Radio>

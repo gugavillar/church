@@ -17,7 +17,7 @@ type SpouseDataProps = {
 export const SpouseData = ({ errors, register, setValue }: SpouseDataProps) => {
   return (
     <Flex
-      gap={8}
+      gap={{ base: 6, md: 8, lg: 8 }}
       mt={6}
       direction={{ base: 'column', md: 'row', lg: 'row' }}
     >

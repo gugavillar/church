@@ -154,6 +154,7 @@ const NewCursilhist = () => {
               register={register}
               errors={errors}
               setValue={setValue}
+              gender={query.gender as 'masculino' | 'feminino'}
             />
             {isMarriedPerson ? (
               <SpouseData

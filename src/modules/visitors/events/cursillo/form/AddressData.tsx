@@ -56,7 +56,7 @@ export const AddressData = ({ errors, register, setValue, watchState }: AddressD
   return (
     <Box mt={6}>
       <Flex
-        gap={8}
+        gap={{ base: 6, md: 8, lg: 8 }}
         direction={{ base: 'column', md: 'row', lg: 'row' }}
       >
         <FieldController
@@ -94,7 +94,7 @@ export const AddressData = ({ errors, register, setValue, watchState }: AddressD
         </FieldController>
       </Flex>
       <Flex
-        gap={8}
+        gap={{ base: 6, md: 8, lg: 8 }}
         mt={6}
         direction={{ base: 'column', md: 'row', lg: 'row' }}
       >
