@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 
 import { Heading, SimpleGrid, Box } from '@chakra-ui/react'
 
-import { CursilloLinkCards } from '@visitors/components'
+import { CursilloLinkCards } from './components/CursilloLinkCards'
 
 const Cursillo = () => {
   return (

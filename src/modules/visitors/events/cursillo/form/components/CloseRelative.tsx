@@ -6,7 +6,7 @@ import { FieldController } from '@common/components'
 
 import { phoneInputRegisterOptions } from '@common/formatters'
 
-import { NewCursilhistForm } from '.'
+import { NewCursilhistForm } from '..'
 
 type SpouseDataProps = {
   errors: FieldErrors<NewCursilhistForm>

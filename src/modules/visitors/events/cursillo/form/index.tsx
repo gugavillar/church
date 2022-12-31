@@ -2,10 +2,9 @@ import { useRouter } from 'next/router'
 
 import { Heading, Box } from '@chakra-ui/react'
 
-import { CursilloFormInstructions } from '@visitors/components'
-
 import { BRAZILIAN_STATES, EDUCATION_LEVEL, MARITAL_STATUS, OCCUPATIONS } from '@common/constants'
 
+import { CursilloFormInstructions } from './components/CursilloFormInstructions'
 import { CursilloFormSubscription } from './CursilloFormSubscription'
 
 export type NewCursilhistForm = {

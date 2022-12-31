@@ -8,13 +8,13 @@ import { FieldController } from '@common/components'
 
 import { newCursilhistFormValidation } from '@common/validations/events/cursillo'
 
-import { AddressData } from './AddressData'
-import { CloseRelative } from './CloseRelative'
-import { HealthData } from './HealthData'
-import { OccupationalData } from './OccupationalData'
-import { PersonData } from './PersonData'
-import { ReligionData } from './ReligionData'
-import { SpouseData } from './SpouseData'
+import { AddressData } from './components/AddressData'
+import { CloseRelative } from './components/CloseRelative'
+import { HealthData } from './components/HealthData'
+import { OccupationalData } from './components/OccupationalData'
+import { PersonData } from './components/PersonData'
+import { ReligionData } from './components/ReligionData'
+import { SpouseData } from './components/SpouseData'
 
 import { NewCursilhistForm } from '.'
 

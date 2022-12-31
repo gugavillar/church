@@ -5,7 +5,7 @@ import { Flex, Input, RadioGroup, Radio, Textarea } from '@chakra-ui/react'
 
 import { FieldController, IfComponent } from '@common/components'
 
-import { NewCursilhistForm } from '.'
+import { NewCursilhistForm } from '..'
 
 type HealthDataProps = {
   errors: FieldErrors<NewCursilhistForm>

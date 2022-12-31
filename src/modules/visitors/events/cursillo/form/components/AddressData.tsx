@@ -9,9 +9,8 @@ import { BRAZILIAN_STATES, ERROR_TOAST } from '@common/constants'
 import { zipCodeInputRegisterOptions } from '@common/formatters'
 import { getAddressFromZipCode } from '@common/services'
 
+import { NewCursilhistForm } from '..'
 import { CityAndStateData } from './CityAndStateData'
-
-import { NewCursilhistForm } from '.'
 
 type AddressDataProps = {
   errors: FieldErrors<NewCursilhistForm>
