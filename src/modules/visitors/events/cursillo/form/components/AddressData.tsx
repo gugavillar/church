@@ -16,7 +16,7 @@ type AddressDataProps = {
   errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
   setValue: UseFormSetValue<NewCursilhistForm>
-  watchState: typeof BRAZILIAN_STATES[number]['value'] | ''
+  watchState: typeof BRAZILIAN_STATES[number]['value'] | undefined
 }
 
 export const AddressData = ({ errors, register, setValue, watchState }: AddressDataProps) => {

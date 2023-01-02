@@ -13,7 +13,7 @@ import { NewCursilhistForm } from '..'
 type CityAndStateDataProps = {
   errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
-  watchState: typeof BRAZILIAN_STATES[number]['value'] | ''
+  watchState: typeof BRAZILIAN_STATES[number]['value'] | undefined
   setValue: UseFormSetValue<NewCursilhistForm>
   cityFromAPI: string
 }
