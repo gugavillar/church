@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEffect } from 'react'
+import { Dispatch, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Card, CardHeader, Heading, CardBody, Textarea, Flex, Button, Box, Text } from '@chakra-ui/react'
@@ -8,21 +8,49 @@ import { FieldController } from '@common/components'
 
 import { newCursilhistFormValidation } from '@common/validations/events/cursillo'
 
-import { AddressData } from './components/AddressData'
-import { CloseRelative } from './components/CloseRelative'
-import { HealthData } from './components/HealthData'
-import { OccupationalData } from './components/OccupationalData'
-import { PersonData } from './components/PersonData'
-import { ReligionData } from './components/ReligionData'
-import { SpouseData } from './components/SpouseData'
-
-import { NewCursilhistForm } from '.'
+import { NewCursilhistForm, CursilhistActionReducer, CursilhistStateReducer } from '..'
+import { AddressData } from './AddressData'
+import { CloseRelative } from './CloseRelative'
+import { HealthData } from './HealthData'
+import { OccupationalData } from './OccupationalData'
+import { PersonData } from './PersonData'
+import { ReligionData } from './ReligionData'
+import { SpouseData } from './SpouseData'
 
 type CardFormProps = {
   gender: 'masculino' | 'feminino'
+  nextStep: () => void
+  dispatch: Dispatch<CursilhistActionReducer>
+  reducerState: CursilhistStateReducer
 }
 
-export const CursilloFormSubscription = ({ gender }: CardFormProps) => {
+export const defaultFormValues = {
+  name: '',
+  likeToBeCalled: '',
+  birthDate: '',
+  phone: '',
+  email: '',
+  maritalStatus: undefined,
+  zipCode: '',
+  street: '',
+  number: '',
+  neighborhood: '',
+  city: '',
+  state: undefined,
+  referencePoint: undefined,
+  religion: '',
+  church: '',
+  education: undefined,
+  occupation: undefined,
+  workplace: undefined,
+  workplacePhone: undefined,
+  healthProblems: undefined,
+  hasDietOrFoodRestriction: undefined,
+  dietOrFoodRestriction: undefined,
+  wish: ''
+}
+
+export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerState }: CardFormProps) => {
   const {
     watch,
     control,
@@ -34,42 +62,14 @@ export const CursilloFormSubscription = ({ gender }: CardFormProps) => {
   } = useForm<NewCursilhistForm>({
     resolver: yupResolver(newCursilhistFormValidation),
     defaultValues: {
-      name: '',
-      likeToBeCalled: '',
-      birthDate: null,
-      phone: null,
-      email: '',
-      maritalStatus: '',
-      zipCode: null,
-      street: '',
-      number: '',
-      neighborhood: '',
-      city: '',
-      state: '',
-      referencePoint: undefined,
-      spouse: {
-        name: '',
-        phone: null,
-        numberOfChildren: null
-      },
-      closeRelative: {
-        name: '',
-        phone: null
-      },
-      religion: '',
-      church: '',
-      education: undefined,
-      occupation: undefined,
-      workplace: undefined,
-      workplacePhone: undefined,
-      healthProblems: undefined,
-      hasDietOrFoodRestriction: '0',
-      dietOrFoodRestriction: undefined,
-      wish: ''
+      ...reducerState
     }
   })
 
-  const onSubmitHandle = (values: NewCursilhistForm) => console.log(values)
+  const onSubmitHandle = (values: NewCursilhistForm) => {
+    dispatch({ type: 'formStep', data: { ...values, stepProgress: 'reviewSubscription' } })
+    nextStep()
+  }
 
   const [maritalStatus, hasDietOrFoodRestriction, state] = watch(['maritalStatus', 'hasDietOrFoodRestriction', 'state'])
   const isMarriedPerson = !!maritalStatus && maritalStatus?.includes('Casado(a)')
@@ -80,6 +80,7 @@ export const CursilloFormSubscription = ({ gender }: CardFormProps) => {
     }
     unregister('spouse')
   }, [maritalStatus, setValue, unregister])
+
   return (
     <Card
       bg='blackAlpha.500'
