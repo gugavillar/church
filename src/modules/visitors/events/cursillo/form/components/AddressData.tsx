@@ -59,7 +59,7 @@ export const AddressData = ({ errors, register, setValue, watchState }: AddressD
         direction={{ base: 'column', md: 'row', lg: 'row' }}
       >
         <FieldController
-          error={errors?.name?.message as string}
+          error={errors?.zipCode?.message as string}
           label='CEP'
           maxW={{ base: 'full', md: 48, lg: 48 }}
           isRequired
@@ -116,7 +116,7 @@ export const AddressData = ({ errors, register, setValue, watchState }: AddressD
         />
       </Flex>
       <FieldController
-        error={errors?.neighborhood?.message as string}
+        error={errors?.referencePoint?.message as string}
         label='Ponto de referência'
         mt={6}
       >

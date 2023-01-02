@@ -39,7 +39,7 @@ export const HealthData = ({ errors, register, control, hasDietOrFoodRestriction
         </FieldController>
         <FieldController
           label='Faz dieta ou restrição alimentar?'
-          error={errors?.dietOrFoodRestriction?.message as string}
+          error={errors?.hasDietOrFoodRestriction?.message as string}
           isRequired
         >
           <Controller

@@ -26,6 +26,7 @@ export const CityAndStateData = ({ errors, register, watchState, setValue, cityF
 
   const handleGetCities = useCallback(
     async (uf: string) => {
+      if (!uf) return
       setIsLoadingCities(true)
       try {
         const response = await getCities(uf)

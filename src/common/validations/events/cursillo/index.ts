@@ -12,12 +12,12 @@ export const newCursilhistFormValidation = yup.object({
   name: yup.string().required(),
   likeToBeCalled: yup.string().required(),
   birthDate: yup
-    .number()
+    .string()
     .nullable()
-    .test('is-valid-date', 'Data inválida', (value) => customValidateDate(Number(value)))
+    .test('is-valid-date', 'Data inválida', (value) => customValidateDate(String(value)))
     .required(),
   phone: yup
-    .number()
+    .string()
     .nullable()
     .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value), 'celPhone'))
     .required(),
@@ -26,32 +26,43 @@ export const newCursilhistFormValidation = yup.object({
     .string()
     .oneOf([...MARITAL_STATUS.map((status) => status.value)])
     .required(),
-  closeRelative: yup.object().when('maritalStatus', {
-    is: (maritalStatus: typeof MARITAL_STATUS[number]['value']) => maritalStatus !== 'Casado(a)',
-    then: yup
-      .object({
+  closeRelative: yup
+    .object()
+    .when('maritalStatus', {
+      is: (maritalStatus: typeof MARITAL_STATUS[number]['value']) => maritalStatus !== 'Casado(a)',
+      then: yup.object({
         name: yup.string().required(),
         phone: yup
-          .number()
+          .string()
           .nullable()
           .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value), 'celPhone'))
           .required()
       })
-      .required()
-  }),
-  spouse: yup.object().when('maritalStatus', {
-    is: (maritalStatus: typeof MARITAL_STATUS[number]['value']) => maritalStatus === 'Casado(a)',
-    then: yup.object({
-      name: yup.string().required(),
-      phone: yup
-        .number()
-        .nullable()
-        .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value), 'celPhone'))
-        .required(),
-      numberOfChildren: yup.number().nullable().min(0, 'O número deve ser 0 ou maior que 0').required()
     })
-  }),
-  zipCode: yup.number().required(),
+    .notRequired()
+    .default(undefined),
+  spouse: yup
+    .object()
+    .when('maritalStatus', {
+      is: (maritalStatus: typeof MARITAL_STATUS[number]['value']) => maritalStatus === 'Casado(a)',
+      then: yup.object({
+        name: yup.string().required(),
+        phone: yup
+          .string()
+          .nullable()
+          .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value), 'celPhone'))
+          .required(),
+        numberOfChildren: yup
+          .number()
+          .typeError('O número deve ser 0 ou maior que 0')
+          .nullable()
+          .min(0, 'O número deve ser 0 ou maior que 0')
+          .required()
+      })
+    })
+    .notRequired()
+    .default(undefined),
+  zipCode: yup.string().nullable().required(),
   street: yup.string().required(),
   number: yup.string().required(),
   neighborhood: yup.string().required(),
@@ -67,18 +78,18 @@ export const newCursilhistFormValidation = yup.object({
   occupation: yup.string().oneOf(['', ...OCCUPATIONS.map((occupation) => occupation.value)]),
   workplace: yup.string().nullable(),
   workplacePhone: yup
-    .number()
+    .string()
     .nullable()
     .test('is-valid-phone', 'Telefone inválido', (value) =>
       value ? customValidatePhone(String(value), 'both') : true
     ),
   healthProblems: yup.string().nullable(),
-  hasDietOrFoodRestriction: yup.boolean().required(),
+  hasDietOrFoodRestriction: yup.string().oneOf(['0', '1']).required(),
   dietOrFoodRestriction: yup
     .string()
     .nullable()
     .when('hasDietOrFoodRestriction', {
-      is: (hasDietOrFoodRestriction: boolean) => hasDietOrFoodRestriction,
+      is: (hasDietOrFoodRestriction: '0' | '1') => hasDietOrFoodRestriction === '1',
       then: yup.string().required()
     }),
   wish: yup.string().required()

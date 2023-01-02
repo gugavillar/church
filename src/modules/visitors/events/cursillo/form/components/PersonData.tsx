@@ -85,7 +85,7 @@ export const PersonData = ({ errors, register, setValue, gender }: PersonDataPro
           />
         </FieldController>
         <FieldController
-          error={errors?.email?.message as string}
+          error={errors?.maritalStatus?.message as string}
           label='Estado civil'
           isRequired
         >
