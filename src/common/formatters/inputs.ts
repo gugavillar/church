@@ -48,37 +48,30 @@ export const fieldFormatDate = (value: string) => {
     .replace(/(\/\d{4})\d+?$/, '$1')
 }
 
+export const fieldFormatToNumberForSendToAPI = (value: string) => (!value ? null : Number(value?.replace(/\D/g, '')))
+
 type InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (
   name: string,
   setValue: UseFormSetValue<any>
 ) => {
   onChange: (event: ChangeEvent<HTMLInputElement>) => any
-  setValueAs: (value: string) => number | null
 }
 
 export const phoneInputRegisterOptions: InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (name, setValue) => ({
   onChange: (event: ChangeEvent<HTMLInputElement>) =>
     event?.target?.value?.length >= 15
       ? setValue(name, fieldFormatCelPhone(event.target.value))
-      : setValue(name, fieldFormatPhone(event.target.value)),
-  setValueAs: (value: string) => (!value ? null : Number(value?.replace(/\D/g, '')))
+      : setValue(name, fieldFormatPhone(event.target.value))
 })
 
 export const taxpayerInputRegisterOptions: InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (name, setValue) => ({
-  onChange: (event: ChangeEvent<HTMLInputElement>) => setValue(name, fieldFormatTaxpayer(event.target.value)),
-  setValueAs: (value: string) => (!value ? null : Number(value?.replace(/\D/g, '')))
+  onChange: (event: ChangeEvent<HTMLInputElement>) => setValue(name, fieldFormatTaxpayer(event.target.value))
 })
 
 export const zipCodeInputRegisterOptions: InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (name, setValue) => ({
-  onChange: (event: ChangeEvent<HTMLInputElement>) => setValue(name, fieldFormatZipCode(event.target.value)),
-  setValueAs: (value) => (!value ? null : Number(value?.replace(/\D/g, '')))
+  onChange: (event: ChangeEvent<HTMLInputElement>) => setValue(name, fieldFormatZipCode(event.target.value))
 })
 
 export const dateInputRegisterOptions: InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (name, setValue) => ({
-  onChange: (event: ChangeEvent<HTMLInputElement>) => setValue(name, fieldFormatDate(event.target.value)),
-  setValueAs: (value) => {
-    if (!value || value?.length < 9) return null
-    const [day, month, year] = value.split('/')
-    return new Date(`${year}-${month}-${day}`).setHours(24, 0, 0)
-  }
+  onChange: (event: ChangeEvent<HTMLInputElement>) => setValue(name, fieldFormatDate(event.target.value))
 })
