@@ -48,8 +48,6 @@ export const fieldFormatDate = (value: string) => {
     .replace(/(\/\d{4})\d+?$/, '$1')
 }
 
-export const fieldFormatToNumberForSendToAPI = (value: string) => (!value ? null : Number(value?.replace(/\D/g, '')))
-
 type InputRegisterOptionsPhoneOrZipCodeOrTaxpayerOrDate = (
   name: string,
   setValue: UseFormSetValue<any>
