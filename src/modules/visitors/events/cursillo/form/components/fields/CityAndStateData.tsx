@@ -8,7 +8,7 @@ import { FieldController } from '@common/components'
 import { BRAZILIAN_STATES, ERROR_TOAST } from '@common/constants'
 import { getCities, GetCitiesReturn } from '@common/services'
 
-import { NewCursilhistForm } from '..'
+import { NewCursilhistForm } from '../..'
 
 type CityAndStateDataProps = {
   errors: FieldErrors<NewCursilhistForm>

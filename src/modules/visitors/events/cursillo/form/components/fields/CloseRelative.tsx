@@ -6,7 +6,7 @@ import { FieldController } from '@common/components'
 
 import { phoneInputRegisterOptions } from '@common/formatters'
 
-import { NewCursilhistForm } from '..'
+import { NewCursilhistForm } from '../..'
 
 type SpouseDataProps = {
   errors: FieldErrors<NewCursilhistForm>
@@ -14,7 +14,7 @@ type SpouseDataProps = {
   setValue: UseFormSetValue<NewCursilhistForm>
 }
 
-export const SpouseData = ({ errors, register, setValue }: SpouseDataProps) => {
+export const CloseRelative = ({ errors, register, setValue }: SpouseDataProps) => {
   return (
     <Flex
       gap={{ base: 6, md: 8, lg: 8 }}
@@ -22,36 +22,26 @@ export const SpouseData = ({ errors, register, setValue }: SpouseDataProps) => {
       direction={{ base: 'column', md: 'row', lg: 'row' }}
     >
       <FieldController
-        error={errors?.spouse?.name?.message as string}
-        label='Cônjuge'
+        error={errors?.closeRelative?.name?.message as string}
+        label='Nome do parente próximo'
         isRequired
       >
         <Input
           type='text'
-          {...register('spouse.name')}
+          {...register('closeRelative.name')}
         />
       </FieldController>
       <FieldController
-        error={errors?.spouse?.phone?.message as string}
+        error={errors?.closeRelative?.phone?.message as string}
         label='Celular'
         isRequired
         maxW={{ base: 'full', md: 56, lg: 56 }}
       >
         <Input
           type='text'
-          {...register('spouse.phone', { ...phoneInputRegisterOptions('spouse.phone', setValue) })}
-        />
-      </FieldController>
-      <FieldController
-        error={errors?.spouse?.numberOfChildren?.message as string}
-        label='N˚ de filhos'
-        isRequired
-        maxW={{ base: 'full', md: 36, lg: 36 }}
-      >
-        <Input
-          type='number'
-          min={0}
-          {...register('spouse.numberOfChildren', { valueAsNumber: true })}
+          {...register('closeRelative.phone', {
+            ...phoneInputRegisterOptions('closeRelative.phone', setValue)
+          })}
         />
       </FieldController>
     </Flex>
