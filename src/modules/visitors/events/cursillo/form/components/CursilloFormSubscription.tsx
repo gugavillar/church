@@ -44,6 +44,7 @@ export const defaultFormValues = {
   occupation: undefined,
   workplace: undefined,
   workplacePhone: undefined,
+  hasHeathProblems: undefined,
   healthProblems: undefined,
   hasDietOrFoodRestriction: undefined,
   dietOrFoodRestriction: undefined,
@@ -71,7 +72,12 @@ export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerSt
     nextStep()
   }
 
-  const [maritalStatus, hasDietOrFoodRestriction, state] = watch(['maritalStatus', 'hasDietOrFoodRestriction', 'state'])
+  const [maritalStatus, hasDietOrFoodRestriction, hasHealthProblems, state] = watch([
+    'maritalStatus',
+    'hasDietOrFoodRestriction',
+    'hasHealthProblems',
+    'state'
+  ])
   const isMarriedPerson = !!maritalStatus && maritalStatus?.includes('Casado(a)')
 
   useEffect(() => {
@@ -144,6 +150,7 @@ export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerSt
             errors={errors}
             control={control}
             hasDietOrFoodRestriction={hasDietOrFoodRestriction}
+            hasHealthProblems={hasHealthProblems}
             unregister={unregister}
           />
           <FieldController

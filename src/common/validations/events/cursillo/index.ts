@@ -83,7 +83,14 @@ export const newCursilhistFormValidation = yup.object({
     .test('is-valid-phone', 'Telefone inválido', (value) =>
       value ? customValidatePhone(String(value), 'both') : true
     ),
-  healthProblems: yup.string().nullable(),
+  hasHealthProblems: yup.string().oneOf(['0', '1']).required(),
+  healthProblems: yup
+    .string()
+    .nullable()
+    .when('hasHealthProblems', {
+      is: (hasHealthProblems: '0' | '1') => hasHealthProblems === '1',
+      then: yup.string().required()
+    }),
   hasDietOrFoodRestriction: yup.string().oneOf(['0', '1']).required(),
   dietOrFoodRestriction: yup
     .string()
