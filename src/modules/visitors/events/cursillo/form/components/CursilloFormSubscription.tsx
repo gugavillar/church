@@ -44,7 +44,7 @@ export const defaultFormValues = {
   occupation: undefined,
   workplace: undefined,
   workplacePhone: undefined,
-  hasHeathProblems: undefined,
+  hasHealthProblems: undefined,
   healthProblems: undefined,
   hasDietOrFoodRestriction: undefined,
   dietOrFoodRestriction: undefined,
