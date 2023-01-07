@@ -10,12 +10,7 @@ export const ExhibitionData = ({ data, label }: ExhibitionDataProps) => (
     gap={2}
     mt={2}
   >
-    <Text
-      fontSize={{ base: 'xs', md: 'sm', lg: 'sm' }}
-      fontWeight={700}
-    >
-      {label}
-    </Text>
-    <Text fontSize={{ base: 'xs', md: 'sm', lg: 'sm' }}>{data}</Text>
+    <Text fontWeight={700}>{label}</Text>
+    <Text>{data}</Text>
   </Flex>
 )
