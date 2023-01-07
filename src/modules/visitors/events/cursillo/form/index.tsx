@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useMemo, useReducer } from 'react'
+import { useEffect, useMemo, useReducer } from 'react'
 
 import { Heading, Box } from '@chakra-ui/react'
 
@@ -76,12 +76,25 @@ const reducer = (state: CursilhistStateReducer, action: CursilhistActionReducer)
 
 const NewCursilhist = () => {
   const { query } = useRouter()
-  const { activeStep, nextStep, prevStep } = useSteps({ stepInitial: 0, stepLength: 3 })
+  const { activeStep, setActiveStep, nextStep, prevStep } = useSteps({ stepInitial: 0, stepLength: 3 })
 
   const [state, dispatch] = useReducer(reducer, {
     ...defaultFormValues,
     stepProgress: 'formSubscription'
   })
+
+  useEffect(() => {
+    switch (state?.stepProgress) {
+      case 'formSubscription':
+        return setActiveStep(0)
+      case 'reviewSubscription':
+        return setActiveStep(1)
+      case 'paymentSubscription':
+        return setActiveStep(2)
+      default:
+        return setActiveStep(0)
+    }
+  }, [setActiveStep, state?.stepProgress])
 
   const steps = useMemo(() => {
     return [

@@ -24,5 +24,5 @@ export const useSteps = ({ stepInitial, stepLength }: StepsHookProps) => {
     })
   }
 
-  return { nextStep, prevStep, activeStep }
+  return { nextStep, prevStep, activeStep, setActiveStep }
 }
