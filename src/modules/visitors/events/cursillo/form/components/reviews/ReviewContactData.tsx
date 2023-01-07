@@ -2,7 +2,7 @@ import { Heading, Box, Flex } from '@chakra-ui/react'
 
 import { IfComponent, ExhibitionData } from '@common/components'
 
-import { CursilhistStateReducer } from '..'
+import { CursilhistStateReducer } from '../..'
 
 type ReviewPersonDataProps = {
   data: Pick<
@@ -18,7 +18,7 @@ export const ReviewContactData = ({
     <Box mt={4}>
       <Heading
         as='h4'
-        fontSize='md'
+        fontSize='sm'
       >
         Endereço
       </Heading>

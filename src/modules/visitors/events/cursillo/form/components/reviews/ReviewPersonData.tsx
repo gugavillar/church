@@ -4,23 +4,25 @@ import { IfComponent, ExhibitionData } from '@common/components'
 
 import { calculateAge } from '@common/formatters'
 
-import { CursilhistStateReducer } from '..'
+import { CursilhistStateReducer } from '../..'
 
 type ReviewPersonDataProps = {
   data: Pick<
     CursilhistStateReducer,
     'name' | 'likeToBeCalled' | 'birthDate' | 'phone' | 'email' | 'maritalStatus' | 'spouse' | 'closeRelative'
   >
+  gender: 'masculino' | 'feminino'
 }
 
 export const ReviewPersonData = ({
-  data: { birthDate, likeToBeCalled, maritalStatus, name, phone, closeRelative, email, spouse }
+  data: { birthDate, likeToBeCalled, maritalStatus, name, phone, closeRelative, email, spouse },
+  gender
 }: ReviewPersonDataProps) => {
   return (
     <Box>
       <Heading
         as='h4'
-        fontSize='md'
+        fontSize='sm'
       >
         Dados pessoais
       </Heading>
@@ -33,7 +35,7 @@ export const ReviewPersonData = ({
           data={name}
         />
         <ExhibitionData
-          label='Como deseja ser chamado:'
+          label={`Como deseja ser chamad${gender === 'masculino' ? 'o' : 'a'}:`}
           data={likeToBeCalled}
         />
       </Flex>
