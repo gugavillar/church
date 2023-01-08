@@ -10,7 +10,12 @@ export const ExhibitionData = ({ data, label }: ExhibitionDataProps) => (
     gap={2}
     mt={2}
   >
-    <Text fontWeight={700}>{label}</Text>
-    <Text>{data}</Text>
+    <Text
+      fontWeight={700}
+      color='gray.500'
+    >
+      {label}
+    </Text>
+    <Text color='black'>{data}</Text>
   </Flex>
 )

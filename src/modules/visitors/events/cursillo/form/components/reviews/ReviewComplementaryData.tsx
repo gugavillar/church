@@ -43,6 +43,7 @@ export const ReviewComplementaryData = ({
       <Heading
         as='h4'
         fontSize='sm'
+        color='gray.900'
       >
         Dados complementares
       </Heading>

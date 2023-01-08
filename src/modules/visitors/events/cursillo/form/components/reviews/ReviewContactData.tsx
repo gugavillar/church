@@ -19,6 +19,7 @@ export const ReviewContactData = ({
       <Heading
         as='h4'
         fontSize='sm'
+        color='gray.900'
       >
         Endereço
       </Heading>

@@ -23,6 +23,7 @@ export const ReviewPersonData = ({
       <Heading
         as='h4'
         fontSize='sm'
+        color='gray.900'
       >
         Dados pessoais
       </Heading>

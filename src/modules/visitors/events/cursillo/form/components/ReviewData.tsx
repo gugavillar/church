@@ -62,6 +62,7 @@ export const ReviewData = ({ dispatch, gender, nextStep, prevStep, reducerState 
         <Heading
           as='h4'
           fontSize='md'
+          color='gray.900'
         >
           Revisão dos dados
         </Heading>
