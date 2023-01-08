@@ -31,6 +31,12 @@ export const Button = defineStyleConfig({
         }
       }
     },
+    outline: {
+      border: 'none',
+      fontWeight: 400,
+      textTransform: 'capitalize',
+      fontSize: '1.5rem'
+    },
     secondary: {
       background: 'black',
       color: 'white',
