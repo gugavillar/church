@@ -12,7 +12,12 @@ export const VerticalDivider = memo(({ height = 'inherit', ...props }: VerticalD
       height={height}
       {...props}
     >
-      <Divider orientation='vertical' />
+      <Divider
+        orientation='vertical'
+        opacity={1}
+        borderWidth={1}
+        borderColor='gray.50'
+      />
     </Center>
   )
 })

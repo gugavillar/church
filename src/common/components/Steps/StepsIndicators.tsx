@@ -23,11 +23,12 @@ type StepsIndicatorsProps = {
 const notCompleteStepProps = {
   bg: 'transparent',
   color: 'black',
-  border: '1px solid gray'
+  border: '1px solid',
+  borderColor: 'gray.900'
 }
 
 const completeStepProps = {
-  bg: 'gray',
+  bg: 'gray.500',
   color: 'white',
   border: 'none'
 }

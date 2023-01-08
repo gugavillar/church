@@ -5,7 +5,8 @@ import { CardButton } from '@common/components'
 
 const defaultHeightAndWidthForIcons = {
   width: 64,
-  height: 64
+  height: 64,
+  color: 'black'
 }
 
 const CARDS_OBJECTS = [

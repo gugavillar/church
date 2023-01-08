@@ -15,8 +15,9 @@ export const Header = ({ columns }: HeaderProps) => {
       <Tr>
         {columns.map(({ headerLabel }) => (
           <Th
-            borderColor='background'
+            borderColor='gray.500'
             key={generate()}
+            color='black'
           >
             {headerLabel}
           </Th>

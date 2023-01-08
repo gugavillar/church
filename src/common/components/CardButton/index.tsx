@@ -40,6 +40,7 @@ export const CardButton = ({ cardProps, gender }: CardButtonProps) => {
           as='h4'
           fontSize='sm'
           textAlign='center'
+          color='black'
         >
           {cardProps.title}
         </Heading>

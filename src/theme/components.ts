@@ -19,7 +19,7 @@ export const Button = defineStyleConfig({
   },
   variants: {
     primary: {
-      background: 'gray',
+      background: 'gray.500',
       width: '11.375rem',
       color: 'white',
       ...defaultVariantProps,
@@ -27,7 +27,7 @@ export const Button = defineStyleConfig({
         opacity: 0.8,
         _disabled: {
           opacity: 0.4,
-          bg: 'gray'
+          bg: 'gray.400'
         }
       }
     },
@@ -88,7 +88,8 @@ export const Text = defineStyleConfig({
     active: {
       textDecoration: 'underline',
       fontWeight: '700',
-      textTransform: 'uppercase'
+      textTransform: 'uppercase',
+      color: 'white'
     },
     navLink: {
       color: 'white',
@@ -152,13 +153,13 @@ export const Textarea = defineStyleConfig({
 export const Radio = defineStyleConfig({
   baseStyle: {
     control: {
-      color: 'black',
-      borderColor: 'black',
+      color: 'gray.900',
+      borderColor: 'gray.900',
       width: 5,
       height: 5,
       _checked: {
-        background: 'black',
-        borderColor: 'black',
+        background: 'gray.900',
+        borderColor: 'gray.900',
         color: 'white'
       }
     },
