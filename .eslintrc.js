@@ -21,7 +21,7 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['react', 'jsx-a11y', 'prettier', '@typescript-eslint'],
-  ignorePatterns: ['yarn.lock', 'package.json', '*/**/*.png'],
+  ignorePatterns: ['yarn.lock', 'package.json', '*/**/*.png', 'README.md'],
   rules: {
     '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
     'jsx-quotes': ['error', 'prefer-single'],
