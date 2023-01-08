@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
 import { Box, Flex, Input, useToast } from '@chakra-ui/react'
@@ -17,9 +17,10 @@ type AddressDataProps = {
   register: UseFormRegister<NewCursilhistForm>
   setValue: UseFormSetValue<NewCursilhistForm>
   watchState: typeof BRAZILIAN_STATES[number]['value'] | undefined
+  cityFromReducer: string
 }
 
-export const AddressData = ({ errors, register, setValue, watchState }: AddressDataProps) => {
+export const AddressData = ({ errors, register, setValue, watchState, cityFromReducer }: AddressDataProps) => {
   const [cityFromAPI, setCityFromAPI] = useState('')
 
   const toast = useToast()
@@ -51,6 +52,10 @@ export const AddressData = ({ errors, register, setValue, watchState }: AddressD
     },
     [setValue, toast]
   )
+
+  useEffect(() => {
+    Boolean(cityFromReducer) && setCityFromAPI(cityFromReducer)
+  }, [cityFromReducer])
 
   return (
     <Box mt={6}>

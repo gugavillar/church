@@ -78,24 +78,28 @@ export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerSt
     'hasHealthProblems',
     'state'
   ])
-  const isMarriedPerson = !!maritalStatus && maritalStatus?.includes('Casado(a)')
+  const isMarriedPerson = Boolean(maritalStatus) && maritalStatus?.includes('Casado(a)')
 
   useEffect(() => {
     if (maritalStatus === 'Casado(a)') {
       unregister('closeRelative')
+    } else {
+      unregister('spouse')
     }
-    unregister('spouse')
   }, [maritalStatus, setValue, unregister])
 
   return (
     <Card
       bg='transparent'
       boxShadow='2xl'
+      as='form'
+      onSubmit={handleSubmit(onSubmitHandle)}
     >
       <CardHeader>
         <Heading
           as='h4'
           fontSize='md'
+          color='gray.900'
         >
           Formulário de inscrição
         </Heading>
@@ -107,10 +111,7 @@ export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerSt
         </Text>
       </CardHeader>
       <CardBody pt={0}>
-        <Box
-          as='form'
-          onSubmit={handleSubmit(onSubmitHandle)}
-        >
+        <Box>
           <PersonData
             register={register}
             errors={errors}
@@ -135,6 +136,7 @@ export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerSt
             errors={errors}
             setValue={setValue}
             watchState={state}
+            cityFromReducer={reducerState?.city}
           />
           <ReligionData
             register={register}

@@ -49,7 +49,7 @@ export const CityAndStateData = ({ errors, register, watchState, setValue, cityF
   }, [handleGetCities, watchState])
 
   useEffect(() => {
-    citiesFromUF?.length && setValue('city', cityFromAPI)
+    Boolean(citiesFromUF?.length) && setValue('city', cityFromAPI, { shouldValidate: true, shouldDirty: true })
   }, [citiesFromUF?.length, setValue, cityFromAPI])
 
   return (
