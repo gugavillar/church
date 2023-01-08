@@ -170,7 +170,7 @@ export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerSt
               isLoading={isSubmitting}
               isDisabled={!isValid || !isDirty}
             >
-              Cadastrar
+              Avançar
             </Button>
           </Flex>
         </Box>

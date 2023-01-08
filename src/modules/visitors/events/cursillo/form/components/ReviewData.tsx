@@ -47,11 +47,16 @@ export const ReviewData = ({ dispatch, gender, nextStep, prevStep, reducerState 
     nextStep()
   }
 
+  const handlePrevStep = () => {
+    dispatch({ type: 'formStep', data: { ...reducerState, stepProgress: 'formSubscription' } })
+    console.log(reducerState)
+    prevStep()
+  }
+
   return (
     <Card
-      bg='gray'
+      bg='blackAlpha.500'
       boxShadow='2xl'
-      color='white'
     >
       <CardHeader>
         <Heading
@@ -74,21 +79,16 @@ export const ReviewData = ({ dispatch, gender, nextStep, prevStep, reducerState 
         <Flex
           align='center'
           justify='flex-end'
-          gap={2}
+          gap={6}
           width='full'
         >
           <Button
-            variant='secondary'
-            onClick={prevStep}
+            variant='outline'
+            onClick={handlePrevStep}
           >
             Voltar
           </Button>
-          <Button
-            variant='secondary'
-            onClick={handleCreateCursilhist}
-          >
-            Avançar
-          </Button>
+          <Button onClick={handleCreateCursilhist}>Avançar</Button>
         </Flex>
       </CardFooter>
     </Card>
