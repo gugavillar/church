@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Dispatch, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Card, CardHeader, Heading, CardBody, Textarea, Flex, Button, Box, Text } from '@chakra-ui/react'
+import { Card, CardHeader, Heading, CardBody, Textarea, Flex, Button, Box, Text, CardFooter } from '@chakra-ui/react'
 
 import { FieldController } from '@common/components'
 
@@ -161,20 +161,23 @@ export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerSt
           >
             <Textarea {...register('wish')} />
           </FieldController>
-          <Flex
-            justify='flex-end'
-            mt={6}
-          >
-            <Button
-              type='submit'
-              isLoading={isSubmitting}
-              isDisabled={!isValid || !isDirty}
-            >
-              Avançar
-            </Button>
-          </Flex>
         </Box>
       </CardBody>
+      <CardFooter>
+        <Flex
+          align='center'
+          justify='flex-end'
+          width='full'
+        >
+          <Button
+            type='submit'
+            isLoading={isSubmitting}
+            isDisabled={!isValid || !isDirty}
+          >
+            Avançar
+          </Button>
+        </Flex>
+      </CardFooter>
     </Card>
   )
 }
