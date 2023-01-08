@@ -89,7 +89,7 @@ export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerSt
 
   return (
     <Card
-      bg='blackAlpha.500'
+      bg='transparent'
       boxShadow='2xl'
     >
       <CardHeader>

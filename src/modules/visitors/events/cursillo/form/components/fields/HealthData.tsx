@@ -48,10 +48,7 @@ export const HealthData = ({
             name='hasHealthProblems'
             control={control}
             render={({ field }) => (
-              <RadioGroup
-                {...field}
-                colorScheme='gray'
-              >
+              <RadioGroup {...field}>
                 <Flex
                   align='center'
                   gap={{ base: 6, md: 8, lg: 8 }}
@@ -72,10 +69,7 @@ export const HealthData = ({
             name='hasDietOrFoodRestriction'
             control={control}
             render={({ field }) => (
-              <RadioGroup
-                {...field}
-                colorScheme='gray'
-              >
+              <RadioGroup {...field}>
                 <Flex
                   align='center'
                   gap={{ base: 6, md: 8, lg: 8 }}

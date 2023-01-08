@@ -152,9 +152,15 @@ export const Textarea = defineStyleConfig({
 export const Radio = defineStyleConfig({
   baseStyle: {
     control: {
-      color: 'white',
+      color: 'black',
+      borderColor: 'black',
       width: 5,
-      height: 5
+      height: 5,
+      _checked: {
+        background: 'black',
+        borderColor: 'black',
+        color: 'white'
+      }
     },
     container: {
       height: '3rem'

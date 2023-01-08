@@ -55,7 +55,7 @@ export const ReviewData = ({ dispatch, gender, nextStep, prevStep, reducerState 
 
   return (
     <Card
-      bg='blackAlpha.500'
+      bg='transparent'
       boxShadow='2xl'
     >
       <CardHeader>

@@ -42,7 +42,7 @@ export const ReviewComplementaryData = ({
     <Box mt={4}>
       <Heading
         as='h4'
-        fontSize='md'
+        fontSize='sm'
       >
         Dados complementares
       </Heading>
