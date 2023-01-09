@@ -2,9 +2,9 @@ import { useRouter } from 'next/router'
 
 import { Flex, useDisclosure } from '@chakra-ui/react'
 
-import { VerticalDivider } from '@common/components'
+import { DropdownMenu, VerticalDivider } from '@common/components'
 
-import { ITENS_MENU } from './constants'
+import { DROPDOWN_MENU_ITENS, ITENS_MENU } from './constants'
 import { ItemMenu } from './ItemMenu'
 import { Logo } from './Logo'
 import { MenuContent } from './MenuContent'
@@ -41,6 +41,12 @@ export const Menu = () => {
             handleCloseDrawer={handleCloseDrawer}
           />
         ))}
+        <DropdownMenu
+          labelMenu='Eventos'
+          menuList={DROPDOWN_MENU_ITENS}
+          activeUrl={pathname}
+          handleCloseDrawer={handleCloseDrawer}
+        />
       </MenuContent>
     </Flex>
   )
