@@ -43,7 +43,7 @@ export const DropdownMenu = ({ labelMenu, menuList, activeUrl, handleCloseDrawer
             key={generate()}
           >
             <Link
-              href={`/eventos${menuItem.url}`}
+              href={menuItem.url}
               passHref
               onClick={handleCloseDrawer}
             >
@@ -52,7 +52,7 @@ export const DropdownMenu = ({ labelMenu, menuList, activeUrl, handleCloseDrawer
                 display={{ base: 'block', md: 'block', lg: 'flex' }}
                 py={{ base: 2, md: 2 }}
                 variant='navLink'
-                {...(`/eventos${menuItem.url}` === activeUrl && { variant: 'active' })}
+                {...(activeUrl.includes(menuItem.url) && { variant: 'active' })}
               >
                 {menuItem.label}
               </Text>

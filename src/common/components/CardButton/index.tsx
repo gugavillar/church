@@ -15,7 +15,7 @@ type CardButtonProps = {
 export const CardButton = ({ cardProps, gender }: CardButtonProps) => {
   const { push } = useRouter()
 
-  const handleNavigateTo = (url: string) => push(`/cursilho/${gender}/${url}`)
+  const handleNavigateTo = (url: string) => push(`/eventos/cursilho/${gender}/${url}`)
 
   return (
     <Card

@@ -5,6 +5,6 @@ export const ITENS_MENU = [
 ] as const
 
 export const DROPDOWN_MENU_ITENS = [
-  { label: 'Cursilho', url: '/cursilho' },
-  { label: 'Acampamento', url: '/acampamento' }
+  { label: 'Cursilho', url: '/eventos/cursilho' },
+  { label: 'Acampamento', url: '/eventos/acampamento' }
 ] as const
