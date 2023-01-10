@@ -7,6 +7,7 @@ import { Pix } from '@common/components'
 type ButtonPaymentProps = {
   iconType: 'pix' | 'credit' | 'money'
   label: 'PIX' | 'Cartão' | 'Dinheiro'
+  onClick: () => void
 }
 
 const pixDefaultProps = {
@@ -26,9 +27,12 @@ const icon = {
   money: <CurrencyDollar {...iconsDefaultProps} />
 }
 
-export const ButtonPayment = ({ iconType, label }: ButtonPaymentProps) => {
+export const ButtonPayment = ({ iconType, label, onClick }: ButtonPaymentProps) => {
   return (
-    <ChakraButton bg='transparent'>
+    <ChakraButton
+      bg='transparent'
+      onClick={onClick}
+    >
       {icon[iconType]}
       <Text
         color='black'

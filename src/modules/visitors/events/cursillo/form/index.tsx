@@ -124,6 +124,7 @@ const NewCursilhist = () => {
           <PaymentData
             reducerState={state}
             prevStep={prevStep}
+            dispatch={dispatch}
           />
         )
       }
