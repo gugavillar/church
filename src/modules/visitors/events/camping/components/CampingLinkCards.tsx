@@ -1,4 +1,4 @@
-import { Person, UserList } from 'phosphor-react'
+import { UserPlus, UserList } from 'phosphor-react'
 import { Fragment } from 'react'
 
 import { CardButton } from '@common/components'
@@ -11,7 +11,7 @@ const defaultHeightAndWidthForIcons = {
 
 const CARDS_OBJECTS = [
   {
-    icon: <Person {...defaultHeightAndWidthForIcons} />,
+    icon: <UserPlus {...defaultHeightAndWidthForIcons} />,
     title: 'Inscrever-se',
     url: 'adicionar_jovem'
   },
@@ -22,14 +22,18 @@ const CARDS_OBJECTS = [
   }
 ]
 
-export const CampingLinkCards = () => {
+type CampingLinkCardsProps = {
+  gender: 'feminino' | 'masculino'
+}
+
+export const CampingLinkCards = ({ gender }: CampingLinkCardsProps) => {
   return (
     <Fragment>
       {CARDS_OBJECTS.map((card) => (
         <CardButton
           key={card.title}
           cardProps={card}
-          urlNavigation='/eventos/acampamento/'
+          urlNavigation={`/eventos/acampamento/${gender}`}
         />
       ))}
     </Fragment>
