@@ -17,7 +17,7 @@ const CARDS_OBJECTS = [
   },
   {
     icon: <UserList {...defaultHeightAndWidthForIcons} />,
-    title: 'Cursilhistas inscritos',
+    title: 'Cursilhistas',
     url: 'listar_cursilhistas'
   },
   {
@@ -27,7 +27,7 @@ const CARDS_OBJECTS = [
   },
   {
     icon: <UsersThree {...defaultHeightAndWidthForIcons} />,
-    title: 'Voluntários inscritos',
+    title: 'Voluntários',
     url: 'listar_voluntários'
   }
 ]
@@ -43,7 +43,7 @@ export const CursilloLinkCards = ({ gender }: CursilloLinkCardsPros) => {
         <CardButton
           key={card.title}
           cardProps={card}
-          gender={gender}
+          urlNavigation={`/eventos/cursilho/${gender}`}
         />
       ))}
     </Fragment>
