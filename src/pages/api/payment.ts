@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { Stripe } from 'stripe'
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+const stripe: Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+const PaymentNext = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
     res.status(405).json({ message: 'Method not allowed' })
@@ -20,7 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       cancel_url: 'http://localhost:3000/cancel'
     })
     res.status(200).json({ session })
-  } catch (err) {
+  } catch (err: any) {
     res.status(err.statusCode || 500).json(err.message)
   }
 }
+
+export default PaymentNext
