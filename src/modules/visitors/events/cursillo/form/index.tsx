@@ -5,7 +5,7 @@ import { Heading, Box } from '@chakra-ui/react'
 
 import { Steps } from '@common/components'
 
-import { BRAZILIAN_STATES, EDUCATION_LEVEL, MARITAL_STATUS, OCCUPATIONS } from '@common/constants'
+import { ACTUAL_YEAR, BRAZILIAN_STATES, EDUCATION_LEVEL, MARITAL_STATUS, OCCUPATIONS } from '@common/constants'
 import { useSteps } from '@common/hooks'
 
 import { CursilloFormInstructions } from './components/CursilloFormInstructions'
@@ -57,8 +57,6 @@ export type CursilhistActionReducer = {
   type: 'formStep' | 'reviewStep'
   data: CursilhistStateReducer
 }
-
-const ACTUAL_YEAR = new Date().getFullYear()
 
 const reducer = (state: CursilhistStateReducer, action: CursilhistActionReducer) => {
   switch (action.type) {
