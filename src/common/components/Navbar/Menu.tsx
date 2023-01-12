@@ -4,8 +4,8 @@ import { Flex, useDisclosure } from '@chakra-ui/react'
 
 import { DropdownMenu, VerticalDivider } from '@common/components'
 
-import { DROPDOWN_MENU_ITENS, ITENS_MENU } from './constants'
-import { ItemMenu } from './ItemMenu'
+import { DROPDOWN_MENU_ITENS } from './constants'
+import { ItemList } from './ItemList'
 import { Logo } from './Logo'
 import { MenuContent } from './MenuContent'
 
@@ -32,15 +32,10 @@ export const Menu = () => {
         onOpen={onOpen}
         onClose={onClose}
       >
-        {ITENS_MENU.map((item) => (
-          <ItemMenu
-            key={item.label}
-            label={item.label}
-            url={item.url}
-            activeUrl={pathname}
-            handleCloseDrawer={handleCloseDrawer}
-          />
-        ))}
+        <ItemList
+          handleCloseDrawer={handleCloseDrawer}
+          pathname={pathname}
+        />
         <DropdownMenu
           labelMenu='Eventos'
           menuList={DROPDOWN_MENU_ITENS}
