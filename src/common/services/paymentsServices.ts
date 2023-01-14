@@ -6,7 +6,15 @@ interface CreditCardService {
   }
 }
 
-export const creditCardService = async (): Promise<CreditCardService> => {
-  const { data } = await nextApi.post('/payment')
+export type CreditCardServiceBody = {
+  line_items: Array<{
+    price: string
+    quantity: number
+  }>
+  ref: string
+}
+
+export const creditCardService = async (body: CreditCardServiceBody): Promise<CreditCardService> => {
+  const { data } = await nextApi.post('/payment', { ...body })
   return data
 }
