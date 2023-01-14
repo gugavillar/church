@@ -13,22 +13,22 @@ const CARDS_OBJECTS = [
   {
     icon: <UserPlus {...defaultHeightAndWidthForIcons} />,
     title: 'Inscrever-se',
-    url: 'adicionar_cursilhista'
+    url: 'adicionar'
   },
   {
     icon: <UserList {...defaultHeightAndWidthForIcons} />,
     title: 'Cursilhistas',
-    url: 'listar_cursilhistas'
+    url: 'listar'
   },
   {
     icon: <Handshake {...defaultHeightAndWidthForIcons} />,
     title: 'Voluntariar-se',
-    url: 'adicionar_voluntários'
+    url: 'adicionar'
   },
   {
     icon: <UsersThree {...defaultHeightAndWidthForIcons} />,
     title: 'Voluntários',
-    url: 'listar_voluntários'
+    url: 'listar'
   }
 ]
 

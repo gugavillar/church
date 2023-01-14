@@ -13,12 +13,12 @@ const CARDS_OBJECTS = [
   {
     icon: <UserPlus {...defaultHeightAndWidthForIcons} />,
     title: 'Inscrever-se',
-    url: 'adicionar_jovem'
+    url: 'adicionar'
   },
   {
     icon: <UserList {...defaultHeightAndWidthForIcons} />,
     title: 'Jovens',
-    url: 'listar_jovens'
+    url: 'listar'
   }
 ]
 
