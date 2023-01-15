@@ -1,12 +1,27 @@
-import { Fragment } from 'react'
+import { useRouter } from 'next/router'
+import { Fragment, useEffect } from 'react'
 
-import { Heading, SimpleGrid, Box } from '@chakra-ui/react'
+import { Heading, SimpleGrid, Box, useToast } from '@chakra-ui/react'
 
-import { ACTUAL_YEAR } from '@common/constants'
+import { ACTUAL_YEAR, ERROR_TOAST } from '@common/constants'
 
 import { CursilloLinkCards } from './components/CursilloLinkCards'
 
 const Cursillo = () => {
+  const { push, query } = useRouter()
+  const toast = useToast()
+
+  useEffect(() => {
+    if (query?.cursilhistsError) {
+      toast({
+        ...ERROR_TOAST,
+        title: 'Ocorreu uma falha',
+        description: 'Falha ao carregar os cursilhistas.'
+      })
+      push('/eventos/cursilho', undefined, { shallow: true })
+    }
+  }, [push, query?.cursilhistsError, toast])
+
   return (
     <Fragment>
       <Heading

@@ -43,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
   } catch {
     return {
       redirect: {
-        destination: '/eventos/cursilho',
+        destination: '/eventos/cursilho?cursilhistsError=true',
         permanent: false
       }
     }
