@@ -6,6 +6,7 @@ import { Card, CardHeader, Heading, CardBody, Textarea, Flex, Button, Box, Text,
 
 import { FieldController } from '@common/components'
 
+import { Gender } from '@common/@types'
 import { newCursilhistFormValidation } from '@common/validations/events/cursillo'
 
 import { NewCursilhistForm, CursilhistActionReducer, CursilhistStateReducer } from '..'
@@ -18,7 +19,7 @@ import { ReligionData } from './fields/ReligionData'
 import { SpouseData } from './fields/SpouseData'
 
 type CardFormProps = {
-  gender: 'masculino' | 'feminino'
+  gender: Gender
   dispatch: Dispatch<CursilhistActionReducer>
   reducerState: CursilhistStateReducer
 }

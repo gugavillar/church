@@ -2,6 +2,7 @@ import { Heading, Box, Flex } from '@chakra-ui/react'
 
 import { IfComponent, ExhibitionData } from '@common/components'
 
+import { Gender } from '@common/@types'
 import { calculateAge } from '@common/formatters'
 
 import { CursilhistStateReducer } from '../..'
@@ -11,7 +12,7 @@ type ReviewPersonDataProps = {
     CursilhistStateReducer,
     'name' | 'likeToBeCalled' | 'birthDate' | 'phone' | 'email' | 'maritalStatus' | 'spouse' | 'closeRelative'
   >
-  gender: 'masculino' | 'feminino'
+  gender: Gender
 }
 
 export const ReviewPersonData = ({

@@ -17,6 +17,7 @@ import {
 
 import { IfComponent } from '@common/components'
 
+import { PaymentMethods } from '@common/@types'
 import { ERROR_TOAST, PAYMENT_METHODS } from '@common/constants'
 import { creditCardService } from '@common/services'
 
@@ -91,11 +92,11 @@ const PAYMENT_METHOD_SHOW = {
 }
 
 export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
-  const [paymentMethod, setPaymentMethod] = useState<'pix' | 'credit' | 'money' | 'noPayment'>('noPayment')
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethods | 'noPayment'>('noPayment')
 
   const toast = useToast()
 
-  const handleSetPaymentMethod = async (method: 'pix' | 'credit' | 'money') => {
+  const handleSetPaymentMethod = async (method: PaymentMethods) => {
     setPaymentMethod(method)
     if (method === 'credit') {
       try {
@@ -125,7 +126,7 @@ export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
       data: {
         ...reducerState,
         stepProgress: 'confirmSubscription',
-        method: paymentMethod as 'pix' | 'credit' | 'money'
+        method: paymentMethod as PaymentMethods
       }
     })
   }

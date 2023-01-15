@@ -5,6 +5,7 @@ import { Heading, Box } from '@chakra-ui/react'
 
 import { Steps } from '@common/components'
 
+import { Gender, PaymentMethods } from '@common/@types'
 import { ACTUAL_YEAR, BRAZILIAN_STATES, EDUCATION_LEVEL, MARITAL_STATUS, OCCUPATIONS } from '@common/constants'
 import { useSteps } from '@common/hooks'
 
@@ -49,7 +50,7 @@ export type NewCursilhistForm = {
   hasDietOrFoodRestriction?: '1' | '0'
   dietOrFoodRestriction?: string
   wish: string
-  method?: 'credit' | 'money' | 'pix'
+  method?: PaymentMethods
 }
 
 export type CursilhistStateReducer = {
@@ -133,7 +134,7 @@ const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
       {
         content: (
           <CursilloFormSubscription
-            gender={query.gender as 'masculino' | 'feminino'}
+            gender={query.gender as Gender}
             dispatch={dispatch}
             reducerState={state}
           />
@@ -142,7 +143,7 @@ const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
       {
         content: (
           <ReviewData
-            gender={query.gender as 'masculino' | 'feminino'}
+            gender={query.gender as Gender}
             dispatch={dispatch}
             reducerState={state}
           />
@@ -157,12 +158,7 @@ const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
         )
       },
       {
-        content: (
-          <ConfirmedPayment
-            gender={query.gender as 'masculino' | 'feminino'}
-            reducerState={state}
-          />
-        )
+        content: <ConfirmedPayment reducerState={state} />
       }
     ]
   }, [query.gender, state])

@@ -4,6 +4,7 @@ import { Flex, Input, Box, Select } from '@chakra-ui/react'
 
 import { FieldController } from '@common/components'
 
+import { Gender } from '@common/@types'
 import { MARITAL_STATUS } from '@common/constants'
 import { dateInputRegisterOptions, phoneInputRegisterOptions } from '@common/formatters'
 
@@ -13,7 +14,7 @@ type PersonDataProps = {
   errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
   setValue: UseFormSetValue<NewCursilhistForm>
-  gender: 'masculino' | 'feminino'
+  gender: Gender
 }
 
 export const PersonData = ({ errors, register, setValue, gender }: PersonDataProps) => {

@@ -3,6 +3,8 @@ import { Fragment } from 'react'
 
 import { CardButton } from '@common/components'
 
+import { Gender } from '@common/@types'
+
 const defaultHeightAndWidthForIcons = {
   width: 64,
   height: 64,
@@ -33,7 +35,7 @@ const CARDS_OBJECTS = [
 ]
 
 type CursilloLinkCardsPros = {
-  gender: 'masculino' | 'feminino'
+  gender: Gender
 }
 
 export const CursilloLinkCards = ({ gender }: CursilloLinkCardsPros) => {

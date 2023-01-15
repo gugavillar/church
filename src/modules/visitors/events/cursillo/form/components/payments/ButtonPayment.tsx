@@ -4,8 +4,10 @@ import { Button as ChakraButton, Text } from '@chakra-ui/react'
 
 import { Pix } from '@common/components'
 
+import { PaymentMethods } from '@common/@types'
+
 type ButtonPaymentProps = {
-  iconType: 'pix' | 'credit' | 'money'
+  iconType: PaymentMethods
   label: 'PIX' | 'Cartão' | 'Dinheiro'
   onClick: () => void
 }

@@ -5,6 +5,7 @@ import { Card, CardHeader, Heading, CardBody, Text, CardFooter, Flex, Button, us
 
 import { IfComponent } from '@common/components'
 
+import { Gender } from '@common/@types'
 import { ERROR_TOAST } from '@common/constants'
 import { timestampDate, formatToNumber } from '@common/formatters'
 import { createCursilhist } from '@common/services'
@@ -17,12 +18,12 @@ import { ReviewPersonData } from './reviews/ReviewPersonData'
 type ReviewDataProps = {
   reducerState: CursilhistStateReducer
   dispatch: Dispatch<CursilhistActionReducer>
-  gender: 'masculino' | 'feminino'
+  gender: Gender
 }
 
 type FormatDataToDatabaseArgs = {
   reducerState: CursilhistStateReducer
-  gender: 'masculino' | 'feminino'
+  gender: Gender
 }
 
 const formatDataToDatabase = ({ reducerState: { stepProgress, ...rest }, gender }: FormatDataToDatabaseArgs) => {
