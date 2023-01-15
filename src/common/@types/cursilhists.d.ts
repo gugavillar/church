@@ -1,6 +1,6 @@
 import { MARITAL_STATUS, OCCUPATIONS, EDUCATION_LEVEL, BRAZILIAN_STATES } from '@common/constants'
 
-import { PaymentMethods } from '.'
+import { PaymentMethods, PaymentStatus } from '.'
 
 type Cursilhist = {
   name: string
@@ -30,14 +30,15 @@ type Cursilhist = {
   education?: typeof EDUCATION_LEVEL[number]['value']
   occupation?: typeof OCCUPATIONS[number]['value']
   workplace?: string
-  workplacePhone?: string
+  workplacePhone?: number
   hasHealthProblems: boolean
   healthProblems?: string
   hasDietOrFoodRestriction: boolean
   dietOrFoodRestriction?: string
   wish: string
-  method: PaymentMethods
+  paymentMethod: PaymentMethods
   stripe_id: string
+  paymentStatus: PaymentStatus
 }
 
 export interface CursilhistDatabase {
