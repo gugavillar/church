@@ -21,7 +21,7 @@ export const newCursilhistFormValidation = yup.object({
     .nullable()
     .test('is-valid-phone', 'Telefone inválido', (value) => customValidatePhone(String(value), 'celPhone'))
     .required(),
-  email: yup.string().nullable().email(),
+  email: yup.string().nullable().email().required(),
   maritalStatus: yup
     .string()
     .oneOf([...MARITAL_STATUS.map((status) => status.value)])
