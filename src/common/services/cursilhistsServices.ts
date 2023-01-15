@@ -15,7 +15,6 @@ export const getCursilhist = (ref: string) =>
 type CreatePaymentConfirmationParams = {
   method: 'pix' | 'money' | 'credit'
   cursilhistRef: string
-  status: boolean
   gender: 'masculino' | 'feminino'
 }
 

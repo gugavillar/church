@@ -36,8 +36,8 @@ const PaymentNext = async (req: NextApiRequest, res: NextApiResponse) => {
       customer: stripeCustomerCreate?.id ?? data.stripe_id,
       line_items,
       mode: 'payment',
-      success_url: `${url}?user_id=${ref}&payment=true`,
-      cancel_url: `${url}?user_id=${ref}&payment=false`
+      success_url: `${url}?user_id=${ref}&success=true`,
+      cancel_url: `${url}?user_id=${ref}&success=false`
     })
 
     res.status(200).json({ session })

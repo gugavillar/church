@@ -14,19 +14,18 @@ type ConfirmedPaymentProps = {
 }
 
 export const ConfirmedPayment = ({ gender, reducerState }: ConfirmedPaymentProps) => {
-  console.log(reducerState)
   const [isLoading, setIsLoading] = useState(false)
 
-  const { push } = useRouter()
+  const { push, query } = useRouter()
   const toast = useToast()
+  const hasUserId = Boolean(query?.user_id)
 
   const handleConcludeSubscription = async () => {
     setIsLoading(true)
     try {
       const payment = {
-        method: reducerState.method as 'pix' | 'money' | 'credit',
+        method: hasUserId ? 'credit' : (reducerState.method as 'pix' | 'money' | 'credit'),
         cursilhistRef: reducerState.id as string,
-        status: reducerState.method !== 'money',
         gender
       }
       await createCursilhistPaymentConfirmation(payment)

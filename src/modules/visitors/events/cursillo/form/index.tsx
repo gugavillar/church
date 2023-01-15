@@ -124,9 +124,9 @@ const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
     cursilhist &&
       dispatch({
         type: 'confirmStep',
-        data: { ...cursilhist, stepProgress: query?.payment === 'true' ? 'confirmSubscription' : 'reviewSubscription' }
+        data: { ...cursilhist, stepProgress: query?.success === 'true' ? 'confirmSubscription' : 'reviewSubscription' }
       })
-  }, [cursilhist, query?.payment])
+  }, [cursilhist, query?.success])
 
   const steps = useMemo(() => {
     return [
