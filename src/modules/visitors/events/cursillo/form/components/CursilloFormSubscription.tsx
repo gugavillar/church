@@ -19,7 +19,6 @@ import { SpouseData } from './fields/SpouseData'
 
 type CardFormProps = {
   gender: 'masculino' | 'feminino'
-  nextStep: () => void
   dispatch: Dispatch<CursilhistActionReducer>
   reducerState: CursilhistStateReducer
 }
@@ -51,7 +50,7 @@ export const defaultFormValues = {
   wish: ''
 }
 
-export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerState }: CardFormProps) => {
+export const CursilloFormSubscription = ({ gender, dispatch, reducerState }: CardFormProps) => {
   const {
     watch,
     control,
@@ -69,7 +68,6 @@ export const CursilloFormSubscription = ({ gender, nextStep, dispatch, reducerSt
 
   const onSubmitHandle = (values: NewCursilhistForm) => {
     dispatch({ type: 'formStep', data: { ...values, stepProgress: 'reviewSubscription' } })
-    nextStep()
   }
 
   const [maritalStatus, hasDietOrFoodRestriction, hasHealthProblems, state] = watch([
