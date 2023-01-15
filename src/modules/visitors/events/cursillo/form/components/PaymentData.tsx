@@ -38,7 +38,7 @@ const PAYMENT_METHOD_SHOW = {
         fontSize='sm'
         color='gray.500'
       >
-        Leia o QrCode, efetue o pagamento e envie o comprovante.
+        Leia o QrCode, efetue o pagamento.
       </Heading>
       <Image
         src='/assets/qrCodePix.png'
@@ -126,7 +126,7 @@ export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
       data: {
         ...reducerState,
         stepProgress: 'confirmSubscription',
-        method: paymentMethod as PaymentMethods
+        paymentMethod: paymentMethod as PaymentMethods
       }
     })
   }

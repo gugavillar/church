@@ -50,7 +50,7 @@ export type NewCursilhistForm = {
   hasDietOrFoodRestriction?: '1' | '0'
   dietOrFoodRestriction?: string
   wish: string
-  method?: PaymentMethods
+  paymentMethod?: PaymentMethods
 }
 
 export type CursilhistStateReducer = {
@@ -82,7 +82,7 @@ const reducer = (state: CursilhistStateReducer, action: CursilhistActionReducer)
       return {
         ...state,
         stepProgress: action.data.stepProgress,
-        method: action.data.method
+        paymentMethod: action.data.paymentMethod
       }
     case 'confirmStep':
       return {
