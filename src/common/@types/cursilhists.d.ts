@@ -6,5 +6,7 @@ export interface CursilhistDatabase {
       id: string
     }
   }
-  data: Cursilhist
+  data: {
+    stripe_id: string
+  } & Cursilhist
 }
