@@ -22,7 +22,8 @@
       "@services/*": ["src/common/services/*"],
       "@validations/*": ["src/common/validations/*"],
       "@visitors/*": ["src/modules/visitors/*"],
-      "@utils/*": ["src/modules/utils/*"]
+      "@utils/*": ["src/modules/utils/*"],
+      "@pages/*": ["src/pages/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
