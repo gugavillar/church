@@ -10,3 +10,7 @@ export interface CursilhistDatabase {
     stripe_id: string
   } & Cursilhist
 }
+
+export interface AllCursilhistsDatabase {
+  data: Array<CursilhistDatabase>
+}
