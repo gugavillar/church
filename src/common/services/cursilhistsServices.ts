@@ -1,3 +1,4 @@
+import { Gender, PaymentMethods, PaymentStatus } from '@common/@types'
 import { AllCursilhistsDatabase, CursilhistDatabase } from '@common/@types/cursilhists'
 import { faunaAPI, faunaQ } from '@common/provider/faunaApi'
 import { Cursilhist } from '@visitors/events/cursillo/form/components/ReviewData'
@@ -12,7 +13,7 @@ export const createCursilhist = (cursilhist: Cursilhist) =>
 export const getCursilhist = (ref: string) =>
   faunaAPI.query<CursilhistDatabase>(faunaQ.Get(faunaQ.Ref(faunaQ.Collection('cursilhists'), ref)))
 
-export const getAllCursilhists = (gender: 'masculino' | 'feminino') =>
+export const getAllCursilhists = (gender: Gender) =>
   faunaAPI.query<AllCursilhistsDatabase>(
     faunaQ.Map(
       faunaQ.Paginate(faunaQ.Match(faunaQ.Index('cursilhists_by_gender'), gender)),
@@ -21,15 +22,16 @@ export const getAllCursilhists = (gender: 'masculino' | 'feminino') =>
   )
 
 type CreatePaymentConfirmationParams = {
-  method: 'pix' | 'money' | 'credit'
+  paymentMethod: PaymentMethods
   cursilhistRef: string
+  paymentStatus: PaymentStatus
 }
 
-export const createCursilhistPaymentConfirmation = ({ cursilhistRef, method }: CreatePaymentConfirmationParams) =>
+export const createCursilhistPaymentConfirmation = ({ cursilhistRef, ...rest }: CreatePaymentConfirmationParams) =>
   faunaAPI.query(
     faunaQ.Update(faunaQ.Ref(faunaQ.Collection('cursilhists'), cursilhistRef), {
       data: {
-        method
+        ...rest
       }
     })
   )
