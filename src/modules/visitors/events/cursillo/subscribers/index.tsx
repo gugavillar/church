@@ -2,12 +2,18 @@ import { useRouter } from 'next/router'
 
 import { Heading, Box, Text, Card, CardHeader, CardBody } from '@chakra-ui/react'
 
+import { ACTUAL_YEAR } from '@common/constants'
+import { Cursilhists } from '@pages/eventos/cursilho/[gender]/listar'
+
 import { CursilhistTable } from './components/CursilhistTable'
 
-const ACTUAL_YEAR = new Date().getFullYear()
+type CursilhistSubscribersProps = {
+  cursilhists: Cursilhists
+}
 
-const CursilhistSubscribers = () => {
+const CursilhistSubscribers = ({ cursilhists }: CursilhistSubscribersProps) => {
   const { query } = useRouter()
+
   return (
     <Box>
       <Heading as='h2'>Listagem dos cursilhistas</Heading>
@@ -21,7 +27,7 @@ const CursilhistSubscribers = () => {
           </Text>
         </CardHeader>
         <CardBody>
-          <CursilhistTable />
+          <CursilhistTable cursilhists={cursilhists} />
         </CardBody>
       </Card>
     </Box>

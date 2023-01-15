@@ -1,20 +1,31 @@
-import { HighlightText, Table } from '@common/components'
+import { HighlightPaymentMethod, HighlightPaymentStatus, Table } from '@common/components'
+
+import { Cursilhists } from '@pages/eventos/cursilho/[gender]/listar'
 
 const COLUMNS = [
   { headerLabel: 'Nome', accessorData: 'name' },
-  { headerLabel: 'Crachá', accessorData: 'likeToBeCalled' },
-  { headerLabel: 'Status pagamento', accessorData: 'payment' }
+  { headerLabel: 'Como chamar', accessorData: 'likeToBeCalled' },
+  { headerLabel: 'Telefone', accessorData: 'phone' },
+  { headerLabel: 'Forma de pagamento', accessorData: 'paymentMethod' },
+  { headerLabel: 'Status de pagamento', accessorData: 'paymentStatus' }
 ]
 
-const ROWS = [
-  { name: 'Gustavo Villar', likeToBeCalled: 'Guga Villar', payment: <HighlightText text='Aberto' /> },
-  { name: 'Dayane Martins', likeToBeCalled: 'Day Martins', payment: <HighlightText text='Pagamento presencial' /> }
-]
+type CursilhistTableProps = {
+  cursilhists: Cursilhists
+}
 
-export const CursilhistTable = () => {
+const formattedPayment = (cursilhists: Cursilhists) =>
+  cursilhists?.map((cursilhist) => ({
+    ...cursilhist,
+    paymentMethod: <HighlightPaymentMethod text={cursilhist.paymentMethod} />,
+    paymentStatus: <HighlightPaymentStatus text={cursilhist.paymentStatus} />
+  }))
+
+export const CursilhistTable = ({ cursilhists }: CursilhistTableProps) => {
+  const formatted = formattedPayment(cursilhists)
   return (
     <Table
-      rows={ROWS}
+      rows={formatted}
       columns={COLUMNS}
     />
   )
