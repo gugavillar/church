@@ -1,7 +1,19 @@
 import { Dispatch, useState } from 'react'
 import { generate } from 'short-uuid'
 
-import { Card, CardHeader, Heading, CardBody, Button, CardFooter, Flex, Box, Image, useToast } from '@chakra-ui/react'
+import {
+  Card,
+  CardHeader,
+  Heading,
+  CardBody,
+  Button,
+  CardFooter,
+  Flex,
+  Box,
+  Image,
+  useToast,
+  Spinner
+} from '@chakra-ui/react'
 
 import { IfComponent } from '@common/components'
 
@@ -13,7 +25,6 @@ import { ButtonPayment } from './payments/ButtonPayment'
 
 type PaymentDataProps = {
   reducerState: CursilhistStateReducer
-  prevStep: () => void
   dispatch: Dispatch<CursilhistActionReducer>
 }
 
@@ -44,7 +55,12 @@ const PAYMENT_METHOD_SHOW = {
         fontSize='sm'
         color='gray.500'
       >
-        Pagamento com cartão de crédito
+        <Spinner
+          size='sm'
+          color='gray.500'
+          mr={4}
+        />
+        Redirecionando para o pagamento
       </Heading>
     </Box>
   ),
@@ -74,7 +90,7 @@ const PAYMENT_METHOD_SHOW = {
   )
 }
 
-export const PaymentData = ({ reducerState, prevStep, dispatch }: PaymentDataProps) => {
+export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
   const [paymentMethod, setPaymentMethod] = useState<'pix' | 'credit' | 'money' | 'noPayment'>('noPayment')
 
   const toast = useToast()
@@ -83,22 +99,35 @@ export const PaymentData = ({ reducerState, prevStep, dispatch }: PaymentDataPro
     setPaymentMethod(method)
     if (method === 'credit') {
       try {
-        const { session } = await creditCardService()
+        const { session } = await creditCardService({
+          line_items: [{ price: process.env.NEXT_PUBLIC_CURSILHO_INSCRICAO as string, quantity: 1 }],
+          ref: String(reducerState?.id),
+          email: String(reducerState?.email)
+        })
         window.location.href = session?.url
       } catch {
         toast({
           ...ERROR_TOAST,
           title: 'Ocorreu uma falha',
-          description: 'Falha ao direcionar para o pagamento'
+          description: 'Falha ao redirecionar para o pagamento'
         })
       }
     }
   }
 
   const handlePrevStep = () => {
-    dispatch({ type: 'formStep', data: { ...reducerState, stepProgress: 'reviewSubscription' } })
-    console.log(reducerState)
-    prevStep()
+    dispatch({ data: { ...reducerState, stepProgress: 'reviewSubscription' } })
+  }
+
+  const handleConcludeSubscription = () => {
+    dispatch({
+      type: 'paymentStep',
+      data: {
+        ...reducerState,
+        stepProgress: 'confirmSubscription',
+        method: paymentMethod as 'pix' | 'credit' | 'money'
+      }
+    })
   }
 
   return (
@@ -148,7 +177,10 @@ export const PaymentData = ({ reducerState, prevStep, dispatch }: PaymentDataPro
           >
             Voltar
           </Button>
-          <Button>Finalizar</Button>
+          <IfComponent
+            conditional={['money', 'pix'].includes(paymentMethod)}
+            component={<Button onClick={handleConcludeSubscription}>Avançar</Button>}
+          />
         </Flex>
       </CardFooter>
     </Card>

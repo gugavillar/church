@@ -8,17 +8,19 @@ import { Steps } from '@common/components'
 import { ACTUAL_YEAR, BRAZILIAN_STATES, EDUCATION_LEVEL, MARITAL_STATUS, OCCUPATIONS } from '@common/constants'
 import { useSteps } from '@common/hooks'
 
+import { ConfirmedPayment } from './components/ConfirmedPayment'
 import { CursilloFormInstructions } from './components/CursilloFormInstructions'
 import { CursilloFormSubscription, defaultFormValues } from './components/CursilloFormSubscription'
 import { PaymentData } from './components/PaymentData'
 import { ReviewData } from './components/ReviewData'
 
 export type NewCursilhistForm = {
+  id?: string
   name: string
   likeToBeCalled: string
   birthDate: string
   phone: string
-  email?: string
+  email: string
   maritalStatus: typeof MARITAL_STATUS[number]['value'] | undefined
   zipCode: string
   street: string
@@ -47,15 +49,20 @@ export type NewCursilhistForm = {
   hasDietOrFoodRestriction?: '1' | '0'
   dietOrFoodRestriction?: string
   wish: string
+  method?: 'credit' | 'money' | 'pix'
 }
 
 export type CursilhistStateReducer = {
-  stepProgress: 'formSubscription' | 'reviewSubscription' | 'paymentSubscription'
+  stepProgress: 'formSubscription' | 'reviewSubscription' | 'paymentSubscription' | 'confirmSubscription'
 } & NewCursilhistForm
 
 export type CursilhistActionReducer = {
-  type: 'formStep' | 'reviewStep'
+  type?: 'formStep' | 'reviewStep' | 'paymentStep' | 'confirmStep'
   data: CursilhistStateReducer
+}
+
+type NewCursilhistProps = {
+  cursilhist: NewCursilhistForm
 }
 
 const reducer = (state: CursilhistStateReducer, action: CursilhistActionReducer) => {
@@ -67,14 +74,31 @@ const reducer = (state: CursilhistStateReducer, action: CursilhistActionReducer)
     case 'reviewStep':
       return {
         ...state,
+        stepProgress: action.data.stepProgress,
+        id: action.data.id
+      }
+    case 'paymentStep':
+      return {
+        ...state,
+        stepProgress: action.data.stepProgress,
+        method: action.data.method
+      }
+    case 'confirmStep':
+      return {
+        ...action.data,
+        stepProgress: action.data.stepProgress
+      }
+    default:
+      return {
+        ...state,
         stepProgress: action.data.stepProgress
       }
   }
 }
 
-const NewCursilhist = () => {
+const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
   const { query } = useRouter()
-  const { activeStep, setActiveStep, nextStep, prevStep } = useSteps({ stepInitial: 0, stepLength: 3 })
+  const { activeStep, setActiveStep } = useSteps({ stepInitial: 0, stepLength: 3 })
 
   const [state, dispatch] = useReducer(reducer, {
     ...defaultFormValues,
@@ -89,10 +113,20 @@ const NewCursilhist = () => {
         return setActiveStep(1)
       case 'paymentSubscription':
         return setActiveStep(2)
+      case 'confirmSubscription':
+        return setActiveStep(3)
       default:
         return setActiveStep(0)
     }
   }, [setActiveStep, state?.stepProgress])
+
+  useEffect(() => {
+    cursilhist &&
+      dispatch({
+        type: 'confirmStep',
+        data: { ...cursilhist, stepProgress: query?.payment === 'true' ? 'confirmSubscription' : 'reviewSubscription' }
+      })
+  }, [cursilhist, query?.payment])
 
   const steps = useMemo(() => {
     return [
@@ -100,7 +134,6 @@ const NewCursilhist = () => {
         content: (
           <CursilloFormSubscription
             gender={query.gender as 'masculino' | 'feminino'}
-            nextStep={nextStep}
             dispatch={dispatch}
             reducerState={state}
           />
@@ -110,10 +143,8 @@ const NewCursilhist = () => {
         content: (
           <ReviewData
             gender={query.gender as 'masculino' | 'feminino'}
-            nextStep={nextStep}
             dispatch={dispatch}
             reducerState={state}
-            prevStep={prevStep}
           />
         )
       },
@@ -121,13 +152,20 @@ const NewCursilhist = () => {
         content: (
           <PaymentData
             reducerState={state}
-            prevStep={prevStep}
             dispatch={dispatch}
+          />
+        )
+      },
+      {
+        content: (
+          <ConfirmedPayment
+            gender={query.gender as 'masculino' | 'feminino'}
+            reducerState={state}
           />
         )
       }
     ]
-  }, [nextStep, prevStep, query.gender, state])
+  }, [query.gender, state])
 
   return (
     <Box>

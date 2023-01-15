@@ -1,8 +1,13 @@
+import { useRouter } from 'next/router'
 import { Dispatch } from 'react'
 
-import { Card, CardHeader, Heading, CardBody, Text, CardFooter, Flex, Button } from '@chakra-ui/react'
+import { Card, CardHeader, Heading, CardBody, Text, CardFooter, Flex, Button, useToast } from '@chakra-ui/react'
 
+import { IfComponent } from '@common/components'
+
+import { ERROR_TOAST } from '@common/constants'
 import { timestampDate, formatToNumber } from '@common/formatters'
+import { createCursilhist } from '@common/services'
 
 import { CursilhistActionReducer, CursilhistStateReducer } from '..'
 import { ReviewComplementaryData } from './reviews/ReviewComplementaryData'
@@ -11,10 +16,8 @@ import { ReviewPersonData } from './reviews/ReviewPersonData'
 
 type ReviewDataProps = {
   reducerState: CursilhistStateReducer
-  nextStep: () => void
   dispatch: Dispatch<CursilhistActionReducer>
   gender: 'masculino' | 'feminino'
-  prevStep: () => void
 }
 
 type FormatDataToDatabaseArgs = {
@@ -27,8 +30,8 @@ const formatDataToDatabase = ({ reducerState: { stepProgress, ...rest }, gender 
     ...rest,
     gender,
     birthDate: timestampDate(rest.birthDate),
-    hasDietOrFoodRestriction: Boolean(rest.hasDietOrFoodRestriction),
-    hasHealthProblems: Boolean(rest.hasHealthProblems),
+    hasDietOrFoodRestriction: Boolean(Number(rest.hasDietOrFoodRestriction)),
+    hasHealthProblems: Boolean(Number(rest.hasHealthProblems)),
     phone: formatToNumber(rest.phone),
     zipCode: formatToNumber(rest.zipCode),
     ...(rest?.workplacePhone && { workplacePhone: formatToNumber(rest?.workplacePhone) }),
@@ -39,18 +42,33 @@ const formatDataToDatabase = ({ reducerState: { stepProgress, ...rest }, gender 
   }
 }
 
-export const ReviewData = ({ dispatch, gender, nextStep, prevStep, reducerState }: ReviewDataProps) => {
-  const handleCreateCursilhist = () => {
-    const formattedData = formatDataToDatabase({ reducerState, gender })
-    console.log('Cadastrou no banco de dados', formattedData)
-    dispatch({ type: 'reviewStep', data: { ...reducerState, stepProgress: 'paymentSubscription' } })
-    nextStep()
+export type Cursilhist = ReturnType<typeof formatDataToDatabase>
+
+export const ReviewData = ({ dispatch, gender, reducerState }: ReviewDataProps) => {
+  const toast = useToast()
+  const { query } = useRouter()
+
+  const handleCreateCursilhist = async () => {
+    if (reducerState?.id) {
+      dispatch({ type: 'reviewStep', data: { ...reducerState, stepProgress: 'paymentSubscription' } })
+      return
+    }
+
+    try {
+      const formattedData = formatDataToDatabase({ reducerState, gender })
+      const { ref } = await createCursilhist(formattedData)
+      dispatch({ type: 'reviewStep', data: { ...reducerState, id: ref.value.id, stepProgress: 'paymentSubscription' } })
+    } catch {
+      toast({
+        ...ERROR_TOAST,
+        title: 'Ocorreu uma falha',
+        description: 'Falha ao tentar salvar. Tente novamente'
+      })
+    }
   }
 
   const handlePrevStep = () => {
-    dispatch({ type: 'formStep', data: { ...reducerState, stepProgress: 'formSubscription' } })
-    console.log(reducerState)
-    prevStep()
+    dispatch({ data: { ...reducerState, stepProgress: 'formSubscription' } })
   }
 
   return (
@@ -83,12 +101,17 @@ export const ReviewData = ({ dispatch, gender, nextStep, prevStep, reducerState 
           gap={6}
           width='full'
         >
-          <Button
-            variant='outline'
-            onClick={handlePrevStep}
-          >
-            Voltar
-          </Button>
+          <IfComponent
+            conditional={!Boolean(query?.user_id)}
+            component={
+              <Button
+                variant='outline'
+                onClick={handlePrevStep}
+              >
+                Voltar
+              </Button>
+            }
+          />
           <Button onClick={handleCreateCursilhist}>Avançar</Button>
         </Flex>
       </CardFooter>
