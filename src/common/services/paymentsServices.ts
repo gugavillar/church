@@ -12,6 +12,7 @@ export type CreditCardServiceBody = {
     quantity: number
   }>
   ref: string
+  email: string
 }
 
 export const creditCardService = async (body: CreditCardServiceBody): Promise<CreditCardService> => {

@@ -78,6 +78,7 @@ export const PersonData = ({ errors, register, setValue, gender }: PersonDataPro
         <FieldController
           error={errors?.email?.message as string}
           label='Email'
+          isRequired
         >
           <Input
             type='email'
