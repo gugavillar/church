@@ -4,7 +4,7 @@ import { Text, OrderedList, ListItem, Flex, Box, VStack } from '@chakra-ui/react
 
 import { ptBR } from '@common/utils'
 
-export const CursilloFormInstructions = () => {
+export const Instructions = () => {
   const today = format(new Date(), "dd 'de' MMMM 'de' yyyy", {
     locale: ptBR
   })
@@ -34,8 +34,8 @@ export const CursilloFormInstructions = () => {
         </ListItem>
         <ListItem>
           Haverá transporte saindo das igrejas na quinta-feira, confirme com quem lhe convidou o horário exato da saída.
-          O evento ocorrerá no {process.env.NEXT_PUBLIC_CURSILLO_PLACE}, no qual devido a dinâmica o participante não
-          deverá se ausentar até o domingo.
+          O evento ocorrerá no Centro de Eventos Cristãos 3R localizado em Bezerros, no qual devido a dinâmica o
+          participante não deverá se ausentar até o domingo.
         </ListItem>
         <ListItem>
           Se você deseja mesmo participar deste movimento, deve preencher todos os campos deste formulário. O pagamento

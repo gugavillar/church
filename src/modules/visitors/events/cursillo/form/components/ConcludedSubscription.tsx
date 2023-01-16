@@ -19,7 +19,7 @@ const MESSAGE_PAYMENT = {
   pix: 'Envie o comprovante para o telefone para que possamos confirmar o seu pagamento'
 }
 
-export const ConfirmedPayment = ({ reducerState }: ConfirmedPaymentProps) => {
+export const ConcludedSubscription = ({ reducerState }: ConfirmedPaymentProps) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const { push, query } = useRouter()

@@ -9,9 +9,9 @@ import { Gender, PaymentMethods } from '@common/@types'
 import { ACTUAL_YEAR, BRAZILIAN_STATES, EDUCATION_LEVEL, MARITAL_STATUS, OCCUPATIONS } from '@common/constants'
 import { useSteps } from '@common/hooks'
 
-import { ConfirmedPayment } from './components/ConfirmedPayment'
-import { CursilloFormInstructions } from './components/CursilloFormInstructions'
-import { CursilloFormSubscription, defaultFormValues } from './components/CursilloFormSubscription'
+import { ConcludedSubscription } from './components/ConcludedSubscription'
+import { CursilloFormSubscription, defaultFormValues } from './components/FormSubscription'
+import { Instructions } from './components/Instructions'
 import { PaymentData } from './components/PaymentData'
 import { ReviewData } from './components/ReviewData'
 
@@ -158,7 +158,7 @@ const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
         )
       },
       {
-        content: <ConfirmedPayment reducerState={state} />
+        content: <ConcludedSubscription reducerState={state} />
       }
     ]
   }, [query.gender, state])
@@ -173,7 +173,7 @@ const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
       >
         Cursilho {query.gender} de cristandade vida - {ACTUAL_YEAR}
       </Heading>
-      <CursilloFormInstructions />
+      <Instructions />
       <Steps
         activeStep={activeStep}
         steps={steps}
