@@ -1,27 +1,19 @@
-import { useRouter } from 'next/router'
-import { Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 
-import { Heading, SimpleGrid, Box, useToast } from '@chakra-ui/react'
+import { Heading, SimpleGrid, Box } from '@chakra-ui/react'
 
-import { ACTUAL_YEAR, ERROR_TOAST } from '@common/constants'
+import { ACTUAL_YEAR } from '@common/constants'
+import { useDatabaseAccessError } from '@common/hooks'
 
 import { CursilloLinkCards } from './components/CursilloLinkCards'
 
+const useErrorParams = {
+  key: 'cursilhistsError',
+  description: 'Falha ao carregar os cursilhistas.'
+}
+
 const Cursillo = () => {
-  const { push, query } = useRouter()
-  const toast = useToast()
-
-  useEffect(() => {
-    if (query?.cursilhistsError) {
-      toast({
-        ...ERROR_TOAST,
-        title: 'Ocorreu uma falha',
-        description: 'Falha ao carregar os cursilhistas.'
-      })
-      push('/eventos/cursilho', undefined, { shallow: true })
-    }
-  }, [push, query?.cursilhistsError, toast])
-
+  useDatabaseAccessError({ ...useErrorParams })
   return (
     <Fragment>
       <Heading

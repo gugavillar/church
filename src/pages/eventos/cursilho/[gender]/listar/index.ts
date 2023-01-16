@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
   if (!params?.gender) {
     return {
       redirect: {
-        destination: '/eventos/cursilho',
+        destination: '/eventos/cursilho?cursilhistsError=true',
         permanent: false
       }
     }
