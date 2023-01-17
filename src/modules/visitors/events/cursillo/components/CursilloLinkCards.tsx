@@ -36,18 +36,23 @@ const CARDS_OBJECTS = [
 
 type CursilloLinkCardsPros = {
   gender: Gender
+  isOpenSubscription: boolean
 }
 
-export const CursilloLinkCards = ({ gender }: CursilloLinkCardsPros) => {
+export const CursilloLinkCards = ({ gender, isOpenSubscription }: CursilloLinkCardsPros) => {
   return (
     <Fragment>
-      {CARDS_OBJECTS.map((card) => (
-        <CardButton
-          key={card.title}
-          cardProps={card}
-          urlNavigation={`/eventos/cursilho/${gender}`}
-        />
-      ))}
+      {CARDS_OBJECTS.map((card) => {
+        const isDisabled = card.url === 'adicionar' ? isOpenSubscription : true
+        return (
+          <CardButton
+            key={card.title}
+            cardProps={card}
+            isDisabled={isDisabled}
+            urlNavigation={`/eventos/cursilho/${gender}`}
+          />
+        )
+      })}
     </Fragment>
   )
 }
