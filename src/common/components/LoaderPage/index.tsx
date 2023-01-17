@@ -1,4 +1,4 @@
-import { Flex, Spinner } from '@chakra-ui/react'
+import { Flex, Spinner, Text } from '@chakra-ui/react'
 
 export const LoaderPage = () => {
   return (
@@ -7,11 +7,14 @@ export const LoaderPage = () => {
       justify='center'
       width='full'
       height='calc(100vh - 10rem)'
+      gap={4}
     >
       <Spinner
         size='xl'
         color='gray.500'
+        thickness='4px'
       />
+      <Text fontSize='sm'>Carregando...</Text>
     </Flex>
   )
 }
