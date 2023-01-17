@@ -3,7 +3,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { Gender } from '@common/@types'
 import { AllCursilhistsDatabase } from '@common/@types/cursilhists'
 import { fieldFormatCelPhone } from '@common/formatters'
-import { getAllCursilhists, statusPaymentService } from '@common/services'
+import { getAllCursilhists } from '@common/services'
 
 export { default } from '@visitors/events/cursillo/subscribers'
 
@@ -11,7 +11,6 @@ const formattedResponse = ({ data }: AllCursilhistsDatabase) =>
   data?.map((cursilhist) => {
     return {
       name: cursilhist.data.name,
-      email: cursilhist.data.email,
       likeToBeCalled: cursilhist.data.likeToBeCalled,
       phone: fieldFormatCelPhone(String(cursilhist.data?.phone)),
       paymentMethod: cursilhist.data.paymentMethod,
@@ -36,8 +35,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
   try {
     const response = await getAllCursilhists(params?.gender as Gender)
     const data = formattedResponse(response)
-    const dataResponse = await statusPaymentService(data[0].email)
-    console.log(dataResponse)
     return {
       props: {
         cursilhists: data

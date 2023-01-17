@@ -19,8 +19,3 @@ export const creditCardService = async (body: CreditCardServiceBody): Promise<Cr
   const { data } = await nextApi.post('/payment', { ...body })
   return data
 }
-
-export const statusPaymentService = async (body) => {
-  const { data } = await nextApi.post('/statusPayment', { ...body })
-  return data
-}
