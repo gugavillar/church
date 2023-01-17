@@ -1,14 +1,15 @@
-import { ReactNode } from 'react'
-
 import { Box, Container } from '@chakra-ui/react'
 
-import { Navbar } from '@common/components'
+import { IfComponent, LoaderPage, Navbar } from '@common/components'
+
+import { useRouterChange } from '@common/hooks'
 
 type LayoutProps = {
-  children: ReactNode
+  children: JSX.Element
 }
 
 export const Layout = ({ children }: LayoutProps) => {
+  const isChanging = useRouterChange()
   return (
     <Box>
       <Navbar />
@@ -17,7 +18,14 @@ export const Layout = ({ children }: LayoutProps) => {
         py={{ base: 6, md: 6, lg: 8 }}
         px={{ base: 4, md: 4, lg: 16 }}
       >
-        {children}
+        <IfComponent
+          conditional={isChanging}
+          component={<LoaderPage />}
+        />
+        <IfComponent
+          conditional={!isChanging}
+          component={children}
+        />
       </Container>
     </Box>
   )
