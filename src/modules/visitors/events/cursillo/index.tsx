@@ -7,7 +7,7 @@ import { useDatabaseAccessError } from '@common/hooks'
 
 import { CursilloLinkCards } from './components/CursilloLinkCards'
 
-const useErrorParams = {
+const cursilhistsErrorParams = {
   key: 'cursilhistsError',
   description: 'Falha ao carregar os cursilhistas.'
 }
@@ -18,7 +18,7 @@ type CursilloProps = {
 }
 
 const Cursillo = ({ isOpenMaleSubscription, isOpenFemaleSubscription }: CursilloProps) => {
-  useDatabaseAccessError({ ...useErrorParams })
+  useDatabaseAccessError({ ...cursilhistsErrorParams })
   return (
     <Fragment>
       <Heading
