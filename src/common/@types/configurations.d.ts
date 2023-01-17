@@ -1,6 +1,6 @@
 type ConfigurationValues = {
-  male: Array<string>
-  female: Array<string>
+  endDateForMaleSubscription: Array<string>
+  endDateForFemaleSubscription: Array<string>
 }
 
 export interface Configurations {
