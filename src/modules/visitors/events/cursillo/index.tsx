@@ -12,7 +12,12 @@ const useErrorParams = {
   description: 'Falha ao carregar os cursilhistas.'
 }
 
-const Cursillo = () => {
+type CursilloProps = {
+  isOpenMaleSubscription: boolean
+  isOpenFemaleSubscription: boolean
+}
+
+const Cursillo = ({ isOpenMaleSubscription, isOpenFemaleSubscription }: CursilloProps) => {
   useDatabaseAccessError({ ...useErrorParams })
   return (
     <Fragment>
@@ -37,7 +42,10 @@ const Cursillo = () => {
           justifyItems='center'
           alignItems='center'
         >
-          <CursilloLinkCards gender='feminino' />
+          <CursilloLinkCards
+            gender='feminino'
+            isOpenSubscription={isOpenFemaleSubscription}
+          />
         </SimpleGrid>
       </Box>
       <Box>
@@ -53,7 +61,10 @@ const Cursillo = () => {
           spacing={8}
           justifyItems='center'
         >
-          <CursilloLinkCards gender='masculino' />
+          <CursilloLinkCards
+            gender='masculino'
+            isOpenSubscription={isOpenMaleSubscription}
+          />
         </SimpleGrid>
       </Box>
     </Fragment>
