@@ -34,8 +34,13 @@ export const Button = defineStyleConfig({
     outline: {
       border: 'none',
       fontWeight: 400,
-      textTransform: 'capitalize',
-      fontSize: '1.5rem'
+      textTransform: 'none',
+      fontSize: '1.5rem',
+      py: 0,
+      height: 'auto',
+      _hover: {
+        bg: 'transparent'
+      }
     },
     secondary: {
       background: 'black',
