@@ -3,6 +3,8 @@ import { Fragment } from 'react'
 
 import { CardButton } from '@common/components'
 
+import { Gender } from '@common/@types'
+
 const defaultHeightAndWidthForIcons = {
   width: 64,
   height: 64,
@@ -23,7 +25,7 @@ const CARDS_OBJECTS = [
 ]
 
 type CampingLinkCardsProps = {
-  gender: 'feminino' | 'masculino'
+  gender: Gender
 }
 
 export const CampingLinkCards = ({ gender }: CampingLinkCardsProps) => {
@@ -34,6 +36,7 @@ export const CampingLinkCards = ({ gender }: CampingLinkCardsProps) => {
           key={card.title}
           cardProps={card}
           urlNavigation={`/eventos/acampamento/${gender}`}
+          isDisabled={false}
         />
       ))}
     </Fragment>
