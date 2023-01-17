@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Dispatch } from 'react'
+import { Dispatch, useState } from 'react'
 
 import { Card, CardHeader, Heading, CardBody, Text, CardFooter, Flex, Button, useToast } from '@chakra-ui/react'
 
@@ -46,6 +46,8 @@ const formatDataToDatabase = ({ reducerState: { stepProgress, ...rest }, gender 
 export type Cursilhist = ReturnType<typeof formatDataToDatabase>
 
 export const ReviewData = ({ dispatch, gender, reducerState }: ReviewDataProps) => {
+  const [isSaving, setIsSaving] = useState(false)
+
   const toast = useToast()
   const { query } = useRouter()
 
@@ -54,7 +56,7 @@ export const ReviewData = ({ dispatch, gender, reducerState }: ReviewDataProps) 
       dispatch({ type: 'reviewStep', data: { ...reducerState, stepProgress: 'paymentSubscription' } })
       return
     }
-
+    setIsSaving(true)
     try {
       const formattedData = formatDataToDatabase({ reducerState, gender })
       const { ref } = await createCursilhist(formattedData)
@@ -65,6 +67,8 @@ export const ReviewData = ({ dispatch, gender, reducerState }: ReviewDataProps) 
         title: 'Ocorreu uma falha',
         description: 'Falha ao tentar salvar. Tente novamente'
       })
+    } finally {
+      setIsSaving(false)
     }
   }
 
@@ -113,7 +117,12 @@ export const ReviewData = ({ dispatch, gender, reducerState }: ReviewDataProps) 
               </Button>
             }
           />
-          <Button onClick={handleCreateCursilhist}>Avançar</Button>
+          <Button
+            isLoading={isSaving}
+            onClick={handleCreateCursilhist}
+          >
+            Avançar
+          </Button>
         </Flex>
       </CardFooter>
     </Card>
