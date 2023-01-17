@@ -9,8 +9,12 @@ export { default } from '@visitors/events/cursillo'
 const TODAY = new Date()
 
 const formatConfigurations = ({ data }: Configurations) => {
-  const dateOfNextMaleCursillo = data?.cursillo.male?.find((male) => isFuture(new Date(male)))
-  const dateOfNextFemaleCursillo = data?.cursillo.female?.find((female) => isFuture(new Date(female)))
+  const dateOfNextMaleCursillo = data?.cursillo.endDateForMaleSubscription?.find((endMaleDate) =>
+    isFuture(new Date(endMaleDate))
+  )
+  const dateOfNextFemaleCursillo = data?.cursillo.endDateForFemaleSubscription?.find((endFemaleDate) =>
+    isFuture(new Date(endFemaleDate))
+  )
 
   if (!dateOfNextMaleCursillo && !dateOfNextFemaleCursillo) {
     return {
@@ -38,9 +42,18 @@ const formatConfigurations = ({ data }: Configurations) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await getConfigurations()
-  const formattedConfig = formatConfigurations(response)
-  return {
-    props: { ...formattedConfig }
+  try {
+    const response = await getConfigurations()
+    const formattedConfig = formatConfigurations(response)
+    return {
+      props: { ...formattedConfig }
+    }
+  } catch {
+    return {
+      redirect: {
+        destination: '/?configurations=true',
+        permanent: false
+      }
+    }
   }
 }
