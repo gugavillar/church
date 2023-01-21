@@ -37,7 +37,7 @@ type Cursilhist = {
   dietOrFoodRestriction?: string
   wish: string
   paymentMethod: PaymentMethods
-  stripe_id: string
+  stripeId: string
   paymentStatus: PaymentStatus
 }
 
