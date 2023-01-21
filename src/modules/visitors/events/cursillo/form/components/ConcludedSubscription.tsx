@@ -28,11 +28,12 @@ export const ConcludedSubscription = ({ reducerState }: ConfirmedPaymentProps) =
 
   const handleConcludeSubscription = async () => {
     setIsLoading(true)
+    const paymentStatus: PaymentStatus = query?.success === 'true' ? 'pago' : 'em_aberto'
     try {
       const payment = {
         paymentMethod: hasUserId ? 'credit' : (reducerState.paymentMethod as PaymentMethods),
         cursilhistRef: reducerState.id as string,
-        paymentStatus: 'em_aberto' as PaymentStatus
+        paymentStatus
       }
       await createCursilhistPaymentConfirmation(payment)
       push('/eventos/cursilho')
