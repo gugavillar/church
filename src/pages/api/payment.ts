@@ -1,9 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { Stripe } from 'stripe'
 
+import { stripeApi } from '@common/provider/stripeApi'
 import { createCursilhistStripeId, CreditCardServiceBody, getCursilhistStripeId } from '@common/services'
-
-const stripe: Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 const PaymentNext = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
@@ -25,22 +23,22 @@ const PaymentNext = async (req: NextApiRequest, res: NextApiResponse) => {
 
     let stripeCustomerCreate
 
-    if (!data.stripe_id) {
-      stripeCustomerCreate = await stripe.customers.create({
+    if (!data.stripeId) {
+      stripeCustomerCreate = await stripeApi.customers.create({
         email
       })
       await createCursilhistStripeId(ref, stripeCustomerCreate.id)
     }
 
-    const session = await stripe.checkout.sessions.create({
-      customer: stripeCustomerCreate?.id ?? data.stripe_id,
+    const stripeCheckoutSession = await stripeApi.checkout.sessions.create({
+      customer: stripeCustomerCreate?.id ?? data.stripeId,
       line_items,
       mode: 'payment',
       success_url: `${url}?user_id=${ref}&success=true`,
       cancel_url: `${url}?user_id=${ref}&success=false`
     })
 
-    res.status(200).json({ session })
+    res.status(200).json({ sessionId: stripeCheckoutSession.id })
   } catch (err: any) {
     res.status(err.statusCode || 500).json(err.message)
   }

@@ -19,6 +19,7 @@ import { IfComponent } from '@common/components'
 
 import { PaymentMethods } from '@common/@types'
 import { ERROR_TOAST, PAYMENT_METHODS } from '@common/constants'
+import { getStripeJs } from '@common/provider/stripeJSApi'
 import { creditCardService } from '@common/services'
 
 import { CursilhistActionReducer, CursilhistStateReducer } from '..'
@@ -31,7 +32,7 @@ type PaymentDataProps = {
 
 const PAYMENT_METHOD_SHOW = {
   pix: (
-    <Box mt={8}>
+    <Box>
       <Heading
         textAlign='center'
         as='h4'
@@ -49,24 +50,19 @@ const PAYMENT_METHOD_SHOW = {
     </Box>
   ),
   credit: (
-    <Box mt={8}>
+    <Box>
       <Heading
         textAlign='center'
         as='h4'
         fontSize='sm'
         color='gray.500'
       >
-        <Spinner
-          size='sm'
-          color='gray.500'
-          mr={4}
-        />
         Redirecionando para o pagamento
       </Heading>
     </Box>
   ),
   money: (
-    <Box mt={8}>
+    <Box>
       <Heading
         textAlign='center'
         as='h4'
@@ -76,42 +72,35 @@ const PAYMENT_METHOD_SHOW = {
         Pagamento em dinheiro no local
       </Heading>
     </Box>
-  ),
-  noPayment: (
-    <Box mt={8}>
-      <Heading
-        textAlign='center'
-        as='h4'
-        fontSize='sm'
-        color='gray.500'
-      >
-        Selecione uma das opção de pagamento acima
-      </Heading>
-    </Box>
   )
-}
+} as const
 
 export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethods | 'noPayment'>('noPayment')
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethods | ''>('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const toast = useToast()
 
   const handleSetPaymentMethod = async (method: PaymentMethods) => {
     setPaymentMethod(method)
     if (method === 'credit') {
+      setIsLoading(true)
       try {
-        const { session } = await creditCardService({
+        const { sessionId } = await creditCardService({
           line_items: [{ price: process.env.NEXT_PUBLIC_CURSILHO_INSCRICAO as string, quantity: 1 }],
           ref: String(reducerState?.id),
           email: String(reducerState?.email)
         })
-        window.location.href = session?.url
+        const stripe = await getStripeJs()
+        await stripe?.redirectToCheckout({ sessionId })
       } catch {
         toast({
           ...ERROR_TOAST,
           title: 'Ocorreu uma falha',
           description: 'Falha ao redirecionar para o pagamento'
         })
+      } finally {
+        setIsLoading(false)
       }
     }
   }
@@ -160,10 +149,26 @@ export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
             />
           ))}
         </Flex>
-        <IfComponent
-          conditional={Boolean(paymentMethod)}
-          component={PAYMENT_METHOD_SHOW[paymentMethod]}
-        />
+        <Flex
+          align='center'
+          justify='center'
+          mt={8}
+        >
+          <IfComponent
+            conditional={isLoading}
+            component={
+              <Spinner
+                size='sm'
+                color='gray.500'
+                mr={4}
+              />
+            }
+          />
+          <IfComponent
+            conditional={Boolean(paymentMethod)}
+            component={PAYMENT_METHOD_SHOW[paymentMethod as PaymentMethods]}
+          />
+        </Flex>
       </CardBody>
       <CardFooter>
         <Flex
