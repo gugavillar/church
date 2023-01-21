@@ -12,6 +12,16 @@ const cursilhistsErrorParams = {
   description: 'Falha ao carregar os cursilhistas.'
 }
 
+const isOpenMaleSubscriptionErrorParams = {
+  key: 'isOpenMaleSubscription',
+  description: 'Não tem inscrições abertas para o cursilho masculino.'
+}
+
+const isOpenFemaleSubscriptionErrorParams = {
+  key: 'isOpenFemaleSubscription',
+  description: 'Não tem inscrições abertas para o cursilho feminino.'
+}
+
 type CursilloProps = {
   isOpenMaleSubscription: boolean
   isOpenFemaleSubscription: boolean
@@ -19,6 +29,8 @@ type CursilloProps = {
 
 const Cursillo = ({ isOpenMaleSubscription, isOpenFemaleSubscription }: CursilloProps) => {
   useDatabaseAccessError({ ...cursilhistsErrorParams })
+  useDatabaseAccessError({ ...isOpenMaleSubscriptionErrorParams })
+  useDatabaseAccessError({ ...isOpenFemaleSubscriptionErrorParams })
   return (
     <Fragment>
       <Heading

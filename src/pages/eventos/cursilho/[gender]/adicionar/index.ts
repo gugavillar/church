@@ -4,6 +4,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { CursilhistDatabase } from '@common/@types/cursilhists'
 import { fieldFormatCelPhone, fieldFormatZipCode } from '@common/formatters'
 import { getCursilhist } from '@common/services'
+import { getIsOpenCursilloSubscription } from '@common/services/configurationsServices'
 
 export { default } from '@visitors/events/cursillo/form'
 
@@ -34,6 +35,38 @@ const formattedResponse = ({ data, ref }: CursilhistDatabase) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { query, resolvedUrl } = ctx
+
+  const isMaleSubscription = query.gender === 'masculino'
+  const isFemaleSubscription = query.gender === 'feminino'
+
+  try {
+    const { isOpenFemaleSubscription, isOpenMaleSubscription } = await getIsOpenCursilloSubscription()
+
+    if (isMaleSubscription && !isOpenMaleSubscription) {
+      return {
+        redirect: {
+          destination: '/eventos/cursilho?isOpenMaleSubscription=false',
+          permanent: false
+        }
+      }
+    }
+
+    if (isFemaleSubscription && !isOpenFemaleSubscription) {
+      return {
+        redirect: {
+          destination: '/eventos/cursilho?isOpenFemaleSubscription=false',
+          permanent: false
+        }
+      }
+    }
+  } catch {
+    return {
+      redirect: {
+        destination: '/eventos/cursilho',
+        permanent: false
+      }
+    }
+  }
 
   if (!query?.user_id) {
     return {
