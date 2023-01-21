@@ -36,11 +36,11 @@ export const createCursilhistPaymentConfirmation = ({ cursilhistRef, ...rest }: 
     })
   )
 
-export const createCursilhistStripeId = (ref: string, stripe_id: string) =>
+export const createCursilhistStripeId = (ref: string, stripeId: string) =>
   faunaAPI.query(
     faunaQ.Update(faunaQ.Ref(faunaQ.Collection('cursilhists'), ref), {
       data: {
-        stripe_id
+        stripeId
       }
     })
   )

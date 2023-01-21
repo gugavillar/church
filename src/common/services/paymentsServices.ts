@@ -1,9 +1,7 @@
 import { nextApi } from '@common/provider/nextApi'
 
 interface CreditCardService {
-  session: {
-    url: string
-  }
+  sessionId: string
 }
 
 export type CreditCardServiceBody = {
