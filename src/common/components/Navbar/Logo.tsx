@@ -11,7 +11,7 @@ export const Logo = memo(() => {
     >
       <Box boxSize={20}>
         <Image
-          src='/assets/logo.png'
+          src='/assets/logo-vida-white.png'
           alt='Logo da igreja anglicana de Gravatá'
         />
       </Box>
