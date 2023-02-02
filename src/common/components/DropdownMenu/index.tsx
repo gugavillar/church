@@ -1,6 +1,7 @@
 import { Menu } from '@chakra-ui/react'
 
-import { DROPDOWN_MENU_ITENS } from '../Navbar/constants'
+import { DROPDOWN_MENU_ITENS } from '@common/components/Navbar/constants'
+
 import { DropdownButton } from './DropdownButton'
 import { DropdownList } from './DropdownList'
 

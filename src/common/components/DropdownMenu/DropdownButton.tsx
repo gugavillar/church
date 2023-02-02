@@ -8,7 +8,8 @@ type DropdownButtonProps = {
 }
 
 export const DropdownButton = ({ activeUrl, label }: DropdownButtonProps) => {
-  const isEventInPath = /eventos/g.test(activeUrl)
+  const regExp = new RegExp(label.toLowerCase())
+  const isEventInPath = regExp.test(activeUrl)
   return (
     <MenuButton>
       <Text

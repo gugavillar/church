@@ -1,1 +1,1 @@
-export { default } from '@visitors/events/camping'
+export { default } from '@modules/visitors/events/camping'

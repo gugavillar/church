@@ -4,7 +4,7 @@ import { generate } from 'short-uuid'
 
 import { Divider, Flex } from '@chakra-ui/react'
 
-import { IfComponent } from '../IfComponent'
+import { IfComponent } from '@common/components/IfComponent'
 
 const Checked = () => (
   <Check

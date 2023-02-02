@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next'
 
 import { getIsOpenCursilloSubscription } from '@common/services/configurationsServices'
 
-export { default } from '@visitors/events/cursillo'
+export { default } from '@modules/visitors/events/cursillo'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {

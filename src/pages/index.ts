@@ -1,1 +1,1 @@
-export { default } from '@visitors/home'
+export { default } from '@modules/visitors/home'

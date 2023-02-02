@@ -5,7 +5,7 @@ import { AllCursilhistsDatabase } from '@common/@types/cursilhists'
 import { fieldFormatCelPhone } from '@common/formatters'
 import { getAllCursilhists } from '@common/services'
 
-export { default } from '@visitors/events/cursillo/subscribers'
+export { default } from '@modules/visitors/events/cursillo/subscribers'
 
 const formattedResponse = ({ data }: AllCursilhistsDatabase) =>
   data?.map((cursilhist) => {

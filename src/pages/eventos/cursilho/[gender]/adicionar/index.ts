@@ -6,7 +6,7 @@ import { fieldFormatCelPhone, fieldFormatZipCode } from '@common/formatters'
 import { getCursilhist } from '@common/services'
 import { getIsOpenCursilloSubscription } from '@common/services/configurationsServices'
 
-export { default } from '@visitors/events/cursillo/form'
+export { default } from '@modules/visitors/events/cursillo/form'
 
 const formattedResponse = ({ data, ref }: CursilhistDatabase) => {
   return {

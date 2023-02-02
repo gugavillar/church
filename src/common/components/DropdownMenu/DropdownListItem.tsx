@@ -3,7 +3,7 @@ import { memo } from 'react'
 
 import { MenuItem, Text } from '@chakra-ui/react'
 
-import { DROPDOWN_MENU_ITENS } from '../Navbar/constants'
+import { DROPDOWN_MENU_ITENS } from '@common/components/Navbar/constants'
 
 type DropdownListItemProps = {
   isActive: boolean
