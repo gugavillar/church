@@ -7,9 +7,9 @@ type HighlightPaymentMethodProps = {
 }
 
 const translateText = {
-  money: 'Pagamento em dinheiro',
-  pix: 'Pagamento via pix',
-  credit: 'Pagamento no cartão de crédito'
+  money: 'Dinheiro',
+  pix: 'PIX',
+  credit: 'Cartão de Crédito'
 } as const
 
 export const HighlightPaymentMethod = ({ text }: HighlightPaymentMethodProps) => {
