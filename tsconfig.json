@@ -18,13 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "@common/*": ["src/common/*"],
-      "@formatters/*": ["src/common/formatters/*"],
-      "@services/*": ["src/common/services/*"],
-      "@validations/*": ["src/common/validations/*"],
-      "@visitors/*": ["src/modules/visitors/*"],
-      "@utils/*": ["src/modules/utils/*"],
       "@pages/*": ["src/pages/*"],
-      "@context/*": ["src/common/context/*"]
+      "@modules/*": ["src/modules/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
