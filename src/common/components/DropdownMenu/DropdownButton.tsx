@@ -1,4 +1,5 @@
 import { CaretDown } from 'phosphor-react'
+import { memo } from 'react'
 
 import { MenuButton, Flex, Text } from '@chakra-ui/react'
 
@@ -7,7 +8,7 @@ type DropdownButtonProps = {
   label: string
 }
 
-export const DropdownButton = ({ activeUrl, label }: DropdownButtonProps) => {
+export const DropdownButton = memo(({ activeUrl, label }: DropdownButtonProps) => {
   const regExp = new RegExp(label.toLowerCase())
   const isEventInPath = regExp.test(activeUrl)
   return (
@@ -28,4 +29,6 @@ export const DropdownButton = ({ activeUrl, label }: DropdownButtonProps) => {
       </Text>
     </MenuButton>
   )
-}
+})
+
+DropdownButton.displayName = 'DropdownButton'

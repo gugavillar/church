@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { memo } from 'react'
 
 import { MenuItem, Text } from '@chakra-ui/react'
 
@@ -11,7 +10,7 @@ type DropdownListItemProps = {
   handleCloseDrawer: () => void
 }
 
-export const DropdownListItem = memo(({ handleCloseDrawer, isActive, item }: DropdownListItemProps) => {
+export const DropdownListItem = ({ handleCloseDrawer, isActive, item }: DropdownListItemProps) => {
   return (
     <MenuItem bg='gray.900'>
       <Link
@@ -31,6 +30,4 @@ export const DropdownListItem = memo(({ handleCloseDrawer, isActive, item }: Dro
       </Link>
     </MenuItem>
   )
-})
-
-DropdownListItem.displayName = 'DropdownListItem'
+}
