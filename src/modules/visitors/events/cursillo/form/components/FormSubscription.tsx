@@ -7,6 +7,7 @@ import { Card, CardHeader, Heading, CardBody, Textarea, Flex, Button, Box, Text,
 import { FieldController } from '@common/components'
 
 import { Gender } from '@common/@types'
+import { CLOSE_RELATIVE, MARITAL_STATUS } from '@common/constants'
 import { newCursilhistFormValidation } from '@common/validations/events/cursillo'
 
 import { NewCursilhistForm, CursilhistActionReducer, CursilhistStateReducer } from '..'
@@ -77,10 +78,11 @@ export const CursilloFormSubscription = ({ gender, dispatch, reducerState }: Car
     'hasHealthProblems',
     'state'
   ])
-  const isMarriedPerson = Boolean(maritalStatus) && maritalStatus?.includes('Casado(a)')
+  const isMarriedPerson =
+    Boolean(maritalStatus) && CLOSE_RELATIVE?.includes(maritalStatus as typeof MARITAL_STATUS[number]['value'])
 
   useEffect(() => {
-    if (maritalStatus === 'Casado(a)') {
+    if (CLOSE_RELATIVE?.includes(maritalStatus as typeof MARITAL_STATUS[number]['value'])) {
       unregister('closeRelative')
     } else {
       unregister('spouse')
