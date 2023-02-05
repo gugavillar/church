@@ -7,7 +7,7 @@ import { DropdownListItem } from './DropdownListItem'
 type DropdownListProps = {
   menuList: typeof DROPDOWN_MENU_ITENS
   activeUrl: string
-  handleCloseDrawer: () => void
+  handleCloseDrawer?: () => void
 }
 
 export const DropdownList = ({ menuList, activeUrl, handleCloseDrawer }: DropdownListProps) => {
@@ -20,8 +20,8 @@ export const DropdownList = ({ menuList, activeUrl, handleCloseDrawer }: Dropdow
         <DropdownListItem
           key={menuItem.label}
           item={menuItem}
-          handleCloseDrawer={handleCloseDrawer}
           isActive={activeUrl.includes(menuItem.url)}
+          {...(handleCloseDrawer && { handleCloseDrawer })}
         />
       ))}
     </MenuList>

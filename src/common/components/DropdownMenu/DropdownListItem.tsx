@@ -7,16 +7,16 @@ import { DROPDOWN_MENU_ITENS } from '@common/components/Navbar/constants'
 type DropdownListItemProps = {
   isActive: boolean
   item: typeof DROPDOWN_MENU_ITENS[number]
-  handleCloseDrawer: () => void
+  handleCloseDrawer?: () => void
 }
 
-export const DropdownListItem = ({ handleCloseDrawer, isActive, item }: DropdownListItemProps) => {
+export const DropdownListItem = ({ isActive, item, handleCloseDrawer }: DropdownListItemProps) => {
   return (
     <MenuItem bg='gray.900'>
       <Link
         href={item.url}
         passHref
-        onClick={handleCloseDrawer}
+        {...(handleCloseDrawer && { onClick: handleCloseDrawer })}
       >
         <Text
           as='span'
