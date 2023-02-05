@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useReducer } from 'react'
 
-import { Heading, Box } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 
-import { Steps } from '@common/components'
+import { Steps, PageTitle } from '@common/components'
 
 import { Gender, PaymentMethods } from '@common/@types'
 import { ACTUAL_YEAR, BRAZILIAN_STATES, EDUCATION_LEVEL, MARITAL_STATUS, OCCUPATIONS } from '@common/constants'
@@ -165,14 +165,9 @@ const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
 
   return (
     <Box>
-      <Heading
-        as='h2'
-        fontSize='lg'
-        textAlign='center'
-        mb={6}
-      >
+      <PageTitle textAlign='center'>
         Cursilho {query.gender} de cristandade vida - {ACTUAL_YEAR}
-      </Heading>
+      </PageTitle>
       <Instructions />
       <Steps
         activeStep={activeStep}

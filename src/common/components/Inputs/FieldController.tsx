@@ -20,7 +20,7 @@ export const FieldController = ({ error, isRequired, children, label, helperText
       {...props}
     >
       <FormLabel
-        fontSize='sm'
+        fontSize={{ base: 'xs', md: 'sm' }}
         color='gray.500'
       >
         {label}

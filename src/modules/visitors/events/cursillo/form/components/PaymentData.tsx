@@ -15,7 +15,7 @@ import {
   Spinner
 } from '@chakra-ui/react'
 
-import { IfComponent } from '@common/components'
+import { IfComponent, PageSubtitle } from '@common/components'
 
 import { PaymentMethods } from '@common/@types'
 import { ERROR_TOAST, PAYMENT_METHODS } from '@common/constants'
@@ -126,16 +126,11 @@ export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
       boxShadow='2xl'
     >
       <CardHeader>
-        <Heading
-          as='h4'
-          fontSize='md'
-          color='gray.900'
-        >
-          Método de pagamento
-        </Heading>
+        <PageSubtitle>Método de pagamento</PageSubtitle>
       </CardHeader>
       <CardBody pt={0}>
         <Flex
+          direction={['column', 'row']}
           align='center'
           justify='space-evenly'
           mt={8}

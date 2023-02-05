@@ -58,11 +58,11 @@ export const StepsIndicators = ({ steps, activeStep }: StepsIndicatorsProps) => 
                 ...lastStepProps
               }
             })}
-            minH='56px'
-            minW='56px'
+            minH={{ base: '48px', md: '56px' }}
+            minW={{ base: '48px', md: '56px' }}
             textAlign='center'
             lineHeight={1}
-            fontSize='sm'
+            fontSize={{ base: 'xs', md: 'sm' }}
             align='center'
             justify='center'
           >

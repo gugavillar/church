@@ -13,13 +13,13 @@ type ButtonPaymentProps = {
 }
 
 const pixDefaultProps = {
-  width: 12,
-  height: 12
+  width: 8,
+  height: 8
 }
 
 const iconsDefaultProps = {
-  width: 48,
-  height: 48,
+  width: 32,
+  height: 32,
   color: '#4BB8A9'
 }
 
@@ -34,8 +34,8 @@ export const ButtonPayment = ({ iconType, label, onClick }: ButtonPaymentProps) 
     <ChakraButton
       bg='transparent'
       onClick={onClick}
+      leftIcon={icon[iconType]}
     >
-      {icon[iconType]}
       <Text
         color='black'
         fontSize='sm'

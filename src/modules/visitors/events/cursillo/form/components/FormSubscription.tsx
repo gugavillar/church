@@ -2,9 +2,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Dispatch, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Card, CardHeader, Heading, CardBody, Textarea, Flex, Button, Box, Text, CardFooter } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, Textarea, Flex, Button, Box, Text, CardFooter } from '@chakra-ui/react'
 
-import { FieldController } from '@common/components'
+import { FieldController, PageSubtitle } from '@common/components'
 
 import { Gender } from '@common/@types'
 import { CLOSE_RELATIVE, MARITAL_STATUS } from '@common/constants'
@@ -97,19 +97,8 @@ export const CursilloFormSubscription = ({ gender, dispatch, reducerState }: Car
       onSubmit={handleSubmit(onSubmitHandle)}
     >
       <CardHeader>
-        <Heading
-          as='h4'
-          fontSize='md'
-          color='gray.900'
-        >
-          Formulário de inscrição
-        </Heading>
-        <Text
-          mt={4}
-          color='red'
-        >
-          Campos com * são obrigatórios
-        </Text>
+        <PageSubtitle>Formulário de inscrição</PageSubtitle>
+        <Text color='red'>Campos com * são obrigatórios</Text>
       </CardHeader>
       <CardBody pt={0}>
         <Box>

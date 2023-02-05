@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { Card, CardHeader, Heading, CardBody, CardFooter, Button, Flex, useToast, Text } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, CardFooter, Button, Flex, useToast, Text } from '@chakra-ui/react'
+
+import { PageSubtitle } from '@common/components'
 
 import { PaymentMethods, PaymentStatus } from '@common/@types'
 import { ERROR_TOAST } from '@common/constants'
@@ -54,17 +56,11 @@ export const ConcludedSubscription = ({ reducerState }: ConfirmedPaymentProps) =
       boxShadow='2xl'
     >
       <CardHeader>
-        <Heading
-          as='h4'
-          fontSize='md'
-          color='gray.900'
-        >
-          Inscrição confirmada
-        </Heading>
+        <PageSubtitle>Inscrição confirmada</PageSubtitle>
       </CardHeader>
       <CardBody
         pt={0}
-        fontSize='sm'
+        fontSize={['xs', 'sm']}
       >
         <Text>Você finalizou o processo de inscrição</Text>
         <Text>{MESSAGE_PAYMENT[reducerState.paymentMethod as PaymentMethods]}</Text>

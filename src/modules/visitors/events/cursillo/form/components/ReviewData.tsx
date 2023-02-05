@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import { Dispatch, useState } from 'react'
 
-import { Card, CardHeader, Heading, CardBody, Text, CardFooter, Flex, Button, useToast } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, Text, CardFooter, Flex, Button, useToast } from '@chakra-ui/react'
 
-import { IfComponent } from '@common/components'
+import { IfComponent, PageSubtitle } from '@common/components'
 
 import { Gender } from '@common/@types'
 import { ERROR_TOAST } from '@common/constants'
@@ -82,14 +82,8 @@ export const ReviewData = ({ dispatch, gender, reducerState }: ReviewDataProps) 
       boxShadow='2xl'
     >
       <CardHeader>
-        <Heading
-          as='h4'
-          fontSize='md'
-          color='gray.900'
-        >
-          Revisão dos dados
-        </Heading>
-        <Text mt={4}>Revise os dados e clique em avançar para escolher a forma de pagamento</Text>
+        <PageSubtitle>Revisão dos dados</PageSubtitle>
+        <Text>Revise os dados e clique em avançar para escolher a forma de pagamento</Text>
       </CardHeader>
       <CardBody pt={0}>
         <ReviewPersonData

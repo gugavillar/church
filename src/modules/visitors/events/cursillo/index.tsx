@@ -1,6 +1,8 @@
 import { Fragment } from 'react'
 
-import { Heading, SimpleGrid, Box } from '@chakra-ui/react'
+import { SimpleGrid, Box } from '@chakra-ui/react'
+
+import { PageTitle, PageSubtitle } from '@common/components'
 
 import { ACTUAL_YEAR } from '@common/constants'
 import { useDatabaseAccessError } from '@common/hooks'
@@ -33,21 +35,9 @@ const Cursillo = ({ isOpenMaleSubscription, isOpenFemaleSubscription }: Cursillo
   useDatabaseAccessError({ ...isOpenFemaleSubscriptionErrorParams })
   return (
     <Fragment>
-      <Heading
-        as='h2'
-        fontSize='lg'
-        mb={6}
-      >
-        Cursilho de cristandade {ACTUAL_YEAR}
-      </Heading>
+      <PageTitle>Cursilho de cristandade {ACTUAL_YEAR}</PageTitle>
       <Box mb={8}>
-        <Heading
-          as='h3'
-          fontSize='md'
-          mb={6}
-        >
-          Feminino
-        </Heading>
+        <PageSubtitle>Feminino</PageSubtitle>
         <SimpleGrid
           columns={{ base: 1, md: 2, lg: 2 }}
           spacing={8}
@@ -61,13 +51,7 @@ const Cursillo = ({ isOpenMaleSubscription, isOpenFemaleSubscription }: Cursillo
         </SimpleGrid>
       </Box>
       <Box>
-        <Heading
-          as='h3'
-          fontSize='md'
-          mb={6}
-        >
-          Masculino
-        </Heading>
+        <PageSubtitle>Masculino</PageSubtitle>
         <SimpleGrid
           columns={{ base: 1, md: 2, lg: 2 }}
           spacing={8}
