@@ -1,17 +1,16 @@
 import Link from 'next/link'
-import { memo } from 'react'
 
 import { Text } from '@chakra-ui/react'
 
-import { ITENS_MENU } from './constants'
+import { ITENS_MENU } from '../constants'
 
 type ItemMenuProps = {
   item: typeof ITENS_MENU[number]
   activeUrl: string
-  handleCloseDrawer: () => void
+  handleCloseDrawer?: () => void
 }
 
-export const ItemMenu = memo(({ item, activeUrl, handleCloseDrawer }: ItemMenuProps) => {
+export const ItemMenu = ({ item, activeUrl, handleCloseDrawer }: ItemMenuProps) => {
   const labelLowerCase = item.label.toLowerCase()
   const isHomeLabel = item.label === 'Home' && activeUrl === '/'
 
@@ -19,7 +18,7 @@ export const ItemMenu = memo(({ item, activeUrl, handleCloseDrawer }: ItemMenuPr
     <Link
       href={item.url}
       passHref
-      onClick={handleCloseDrawer}
+      {...(handleCloseDrawer && { onClick: handleCloseDrawer })}
     >
       <Text
         as='span'
@@ -33,6 +32,4 @@ export const ItemMenu = memo(({ item, activeUrl, handleCloseDrawer }: ItemMenuPr
       </Text>
     </Link>
   )
-})
-
-ItemMenu.displayName = 'ItemMenu'
+}

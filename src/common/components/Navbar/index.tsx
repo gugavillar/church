@@ -1,8 +1,10 @@
+import { memo } from 'react'
+
 import { Button, Flex } from '@chakra-ui/react'
 
-import { Menu } from './Menu'
+import { Menu } from './Menu/Menu'
 
-export const Navbar = () => {
+export const Navbar = memo(() => {
   return (
     <Flex
       as='nav'
@@ -21,4 +23,6 @@ export const Navbar = () => {
       </Button>
     </Flex>
   )
-}
+})
+
+Navbar.displayName = 'Navbar'
