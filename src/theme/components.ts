@@ -1,7 +1,7 @@
 import { defineStyleConfig } from '@chakra-ui/react'
 
 const defaultVariantProps = {
-  height: '4rem',
+  height: ['2rem', '4rem'],
   fontSize: 'xs',
   fontWeight: '400',
   lineHeight: '1rem'
@@ -20,7 +20,7 @@ export const Button = defineStyleConfig({
   variants: {
     primary: {
       background: 'gray.500',
-      width: '11.375rem',
+      width: ['10rem', '11.375rem'],
       color: 'white',
       ...defaultVariantProps,
       _hover: {
@@ -35,7 +35,7 @@ export const Button = defineStyleConfig({
       border: 'none',
       fontWeight: 400,
       textTransform: 'none',
-      fontSize: '1.5rem',
+      fontSize: ['1.3rem', '1.5rem'],
       py: 0,
       height: 'auto',
       _hover: {
@@ -73,9 +73,9 @@ export const Input = defineStyleConfig({
   variants: {
     outline: {
       field: {
-        height: '3rem',
+        height: ['2rem', '3rem'],
         border: 'none',
-        fontSize: 'sm',
+        fontSize: ['xs', 'sm'],
         lineHeight: '1.5rem',
         padding: '1.25rem',
         bg: 'white',
@@ -118,9 +118,9 @@ export const Select = defineStyleConfig({
   variants: {
     outline: {
       field: {
-        height: '3rem',
+        height: ['2.5rem', '3rem'],
         border: 'none',
-        fontSize: 'sm',
+        fontSize: ['xs', 'sm'],
         lineHeight: '1.5rem',
         bg: 'white',
         borderRadius: '0.25rem'
@@ -141,9 +141,9 @@ export const Textarea = defineStyleConfig({
   },
   variants: {
     outline: {
-      height: 32,
+      height: [24, 32],
       border: 'none',
-      fontSize: 'sm',
+      fontSize: ['xs', 'sm'],
       lineHeight: '1.5rem',
       padding: '1.25rem',
       bg: 'white',
@@ -175,7 +175,7 @@ export const Radio = defineStyleConfig({
   sizes: {
     md: {
       label: {
-        fontSize: '1.5rem'
+        fontSize: ['1rem', '1.5rem']
       }
     }
   }
