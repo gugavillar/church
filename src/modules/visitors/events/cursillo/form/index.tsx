@@ -64,6 +64,7 @@ export type CursilhistActionReducer = {
 
 type NewCursilhistProps = {
   cursilhist: NewCursilhistForm
+  stepProgress: CursilhistStateReducer['stepProgress']
 }
 
 const reducer = (state: CursilhistStateReducer, action: CursilhistActionReducer) => {
@@ -97,13 +98,13 @@ const reducer = (state: CursilhistStateReducer, action: CursilhistActionReducer)
   }
 }
 
-const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
+const NewCursilhist = ({ cursilhist, stepProgress }: NewCursilhistProps) => {
   const { query } = useRouter()
   const { activeStep, setActiveStep } = useSteps({ stepInitial: 0, stepLength: 3 })
 
   const [state, dispatch] = useReducer(reducer, {
     ...defaultFormValues,
-    stepProgress: 'formSubscription'
+    stepProgress
   })
 
   useEffect(() => {
@@ -124,10 +125,10 @@ const NewCursilhist = ({ cursilhist }: NewCursilhistProps) => {
   useEffect(() => {
     cursilhist &&
       dispatch({
-        type: 'confirmStep',
-        data: { ...cursilhist, stepProgress: query?.success === 'true' ? 'confirmSubscription' : 'reviewSubscription' }
+        type: 'formStep',
+        data: { ...cursilhist, stepProgress }
       })
-  }, [cursilhist, query?.success])
+  }, [cursilhist, query.success, stepProgress])
 
   const steps = useMemo(() => {
     return [

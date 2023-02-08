@@ -70,7 +70,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 
   if (!query?.user_id) {
     return {
-      props: {}
+      props: {
+        stepProgress: 'formSubscription'
+      }
     }
   }
 
@@ -81,7 +83,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
     const data = formattedResponse(response)
     return {
       props: {
-        cursilhist: data
+        cursilhist: data,
+        stepProgress: 'reviewSubscription'
       }
     }
   } catch {
