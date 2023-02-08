@@ -34,13 +34,21 @@ const completeStepProps = {
 }
 
 const lastStepProps = {
-  bg: 'green.500',
+  bg: 'green',
   color: 'white',
   border: 'none'
 }
 
+const styledStep = (activeStep: number, index: number, isLastStep: boolean) => {
+  if (activeStep > index) return completeStepProps
+  if (isLastStep) return lastStepProps
+  return notCompleteStepProps
+}
+
 export const StepsIndicators = ({ steps, activeStep }: StepsIndicatorsProps) => {
   const realStepLength = steps?.length - 1
+  const isLastStep = realStepLength === activeStep
+
   return (
     <Flex
       width='full'
@@ -52,12 +60,7 @@ export const StepsIndicators = ({ steps, activeStep }: StepsIndicatorsProps) => 
         <Fragment key={generate()}>
           <Flex
             rounded='full'
-            {...(activeStep > index ? { ...completeStepProps } : { ...notCompleteStepProps })}
-            {...(realStepLength === activeStep && {
-              _last: {
-                ...lastStepProps
-              }
-            })}
+            {...styledStep(activeStep, index, isLastStep)}
             minH={{ base: '48px', md: '56px' }}
             minW={{ base: '48px', md: '56px' }}
             textAlign='center'
@@ -66,7 +69,7 @@ export const StepsIndicators = ({ steps, activeStep }: StepsIndicatorsProps) => 
             align='center'
             justify='center'
           >
-            {activeStep > index || realStepLength === activeStep ? Checked() : index + 1}
+            {activeStep > index || isLastStep ? Checked() : index + 1}
           </Flex>
           <IfComponent
             conditional={index + 1 < steps.length}
