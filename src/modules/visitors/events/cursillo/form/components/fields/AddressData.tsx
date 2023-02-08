@@ -1,13 +1,12 @@
-import { useCallback, useState, useEffect } from 'react'
-import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { useEffect } from 'react'
+import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
-import { Box, Flex, Input, useToast } from '@chakra-ui/react'
+import { Box, Flex, Input } from '@chakra-ui/react'
 
 import { FieldController } from '@common/components'
 
-import { BRAZILIAN_STATES, ERROR_TOAST } from '@common/constants'
 import { zipCodeInputRegisterOptions } from '@common/formatters'
-import { getAddressFromZipCode } from '@common/services'
+import { useAddress } from '@common/hooks/useAddress'
 
 import { NewCursilhistForm } from '../..'
 import { CityAndStateData } from './CityAndStateData'
@@ -16,46 +15,21 @@ type AddressDataProps = {
   errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
   setValue: UseFormSetValue<NewCursilhistForm>
-  watchState: typeof BRAZILIAN_STATES[number]['value'] | undefined
+  watch: UseFormWatch<NewCursilhistForm>
   cityFromReducer: string
 }
 
-export const AddressData = ({ errors, register, setValue, watchState, cityFromReducer }: AddressDataProps) => {
-  const [cityFromAPI, setCityFromAPI] = useState('')
-
-  const toast = useToast()
-
-  const handleGetAddressData = useCallback(
-    async (zipCode: string) => {
-      if (zipCode.length < 9) return
-      const formatZipCode = zipCode.replace(/-/, '')
-      try {
-        const response = await getAddressFromZipCode(formatZipCode)
-        if (response.error) {
-          return toast({
-            ...ERROR_TOAST,
-            title: 'Cep não encontrado',
-            description: 'Caso esteja correto preencher os dados manualmente'
-          })
-        }
-        setCityFromAPI(response?.city)
-        setValue('state', response?.state, { shouldValidate: true })
-        setValue('street', response?.street, { shouldValidate: true })
-        setValue('neighborhood', response?.neighborhood, { shouldValidate: true })
-      } catch {
-        toast({
-          ...ERROR_TOAST,
-          title: 'Ocorreu uma falha',
-          description: 'Falha ao pegar os dados do cep'
-        })
-      }
-    },
-    [setValue, toast]
-  )
+export const AddressData = ({ errors, register, setValue, watch, cityFromReducer }: AddressDataProps) => {
+  const { addressResponse, handleGetAddressData } = useAddress()
 
   useEffect(() => {
-    Boolean(cityFromReducer) && setCityFromAPI(cityFromReducer)
-  }, [cityFromReducer])
+    if (addressResponse) {
+      setValue('state', addressResponse?.state, { shouldValidate: true })
+      setValue('street', addressResponse?.street, { shouldValidate: true })
+      setValue('neighborhood', addressResponse?.neighborhood, { shouldValidate: true })
+      setValue('city', addressResponse?.city, { shouldValidate: true })
+    }
+  }, [addressResponse, setValue])
 
   return (
     <Box mt={6}>
@@ -115,9 +89,9 @@ export const AddressData = ({ errors, register, setValue, watchState, cityFromRe
         <CityAndStateData
           register={register}
           errors={errors}
-          watchState={watchState}
+          watch={watch}
           setValue={setValue}
-          cityFromAPI={cityFromAPI}
+          cityFromAPI={addressResponse?.city ?? cityFromReducer}
         />
       </Flex>
       <FieldController

@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Dispatch, useEffect } from 'react'
+import { Dispatch } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Card, CardHeader, CardBody, Textarea, Flex, Button, Box, Text, CardFooter } from '@chakra-ui/react'
@@ -7,17 +7,15 @@ import { Card, CardHeader, CardBody, Textarea, Flex, Button, Box, Text, CardFoot
 import { FieldController, PageSubtitle } from '@common/components'
 
 import { Gender } from '@common/@types'
-import { CLOSE_RELATIVE, MARITAL_STATUS } from '@common/constants'
 import { newCursilhistFormValidation } from '@common/validations/events/cursillo'
 
 import { NewCursilhistForm, CursilhistActionReducer, CursilhistStateReducer } from '..'
 import { AddressData } from './fields/AddressData'
-import { CloseRelative } from './fields/CloseRelative'
 import { HealthData } from './fields/HealthData'
+import { MarriedOrSinglePerson } from './fields/MariedOrSinglePerson'
 import { OccupationalData } from './fields/OccupationalData'
 import { PersonData } from './fields/PersonData'
 import { ReligionData } from './fields/ReligionData'
-import { SpouseData } from './fields/SpouseData'
 
 type CardFormProps = {
   gender: Gender
@@ -72,23 +70,6 @@ export const CursilloFormSubscription = ({ gender, dispatch, reducerState }: Car
     dispatch({ type: 'formStep', data: { ...values, stepProgress: 'reviewSubscription' } })
   }
 
-  const [maritalStatus, hasDietOrFoodRestriction, hasHealthProblems, state] = watch([
-    'maritalStatus',
-    'hasDietOrFoodRestriction',
-    'hasHealthProblems',
-    'state'
-  ])
-  const isMarriedPerson =
-    Boolean(maritalStatus) && CLOSE_RELATIVE?.includes(maritalStatus as typeof MARITAL_STATUS[number]['value'])
-
-  useEffect(() => {
-    if (CLOSE_RELATIVE?.includes(maritalStatus as typeof MARITAL_STATUS[number]['value'])) {
-      unregister('closeRelative')
-    } else {
-      unregister('spouse')
-    }
-  }, [maritalStatus, setValue, unregister])
-
   return (
     <Card
       bg='transparent'
@@ -108,24 +89,18 @@ export const CursilloFormSubscription = ({ gender, dispatch, reducerState }: Car
             setValue={setValue}
             gender={gender}
           />
-          {isMarriedPerson ? (
-            <SpouseData
-              register={register}
-              errors={errors}
-              setValue={setValue}
-            />
-          ) : (
-            <CloseRelative
-              register={register}
-              errors={errors}
-              setValue={setValue}
-            />
-          )}
+          <MarriedOrSinglePerson
+            errors={errors}
+            register={register}
+            setValue={setValue}
+            unregister={unregister}
+            watch={watch}
+          />
           <AddressData
             register={register}
             errors={errors}
             setValue={setValue}
-            watchState={state}
+            watch={watch}
             cityFromReducer={reducerState?.city}
           />
           <ReligionData
@@ -141,8 +116,7 @@ export const CursilloFormSubscription = ({ gender, dispatch, reducerState }: Car
             register={register}
             errors={errors}
             control={control}
-            hasDietOrFoodRestriction={hasDietOrFoodRestriction}
-            hasHealthProblems={hasHealthProblems}
+            watch={watch}
             unregister={unregister}
           />
           <FieldController

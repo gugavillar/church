@@ -1,52 +1,29 @@
-import { useCallback, useState, Fragment, useEffect } from 'react'
-import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { Fragment, useEffect } from 'react'
+import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
-import { Select, useToast } from '@chakra-ui/react'
+import { Select } from '@chakra-ui/react'
 
 import { FieldController } from '@common/components'
 
-import { BRAZILIAN_STATES, ERROR_TOAST } from '@common/constants'
-import { getCities, GetCitiesReturn } from '@common/services'
+import { BRAZILIAN_STATES } from '@common/constants'
+import { useCities } from '@common/hooks/useCities'
 
 import { NewCursilhistForm } from '../..'
 
 type CityAndStateDataProps = {
   errors: FieldErrors<NewCursilhistForm>
   register: UseFormRegister<NewCursilhistForm>
-  watchState: typeof BRAZILIAN_STATES[number]['value'] | undefined
+  watch: UseFormWatch<NewCursilhistForm>
   setValue: UseFormSetValue<NewCursilhistForm>
   cityFromAPI: string
 }
 
-export const CityAndStateData = ({ errors, register, watchState, setValue, cityFromAPI }: CityAndStateDataProps) => {
-  const [isLoadingCities, setIsLoadingCities] = useState(false)
-  const [citiesFromUF, setCitiesFromUF] = useState<Array<GetCitiesReturn>>([])
+export const CityAndStateData = ({ errors, register, watch, setValue, cityFromAPI }: CityAndStateDataProps) => {
+  const state = watch('state')
 
-  const toast = useToast()
-
-  const handleGetCities = useCallback(
-    async (uf: string) => {
-      if (!uf) return
-      setIsLoadingCities(true)
-      try {
-        const response = await getCities(uf)
-        setCitiesFromUF(response)
-      } catch {
-        toast({
-          ...ERROR_TOAST,
-          title: 'Ocorreu uma falha',
-          description: 'Falha ao carregar as cidades'
-        })
-      } finally {
-        setIsLoadingCities(false)
-      }
-    },
-    [toast]
+  const { citiesFromUF, isLoadingCities, handleGetCities } = useCities(
+    state as typeof BRAZILIAN_STATES[number]['value']
   )
-
-  useEffect(() => {
-    watchState && handleGetCities(watchState)
-  }, [handleGetCities, watchState])
 
   useEffect(() => {
     Boolean(citiesFromUF?.length) && setValue('city', cityFromAPI, { shouldValidate: true, shouldDirty: true })
@@ -63,7 +40,7 @@ export const CityAndStateData = ({ errors, register, watchState, setValue, cityF
         <Select
           placeholder='UF'
           {...register('state')}
-          onChange={(event) => handleGetCities(event.target.value)}
+          onChange={(event) => handleGetCities(event.target.value as typeof BRAZILIAN_STATES[number]['value'])}
         >
           {BRAZILIAN_STATES.map((state) => (
             <option
