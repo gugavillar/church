@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormUnregister, UseFormWatch } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { CLOSE_RELATIVE, MARITAL_STATUS } from '@common/constants'
 
@@ -7,21 +7,14 @@ import { NewCursilhistForm } from '../..'
 import { CloseRelative } from './CloseRelative'
 import { SpouseData } from './SpouseData'
 
-type MarriedOrSinglePersonProps = {
-  errors: FieldErrors<NewCursilhistForm>
-  register: UseFormRegister<NewCursilhistForm>
-  setValue: UseFormSetValue<NewCursilhistForm>
-  unregister: UseFormUnregister<NewCursilhistForm>
-  watch: UseFormWatch<NewCursilhistForm>
-}
-
-export const MarriedOrSinglePerson = ({
-  register,
-  errors,
-  setValue,
-  unregister,
-  watch
-}: MarriedOrSinglePersonProps) => {
+export const MarriedOrSinglePerson = () => {
+  const {
+    register,
+    setValue,
+    unregister,
+    watch,
+    formState: { errors }
+  } = useFormContext<NewCursilhistForm>()
   const maritalStatus = watch('maritalStatus')
 
   const isMarriedPerson =

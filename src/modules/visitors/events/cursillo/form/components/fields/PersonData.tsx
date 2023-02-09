@@ -1,4 +1,4 @@
-import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { Flex, Input, Box, Select } from '@chakra-ui/react'
 
@@ -11,13 +11,15 @@ import { dateInputRegisterOptions, phoneInputRegisterOptions } from '@common/for
 import { NewCursilhistForm } from '../..'
 
 type PersonDataProps = {
-  errors: FieldErrors<NewCursilhistForm>
-  register: UseFormRegister<NewCursilhistForm>
-  setValue: UseFormSetValue<NewCursilhistForm>
   gender: Gender
 }
 
-export const PersonData = ({ errors, register, setValue, gender }: PersonDataProps) => {
+export const PersonData = ({ gender }: PersonDataProps) => {
+  const {
+    register,
+    setValue,
+    formState: { errors }
+  } = useFormContext<NewCursilhistForm>()
   return (
     <Box>
       <Flex

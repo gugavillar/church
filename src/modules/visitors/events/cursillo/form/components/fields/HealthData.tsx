@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from 'react'
-import { Control, Controller, FieldErrors, UseFormRegister, UseFormUnregister, UseFormWatch } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import { Flex, RadioGroup, Radio, Textarea } from '@chakra-ui/react'
 
@@ -7,15 +7,15 @@ import { FieldController, IfComponent } from '@common/components'
 
 import { NewCursilhistForm } from '../..'
 
-type HealthDataProps = {
-  errors: FieldErrors<NewCursilhistForm>
-  register: UseFormRegister<NewCursilhistForm>
-  control: Control<NewCursilhistForm>
-  watch: UseFormWatch<NewCursilhistForm>
-  unregister: UseFormUnregister<NewCursilhistForm>
-}
+export const HealthData = () => {
+  const {
+    register,
+    control,
+    watch,
+    unregister,
+    formState: { errors }
+  } = useFormContext<NewCursilhistForm>()
 
-export const HealthData = ({ errors, register, control, watch, unregister }: HealthDataProps) => {
   const [hasDietOrFoodRestriction, hasHealthProblems] = watch(['hasDietOrFoodRestriction', 'hasHealthProblems'])
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { Box, Flex, Input } from '@chakra-ui/react'
 
@@ -11,15 +11,12 @@ import { useAddress } from '@common/hooks/useAddress'
 import { NewCursilhistForm } from '../..'
 import { CityAndStateData } from './CityAndStateData'
 
-type AddressDataProps = {
-  errors: FieldErrors<NewCursilhistForm>
-  register: UseFormRegister<NewCursilhistForm>
-  setValue: UseFormSetValue<NewCursilhistForm>
-  watch: UseFormWatch<NewCursilhistForm>
-  cityFromReducer: string
-}
-
-export const AddressData = ({ errors, register, setValue, watch, cityFromReducer }: AddressDataProps) => {
+export const AddressData = () => {
+  const {
+    register,
+    setValue,
+    formState: { errors }
+  } = useFormContext<NewCursilhistForm>()
   const { addressResponse, handleGetAddressData } = useAddress()
 
   useEffect(() => {
@@ -86,13 +83,7 @@ export const AddressData = ({ errors, register, setValue, watch, cityFromReducer
             {...register('neighborhood')}
           />
         </FieldController>
-        <CityAndStateData
-          register={register}
-          errors={errors}
-          watch={watch}
-          setValue={setValue}
-          cityFromAPI={addressResponse?.city ?? cityFromReducer}
-        />
+        <CityAndStateData />
       </Flex>
       <FieldController
         error={errors?.referencePoint?.message as string}

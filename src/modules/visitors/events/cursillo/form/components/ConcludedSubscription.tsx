@@ -1,19 +1,12 @@
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import { Card, CardHeader, CardBody, CardFooter, Button, Flex, useToast, Text } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, CardFooter, Button, Flex, Text } from '@chakra-ui/react'
 
 import { PageSubtitle } from '@common/components'
 
-import { PaymentMethods, PaymentStatus } from '@common/@types'
-import { ERROR_TOAST } from '@common/constants'
-import { createCursilhistPaymentConfirmation } from '@common/services'
+import { PaymentMethods } from '@common/@types'
 
-import { CursilhistStateReducer } from '..'
-
-type ConfirmedPaymentProps = {
-  reducerState: CursilhistStateReducer
-}
+import { NewCursilhistForm } from '..'
 
 const MESSAGE_PAYMENT = {
   credit: 'Estamos aguardando o retorno da operadora do cartão',
@@ -21,35 +14,12 @@ const MESSAGE_PAYMENT = {
   pix: 'Envie o comprovante para o telefone para que possamos confirmar o seu pagamento'
 }
 
-export const ConcludedSubscription = ({ reducerState }: ConfirmedPaymentProps) => {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const { push, query } = useRouter()
-  const toast = useToast()
-  const hasUserId = Boolean(query?.user_id)
-
-  const handleConcludeSubscription = async () => {
-    setIsLoading(true)
-    const paymentStatus: PaymentStatus = query?.success === 'true' ? 'pago' : 'em_aberto'
-    try {
-      const payment = {
-        paymentMethod: hasUserId ? 'credit' : (reducerState.paymentMethod as PaymentMethods),
-        cursilhistRef: reducerState.id as string,
-        paymentStatus
-      }
-      await createCursilhistPaymentConfirmation(payment)
-      push('/eventos/cursilho')
-    } catch {
-      toast({
-        ...ERROR_TOAST,
-        title: 'Ocorreu uma falha',
-        description: 'Falha ao tentar salvar. Tente novamente'
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
+export const ConcludedSubscription = () => {
+  const {
+    getValues,
+    formState: { isSubmitting }
+  } = useFormContext<NewCursilhistForm>()
+  const { paymentMethod } = getValues()
   return (
     <Card
       bg='transparent'
@@ -63,7 +33,7 @@ export const ConcludedSubscription = ({ reducerState }: ConfirmedPaymentProps) =
         fontSize={['xs', 'sm']}
       >
         <Text>Você finalizou o processo de inscrição</Text>
-        <Text>{MESSAGE_PAYMENT[reducerState.paymentMethod as PaymentMethods]}</Text>
+        <Text>{MESSAGE_PAYMENT[paymentMethod as PaymentMethods]}</Text>
         <Text>Esperamos você na quinta feira. Clique em finalizar para sair.</Text>
       </CardBody>
       <CardFooter>
@@ -74,8 +44,8 @@ export const ConcludedSubscription = ({ reducerState }: ConfirmedPaymentProps) =
           width='full'
         >
           <Button
-            isLoading={isLoading}
-            onClick={handleConcludeSubscription}
+            type='submit'
+            isLoading={isSubmitting}
           >
             Finalizar
           </Button>

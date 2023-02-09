@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from 'react'
-import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { Select } from '@chakra-ui/react'
 
@@ -10,24 +10,22 @@ import { useCities } from '@common/hooks/useCities'
 
 import { NewCursilhistForm } from '../..'
 
-type CityAndStateDataProps = {
-  errors: FieldErrors<NewCursilhistForm>
-  register: UseFormRegister<NewCursilhistForm>
-  watch: UseFormWatch<NewCursilhistForm>
-  setValue: UseFormSetValue<NewCursilhistForm>
-  cityFromAPI: string
-}
-
-export const CityAndStateData = ({ errors, register, watch, setValue, cityFromAPI }: CityAndStateDataProps) => {
-  const state = watch('state')
+export const CityAndStateData = () => {
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors }
+  } = useFormContext<NewCursilhistForm>()
+  const [state, city] = watch(['state', 'city'])
 
   const { citiesFromUF, isLoadingCities, handleGetCities } = useCities(
     state as typeof BRAZILIAN_STATES[number]['value']
   )
 
   useEffect(() => {
-    Boolean(citiesFromUF?.length) && setValue('city', cityFromAPI, { shouldValidate: true, shouldDirty: true })
-  }, [citiesFromUF?.length, setValue, cityFromAPI])
+    Boolean(citiesFromUF?.length) && setValue('city', city, { shouldValidate: true, shouldDirty: true })
+  }, [citiesFromUF?.length, city, setValue])
 
   return (
     <Fragment>

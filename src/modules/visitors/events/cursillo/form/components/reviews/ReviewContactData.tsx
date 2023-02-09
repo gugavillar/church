@@ -2,13 +2,10 @@ import { Heading, Box, Flex } from '@chakra-ui/react'
 
 import { IfComponent, ExhibitionData } from '@common/components'
 
-import { CursilhistStateReducer } from '../..'
+import { NewCursilhistForm } from '../..'
 
 type ReviewPersonDataProps = {
-  data: Pick<
-    CursilhistStateReducer,
-    'zipCode' | 'street' | 'number' | 'neighborhood' | 'referencePoint' | 'city' | 'state'
-  >
+  data: Pick<NewCursilhistForm, 'zipCode' | 'street' | 'number' | 'neighborhood' | 'referencePoint' | 'city' | 'state'>
 }
 
 export const ReviewContactData = ({

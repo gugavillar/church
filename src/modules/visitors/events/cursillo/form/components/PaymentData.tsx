@@ -1,33 +1,20 @@
-import { Dispatch, useState } from 'react'
+import { useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { generate } from 'short-uuid'
 
-import {
-  Card,
-  CardHeader,
-  Heading,
-  CardBody,
-  Button,
-  CardFooter,
-  Flex,
-  Box,
-  Image,
-  useToast,
-  Spinner
-} from '@chakra-ui/react'
+import { Card, CardHeader, Heading, CardBody, Button, CardFooter, Flex, Box, Image } from '@chakra-ui/react'
 
 import { IfComponent, PageSubtitle } from '@common/components'
 
 import { PaymentMethods } from '@common/@types'
-import { ERROR_TOAST, PAYMENT_METHODS } from '@common/constants'
-import { getStripeJs } from '@common/provider/stripeJSApi'
-import { creditCardService } from '@common/services'
+import { PAYMENT_METHODS } from '@common/constants'
 
-import { CursilhistActionReducer, CursilhistStateReducer } from '..'
+import { NewCursilhistForm } from '..'
 import { ButtonPayment } from './payments/ButtonPayment'
 
 type PaymentDataProps = {
-  reducerState: CursilhistStateReducer
-  dispatch: Dispatch<CursilhistActionReducer>
+  handleNextStep: () => void
+  handlePrevStep: () => void
 }
 
 const PAYMENT_METHOD_SHOW = {
@@ -75,49 +62,14 @@ const PAYMENT_METHOD_SHOW = {
   )
 } as const
 
-export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
+export const PaymentData = ({ handleNextStep, handlePrevStep }: PaymentDataProps) => {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethods | ''>('')
-  const [isLoading, setIsLoading] = useState(false)
 
-  const toast = useToast()
+  const { setValue } = useFormContext<NewCursilhistForm>()
 
   const handleSetPaymentMethod = async (method: PaymentMethods) => {
     setPaymentMethod(method)
-    if (method === 'credit') {
-      setIsLoading(true)
-      try {
-        const { sessionId } = await creditCardService({
-          line_items: [{ price: process.env.NEXT_PUBLIC_CURSILHO_INSCRICAO as string, quantity: 1 }],
-          ref: String(reducerState?.id),
-          email: String(reducerState?.email)
-        })
-        const stripe = await getStripeJs()
-        await stripe?.redirectToCheckout({ sessionId })
-      } catch {
-        toast({
-          ...ERROR_TOAST,
-          title: 'Ocorreu uma falha',
-          description: 'Falha ao redirecionar para o pagamento'
-        })
-      } finally {
-        setIsLoading(false)
-      }
-    }
-  }
-
-  const handlePrevStep = () => {
-    dispatch({ data: { ...reducerState, stepProgress: 'reviewSubscription' } })
-  }
-
-  const handleConcludeSubscription = () => {
-    dispatch({
-      type: 'paymentStep',
-      data: {
-        ...reducerState,
-        stepProgress: 'confirmSubscription',
-        paymentMethod: paymentMethod as PaymentMethods
-      }
-    })
+    setValue('paymentMethod', method)
   }
 
   return (
@@ -150,16 +102,6 @@ export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
           mt={8}
         >
           <IfComponent
-            conditional={isLoading}
-            component={
-              <Spinner
-                size='sm'
-                color='gray.500'
-                mr={4}
-              />
-            }
-          />
-          <IfComponent
             conditional={Boolean(paymentMethod)}
             component={PAYMENT_METHOD_SHOW[paymentMethod as PaymentMethods]}
           />
@@ -178,10 +120,7 @@ export const PaymentData = ({ reducerState, dispatch }: PaymentDataProps) => {
           >
             Voltar
           </Button>
-          <IfComponent
-            conditional={['money', 'pix'].includes(paymentMethod)}
-            component={<Button onClick={handleConcludeSubscription}>Avançar</Button>}
-          />
+          <Button onClick={handleNextStep}>Avançar</Button>
         </Flex>
       </CardFooter>
     </Card>

@@ -1,80 +1,26 @@
-import { useRouter } from 'next/router'
-import { Dispatch, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import { Card, CardHeader, CardBody, Text, CardFooter, Flex, Button, useToast } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, Text, CardFooter, Flex, Button } from '@chakra-ui/react'
 
-import { IfComponent, PageSubtitle } from '@common/components'
+import { PageSubtitle } from '@common/components'
 
 import { Gender } from '@common/@types'
-import { ERROR_TOAST } from '@common/constants'
-import { timestampDate, formatToNumber } from '@common/formatters'
-import { createCursilhist } from '@common/services'
 
-import { CursilhistActionReducer, CursilhistStateReducer } from '..'
+import { NewCursilhistForm } from '..'
 import { ReviewComplementaryData } from './reviews/ReviewComplementaryData'
 import { ReviewContactData } from './reviews/ReviewContactData'
 import { ReviewPersonData } from './reviews/ReviewPersonData'
 
 type ReviewDataProps = {
-  reducerState: CursilhistStateReducer
-  dispatch: Dispatch<CursilhistActionReducer>
   gender: Gender
+  handlePrevStep: () => void
+  handleNextStep: () => void
 }
 
-type FormatDataToDatabaseArgs = {
-  reducerState: CursilhistStateReducer
-  gender: Gender
-}
+export const ReviewData = ({ gender, handleNextStep, handlePrevStep }: ReviewDataProps) => {
+  const { getValues } = useFormContext<NewCursilhistForm>()
 
-const formatDataToDatabase = ({ reducerState: { stepProgress, ...rest }, gender }: FormatDataToDatabaseArgs) => {
-  return {
-    ...rest,
-    gender,
-    birthDate: timestampDate(rest.birthDate),
-    hasDietOrFoodRestriction: Boolean(Number(rest.hasDietOrFoodRestriction)),
-    hasHealthProblems: Boolean(Number(rest.hasHealthProblems)),
-    phone: formatToNumber(rest.phone),
-    zipCode: formatToNumber(rest.zipCode),
-    ...(rest?.workplacePhone && { workplacePhone: formatToNumber(rest?.workplacePhone) }),
-    ...(rest?.spouse?.phone && { spouse: { ...rest?.spouse, phone: formatToNumber(rest?.spouse?.phone) } }),
-    ...(rest?.closeRelative?.phone && {
-      closeRelative: { ...rest?.closeRelative, phone: formatToNumber(rest?.closeRelative?.phone) }
-    })
-  }
-}
-
-export type Cursilhist = ReturnType<typeof formatDataToDatabase>
-
-export const ReviewData = ({ dispatch, gender, reducerState }: ReviewDataProps) => {
-  const [isSaving, setIsSaving] = useState(false)
-
-  const toast = useToast()
-  const { query } = useRouter()
-
-  const handleCreateCursilhist = async () => {
-    if (reducerState?.id) {
-      dispatch({ type: 'reviewStep', data: { ...reducerState, stepProgress: 'paymentSubscription' } })
-      return
-    }
-    setIsSaving(true)
-    try {
-      const formattedData = formatDataToDatabase({ reducerState, gender })
-      const { ref } = await createCursilhist(formattedData)
-      dispatch({ type: 'reviewStep', data: { ...reducerState, id: ref.value.id, stepProgress: 'paymentSubscription' } })
-    } catch {
-      toast({
-        ...ERROR_TOAST,
-        title: 'Ocorreu uma falha',
-        description: 'Falha ao tentar salvar. Tente novamente'
-      })
-    } finally {
-      setIsSaving(false)
-    }
-  }
-
-  const handlePrevStep = () => {
-    dispatch({ data: { ...reducerState, stepProgress: 'formSubscription' } })
-  }
+  const formValues = getValues()
 
   return (
     <Card
@@ -87,11 +33,11 @@ export const ReviewData = ({ dispatch, gender, reducerState }: ReviewDataProps) 
       </CardHeader>
       <CardBody pt={0}>
         <ReviewPersonData
-          data={reducerState}
+          data={formValues}
           gender={gender}
         />
-        <ReviewContactData data={reducerState} />
-        <ReviewComplementaryData data={reducerState} />
+        <ReviewContactData data={formValues} />
+        <ReviewComplementaryData data={formValues} />
       </CardBody>
       <CardFooter>
         <Flex
@@ -100,23 +46,13 @@ export const ReviewData = ({ dispatch, gender, reducerState }: ReviewDataProps) 
           gap={6}
           width='full'
         >
-          <IfComponent
-            conditional={!Boolean(query?.user_id)}
-            component={
-              <Button
-                variant='outline'
-                onClick={handlePrevStep}
-              >
-                Voltar
-              </Button>
-            }
-          />
           <Button
-            isLoading={isSaving}
-            onClick={handleCreateCursilhist}
+            variant='outline'
+            onClick={handlePrevStep}
           >
-            Avançar
+            Voltar
           </Button>
+          <Button onClick={handleNextStep}>Avançar</Button>
         </Flex>
       </CardFooter>
     </Card>

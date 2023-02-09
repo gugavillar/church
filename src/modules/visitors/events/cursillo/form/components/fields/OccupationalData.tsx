@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { Flex, Select, Input } from '@chakra-ui/react'
 
@@ -10,13 +10,12 @@ import { phoneInputRegisterOptions } from '@common/formatters'
 
 import { NewCursilhistForm } from '../..'
 
-type OccupationalDataProps = {
-  errors: FieldErrors<NewCursilhistForm>
-  register: UseFormRegister<NewCursilhistForm>
-  setValue: UseFormSetValue<NewCursilhistForm>
-}
-
-export const OccupationalData = ({ errors, register, setValue }: OccupationalDataProps) => {
+export const OccupationalData = () => {
+  const {
+    register,
+    setValue,
+    formState: { errors }
+  } = useFormContext<NewCursilhistForm>()
   return (
     <Fragment>
       <Flex

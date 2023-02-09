@@ -4,11 +4,11 @@ import { IfComponent, ExhibitionData } from '@common/components'
 
 import { booleanToText } from '@common/formatters'
 
-import { CursilhistStateReducer } from '../..'
+import { NewCursilhistForm } from '../..'
 
 type ReviewPersonDataProps = {
   data: Pick<
-    CursilhistStateReducer,
+    NewCursilhistForm,
     | 'religion'
     | 'church'
     | 'education'

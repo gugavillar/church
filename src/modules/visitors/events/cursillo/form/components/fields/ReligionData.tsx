@@ -1,4 +1,4 @@
-import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { Flex, Input } from '@chakra-ui/react'
 
@@ -6,12 +6,11 @@ import { FieldController } from '@common/components'
 
 import { NewCursilhistForm } from '../..'
 
-type ReligionDataProps = {
-  errors: FieldErrors<NewCursilhistForm>
-  register: UseFormRegister<NewCursilhistForm>
-}
-
-export const ReligionData = ({ errors, register }: ReligionDataProps) => {
+export const ReligionData = () => {
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext<NewCursilhistForm>()
   return (
     <Flex
       gap={{ base: 6, md: 8, lg: 8 }}

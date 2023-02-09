@@ -5,11 +5,11 @@ import { IfComponent, ExhibitionData } from '@common/components'
 import { Gender } from '@common/@types'
 import { calculateAge } from '@common/formatters'
 
-import { CursilhistStateReducer } from '../..'
+import { NewCursilhistForm } from '../..'
 
 type ReviewPersonDataProps = {
   data: Pick<
-    CursilhistStateReducer,
+    NewCursilhistForm,
     'name' | 'likeToBeCalled' | 'birthDate' | 'phone' | 'email' | 'maritalStatus' | 'spouse' | 'closeRelative'
   >
   gender: Gender
