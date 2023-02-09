@@ -98,16 +98,20 @@ export const defaultFormValues = {
   healthProblems: undefined,
   hasDietOrFoodRestriction: undefined,
   dietOrFoodRestriction: undefined,
-  wish: ''
+  wish: '',
+  paymentMethod: ''
 }
 
 export const Form = ({ children, cursilhist }: FormProps) => {
+  const toast = useToast()
+  const { push, query } = useRouter()
+
   const methods = useForm({
+    mode: 'onBlur',
     resolver: yupResolver(newCursilhistFormValidation),
     defaultValues: cursilhist ?? defaultFormValues
   })
-  const toast = useToast()
-  const { push, query } = useRouter()
+
   const onSubmit = async (values: NewCursilhistForm) => {
     const formattedData = formatDataToDatabase(values, query.gender as Gender)
     try {

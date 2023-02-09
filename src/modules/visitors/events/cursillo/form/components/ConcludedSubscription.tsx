@@ -17,9 +17,11 @@ const MESSAGE_PAYMENT = {
 export const ConcludedSubscription = () => {
   const {
     getValues,
-    formState: { isSubmitting }
+    formState: { isSubmitting, isDirty, isValid }
   } = useFormContext<NewCursilhistForm>()
+
   const { paymentMethod } = getValues()
+
   return (
     <Card
       bg='transparent'
@@ -45,6 +47,7 @@ export const ConcludedSubscription = () => {
         >
           <Button
             type='submit'
+            isDisabled={!isDirty || !isValid}
             isLoading={isSubmitting}
           >
             Finalizar

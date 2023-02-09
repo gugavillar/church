@@ -44,7 +44,8 @@ export const newCursilhistFormValidation = yup.object({
   spouse: yup
     .object()
     .when('maritalStatus', {
-      is: (maritalStatus: typeof MARITAL_STATUS[number]['value']) => maritalStatus === 'Casado(a)',
+      is: (maritalStatus: typeof MARITAL_STATUS[number]['value']) =>
+        maritalStatus === 'Casado(a)' || maritalStatus === 'União estável',
       then: yup.object({
         name: yup.string().required(),
         phone: yup
@@ -74,8 +75,14 @@ export const newCursilhistFormValidation = yup.object({
   referencePoint: yup.string().nullable(),
   religion: yup.string().required(),
   church: yup.string().required(),
-  education: yup.string().oneOf(['', ...EDUCATION_LEVEL.map((education) => education.value)]),
-  occupation: yup.string().oneOf(['', ...OCCUPATIONS.map((occupation) => occupation.value)]),
+  education: yup
+    .string()
+    .nullable()
+    .oneOf(['', ...EDUCATION_LEVEL.map((education) => education.value)]),
+  occupation: yup
+    .string()
+    .nullable()
+    .oneOf(['', ...OCCUPATIONS.map((occupation) => occupation.value)]),
   workplace: yup.string().nullable(),
   workplacePhone: yup
     .string()
@@ -99,5 +106,6 @@ export const newCursilhistFormValidation = yup.object({
       is: (hasDietOrFoodRestriction: '0' | '1') => hasDietOrFoodRestriction === '1',
       then: yup.string().required()
     }),
-  wish: yup.string().required()
+  wish: yup.string().required(),
+  paymentMethod: yup.string().oneOf(['pix', 'credit', 'money']).required()
 })
