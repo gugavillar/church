@@ -1,7 +1,7 @@
 import { Gender, PaymentMethods, PaymentStatus } from '@common/@types'
 import { AllCursilhistsDatabase, CursilhistDatabase } from '@common/@types/cursilhists'
 import { faunaAPI, faunaQ } from '@common/provider/faunaApi'
-import { Cursilhist } from '@modules/visitors/events/cursillo/form/components/ReviewData'
+import { Cursilhist } from '@modules/visitors/events/cursillo/form'
 
 export const createCursilhist = (cursilhist: Cursilhist) =>
   faunaAPI.query<CursilhistDatabase>(
