@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 import { CursilhistDatabase } from '@common/@types/cursilhists'
-import { fieldFormatCelPhone, fieldFormatZipCode } from '@common/formatters'
+import { fieldFormatCelPhone, fieldFormatPhone, fieldFormatZipCode } from '@common/formatters'
 import { getCursilhist } from '@common/services'
 import { getIsOpenCursilloSubscription } from '@common/services/configurationsServices'
 
@@ -29,7 +29,10 @@ const formattedResponse = ({ data, ref }: CursilhistDatabase) => {
           }
         }),
     hasHealthProblems: data.hasHealthProblems ? '1' : '0',
-    hasDietOrFoodRestriction: data.hasDietOrFoodRestriction ? '1' : '0'
+    hasDietOrFoodRestriction: data.hasDietOrFoodRestriction ? '1' : '0',
+    ...(data?.workplacePhone && String(data?.workplacePhone).length === 11
+      ? { workplacePhone: fieldFormatCelPhone(String(data.workplacePhone)) }
+      : { workplacePhone: fieldFormatPhone(String(data.workplacePhone)) })
   }
 }
 
