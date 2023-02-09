@@ -25,7 +25,8 @@ const PaymentNext = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (!data.stripeId) {
       stripeCustomerCreate = await stripeApi.customers.create({
-        email
+        email,
+        name: data?.name
       })
       await createCursilhistStripeId(ref, stripeCustomerCreate.id)
     }
