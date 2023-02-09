@@ -5,7 +5,7 @@ import { Flex, RadioGroup, Radio, Textarea } from '@chakra-ui/react'
 
 import { FieldController, IfComponent } from '@common/components'
 
-import { NewCursilhistForm } from '../..'
+import { NewCursilhistForm } from '../Form'
 
 export const HealthData = () => {
   const {

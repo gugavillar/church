@@ -8,7 +8,7 @@ import { FieldController } from '@common/components'
 import { zipCodeInputRegisterOptions } from '@common/formatters'
 import { useAddress } from '@common/hooks/useAddress'
 
-import { NewCursilhistForm } from '../..'
+import { NewCursilhistForm } from '../Form'
 import { CityAndStateData } from './CityAndStateData'
 
 export const AddressData = () => {

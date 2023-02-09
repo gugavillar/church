@@ -8,7 +8,7 @@ import { FieldController } from '@common/components'
 import { BRAZILIAN_STATES } from '@common/constants'
 import { useCities } from '@common/hooks/useCities'
 
-import { NewCursilhistForm } from '../..'
+import { NewCursilhistForm } from '../Form'
 
 export const CityAndStateData = () => {
   const {

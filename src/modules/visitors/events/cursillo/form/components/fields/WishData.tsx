@@ -4,7 +4,7 @@ import { Textarea } from '@chakra-ui/react'
 
 import { FieldController } from '@common/components'
 
-import { NewCursilhistForm } from '../..'
+import { NewCursilhistForm } from '../Form'
 
 export const WishData = () => {
   const {

@@ -6,7 +6,7 @@ import { PageSubtitle } from '@common/components'
 
 import { Gender } from '@common/@types'
 
-import { NewCursilhistForm } from '..'
+import { NewCursilhistForm } from './Form'
 import { ReviewComplementaryData } from './reviews/ReviewComplementaryData'
 import { ReviewContactData } from './reviews/ReviewContactData'
 import { ReviewPersonData } from './reviews/ReviewPersonData'

@@ -4,7 +4,7 @@ import { Flex, Input } from '@chakra-ui/react'
 
 import { FieldController } from '@common/components'
 
-import { NewCursilhistForm } from '../..'
+import { NewCursilhistForm } from '../Form'
 
 export const ReligionData = () => {
   const {

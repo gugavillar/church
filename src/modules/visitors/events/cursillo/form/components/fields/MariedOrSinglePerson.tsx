@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form'
 
 import { CLOSE_RELATIVE, MARITAL_STATUS } from '@common/constants'
 
-import { NewCursilhistForm } from '../..'
+import { NewCursilhistForm } from '../Form'
 import { CloseRelative } from './CloseRelative'
 import { SpouseData } from './SpouseData'
 

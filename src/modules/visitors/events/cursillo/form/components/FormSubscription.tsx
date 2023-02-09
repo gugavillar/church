@@ -6,7 +6,6 @@ import { PageSubtitle } from '@common/components'
 
 import { Gender } from '@common/@types'
 
-import { NewCursilhistForm } from '..'
 import { AddressData } from './fields/AddressData'
 import { HealthData } from './fields/HealthData'
 import { MarriedOrSinglePerson } from './fields/MariedOrSinglePerson'
@@ -14,6 +13,7 @@ import { OccupationalData } from './fields/OccupationalData'
 import { PersonData } from './fields/PersonData'
 import { ReligionData } from './fields/ReligionData'
 import { WishData } from './fields/WishData'
+import { NewCursilhistForm } from './Form'
 
 type CardFormProps = {
   gender: Gender

@@ -8,7 +8,7 @@ import { Gender } from '@common/@types'
 import { MARITAL_STATUS } from '@common/constants'
 import { dateInputRegisterOptions, phoneInputRegisterOptions } from '@common/formatters'
 
-import { NewCursilhistForm } from '../..'
+import { NewCursilhistForm } from '../Form'
 
 type PersonDataProps = {
   gender: Gender

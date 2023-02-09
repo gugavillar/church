@@ -2,7 +2,7 @@ import { Heading, Box, Flex } from '@chakra-ui/react'
 
 import { IfComponent, ExhibitionData } from '@common/components'
 
-import { NewCursilhistForm } from '../..'
+import { NewCursilhistForm } from '../Form'
 
 type ReviewPersonDataProps = {
   data: Pick<NewCursilhistForm, 'zipCode' | 'street' | 'number' | 'neighborhood' | 'referencePoint' | 'city' | 'state'>

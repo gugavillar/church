@@ -5,7 +5,7 @@ import { IfComponent, ExhibitionData } from '@common/components'
 import { Gender } from '@common/@types'
 import { calculateAge } from '@common/formatters'
 
-import { NewCursilhistForm } from '../..'
+import { NewCursilhistForm } from '../Form'
 
 type ReviewPersonDataProps = {
   data: Pick<

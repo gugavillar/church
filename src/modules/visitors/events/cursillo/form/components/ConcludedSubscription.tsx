@@ -6,7 +6,7 @@ import { PageSubtitle } from '@common/components'
 
 import { PaymentMethods } from '@common/@types'
 
-import { NewCursilhistForm } from '..'
+import { NewCursilhistForm } from './Form'
 
 const MESSAGE_PAYMENT = {
   credit: 'Estamos aguardando o retorno da operadora do cartão',

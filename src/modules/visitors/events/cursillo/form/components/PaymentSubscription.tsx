@@ -9,7 +9,7 @@ import { IfComponent, PageSubtitle } from '@common/components'
 import { PaymentMethods } from '@common/@types'
 import { PAYMENT_METHODS } from '@common/constants'
 
-import { NewCursilhistForm } from '..'
+import { NewCursilhistForm } from './Form'
 import { ButtonPayment } from './payments/ButtonPayment'
 
 type PaymentDataProps = {
