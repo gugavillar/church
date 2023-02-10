@@ -26,7 +26,7 @@ export const customValidateZipCode = async (zipCode: string) => {
 }
 
 export const customValidateDate = (date: string) => {
-  if (!date || date?.length < 9) return false
+  if (!date || date?.length < 10) return false
   const [day, month, year] = date.split('/')
   const timestampDate = new Date(`${year}-${month}-${day}`).setHours(24, 0, 0)
   return isValid(timestampDate)
