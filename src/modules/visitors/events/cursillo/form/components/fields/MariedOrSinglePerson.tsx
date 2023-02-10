@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { CLOSE_RELATIVE, MARITAL_STATUS } from '@common/constants'
+import { MARRIED_PERSON, MARITAL_STATUS } from '@common/constants'
 
 import { NewCursilhistForm } from '../Form'
 import { CloseRelative } from './CloseRelative'
@@ -18,10 +18,10 @@ export const MarriedOrSinglePerson = () => {
   const maritalStatus = watch('maritalStatus')
 
   const isMarriedPerson =
-    Boolean(maritalStatus) && CLOSE_RELATIVE?.includes(maritalStatus as typeof MARITAL_STATUS[number]['value'])
+    Boolean(maritalStatus) && MARRIED_PERSON?.includes(maritalStatus as typeof MARITAL_STATUS[number]['value'])
 
   useEffect(() => {
-    if (CLOSE_RELATIVE?.includes(maritalStatus as typeof MARITAL_STATUS[number]['value'])) {
+    if (MARRIED_PERSON?.includes(maritalStatus as typeof MARITAL_STATUS[number]['value'])) {
       unregister('closeRelative')
     } else {
       unregister('spouse')
