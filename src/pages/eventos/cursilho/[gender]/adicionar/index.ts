@@ -8,31 +8,36 @@ import { getIsOpenCursilloSubscription } from '@common/services/configurationsSe
 
 export { default } from '@modules/visitors/events/cursillo/form'
 
-const formattedResponse = ({ data, ref }: CursilhistDatabase) => {
+const formattedResponse = ({ data: { stripeId, ...restValues } }: CursilhistDatabase) => {
+  const isWorkplacePhone = Boolean(restValues?.workplacePhone)
+  const workplacePhoneLength = String(restValues?.workplacePhone)?.length
+
   return {
-    ...data,
-    id: ref.value.id,
-    birthDate: format(data.birthDate, 'dd/MM/yyyy'),
-    phone: fieldFormatCelPhone(String(data.phone)),
-    zipCode: fieldFormatZipCode(String(data.zipCode)),
-    ...(data.maritalStatus !== 'Casado(a)'
+    ...restValues,
+    birthDate: format(restValues.birthDate, 'dd/MM/yyyy'),
+    phone: fieldFormatCelPhone(String(restValues.phone)),
+    zipCode: fieldFormatZipCode(String(restValues.zipCode)),
+    ...(restValues.maritalStatus !== 'Casado(a)'
       ? {
           closeRelative: {
-            ...data.closeRelative,
-            phone: fieldFormatCelPhone(String(data.closeRelative?.phone))
+            ...restValues.closeRelative,
+            phone: fieldFormatCelPhone(String(restValues.closeRelative?.phone))
           }
         }
       : {
           spouse: {
-            ...data.spouse,
-            phone: fieldFormatCelPhone(String(data.spouse?.phone))
+            ...restValues.spouse,
+            phone: fieldFormatCelPhone(String(restValues.spouse?.phone))
           }
         }),
-    hasHealthProblems: data.hasHealthProblems ? '1' : '0',
-    hasDietOrFoodRestriction: data.hasDietOrFoodRestriction ? '1' : '0',
-    ...(data?.workplacePhone && String(data?.workplacePhone).length === 11
-      ? { workplacePhone: fieldFormatCelPhone(String(data.workplacePhone)) }
-      : { workplacePhone: fieldFormatPhone(String(data.workplacePhone)) })
+    hasHealthProblems: restValues.hasHealthProblems ? '1' : '0',
+    hasDietOrFoodRestriction: restValues.hasDietOrFoodRestriction ? '1' : '0',
+    ...(isWorkplacePhone && {
+      workplacePhone:
+        workplacePhoneLength === 11
+          ? fieldFormatCelPhone(String(restValues.workplacePhone))
+          : fieldFormatPhone(String(restValues.workplacePhone))
+    })
   }
 }
 

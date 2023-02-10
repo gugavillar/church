@@ -14,10 +14,14 @@ const MESSAGE_PAYMENT = {
   pix: 'Envie o comprovante para o telefone para que possamos confirmar o seu pagamento'
 }
 
-export const ConcludedSubscription = () => {
+type ConcludedSubscriptionProps = {
+  handlePrevStep: () => void
+}
+
+export const ConcludedSubscription = ({ handlePrevStep }: ConcludedSubscriptionProps) => {
   const {
     getValues,
-    formState: { isSubmitting, isDirty, isValid }
+    formState: { isSubmitting }
   } = useFormContext<NewCursilhistForm>()
 
   const { paymentMethod } = getValues()
@@ -46,8 +50,14 @@ export const ConcludedSubscription = () => {
           width='full'
         >
           <Button
+            variant='outline'
+            onClick={handlePrevStep}
+          >
+            Voltar
+          </Button>
+          <Button
             type='submit'
-            isDisabled={!isDirty || !isValid}
+            isDisabled={!paymentMethod}
             isLoading={isSubmitting}
           >
             Finalizar

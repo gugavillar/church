@@ -63,7 +63,7 @@ const NewCursilhist = ({ cursilhist, stepProgress }: NewCursilhistProps) => {
         )
       },
       {
-        content: <ConcludedSubscription />
+        content: <ConcludedSubscription handlePrevStep={prevStep} />
       }
     ]
   }, [nextStep, prevStep, query.gender])
