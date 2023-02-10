@@ -42,8 +42,10 @@ export const AddressData = () => {
         >
           <Input
             type='text'
-            {...register('zipCode', { ...zipCodeInputRegisterOptions('zipCode', setValue) })}
-            onBlur={(event) => handleGetAddressData(event.target.value)}
+            {...register('zipCode', {
+              ...zipCodeInputRegisterOptions('zipCode', setValue),
+              onBlur: (event) => handleGetAddressData(event?.target?.value)
+            })}
           />
         </FieldController>
         <FieldController
