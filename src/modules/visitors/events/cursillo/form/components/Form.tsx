@@ -127,13 +127,15 @@ export const Form = ({ children, cursilhist }: FormProps) => {
           const stripe = await getStripeJs()
           await stripe?.redirectToCheckout({ sessionId })
           push(`/eventos/cursilho?payment=${formattedData.paymentMethod}`)
-        } catch {
+        } catch (error) {
           toast({
             ...ERROR_TOAST,
             title: 'Ocorreu uma falha',
             description: 'Falha ao redirecionar para o pagamento'
           })
         }
+      } else {
+        push(`/eventos/cursilho?payment=${formattedData.paymentMethod}`)
       }
     } catch {
       toast({
