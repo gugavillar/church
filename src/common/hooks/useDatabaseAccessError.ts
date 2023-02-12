@@ -12,15 +12,18 @@ type UseErrorParams = {
 
 export const useDatabaseAccessError = ({ key, description }: UseErrorParams) => {
   const toast = useToast()
+  const id = 'error-toast'
   const { push, query, pathname } = useRouter()
 
   useEffect(() => {
     if (query[key]) {
-      toast({
-        ...ERROR_TOAST,
-        title: 'Ocorreu uma falha',
-        description
-      })
+      if (!toast.isActive(id)) {
+        toast({
+          ...ERROR_TOAST,
+          title: 'Ocorreu uma falha',
+          description
+        })
+      }
       push(pathname, undefined, { shallow: true })
     }
   }, [description, key, pathname, push, query, toast])
