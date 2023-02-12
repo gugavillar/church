@@ -18,7 +18,9 @@ export const colors = {
       gray: '#ecf3ea',
       darkBlue: '#313a5c'
     },
-    green: '#31a8ab',
+    green: {
+      '500': '#31a8ab'
+    },
     black: '#161722',
     gray: {
       '50': '#f4f5f7',
