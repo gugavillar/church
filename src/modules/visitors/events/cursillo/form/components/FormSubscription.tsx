@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form'
 
-import { Card, CardHeader, CardBody, Flex, Button, Box, Text, CardFooter } from '@chakra-ui/react'
+import { CardBody, Flex, Button, Box, CardFooter } from '@chakra-ui/react'
 
-import { PageSubtitle } from '@common/components'
+import { CardTitle } from '@common/components'
 
 import { Gender } from '@common/@types'
 
@@ -22,21 +22,14 @@ type CardFormProps = {
 
 export const CursilloFormSubscription = ({ gender, handleNextStep }: CardFormProps) => {
   const {
-    getValues,
     formState: { isDirty, isValid }
   } = useFormContext<NewCursilhistForm>()
 
-  console.log(getValues())
-
   return (
-    <Card
-      bg='transparent'
-      boxShadow='2xl'
+    <CardTitle
+      title='Inscrição'
+      subtitle='Campos com * são obrigatórios'
     >
-      <CardHeader>
-        <PageSubtitle>Formulário de inscrição</PageSubtitle>
-        <Text color='red'>Campos com * são obrigatórios</Text>
-      </CardHeader>
       <CardBody pt={0}>
         <Box>
           <PersonData gender={gender} />
@@ -62,6 +55,6 @@ export const CursilloFormSubscription = ({ gender, handleNextStep }: CardFormPro
           </Button>
         </Flex>
       </CardFooter>
-    </Card>
+    </CardTitle>
   )
 }

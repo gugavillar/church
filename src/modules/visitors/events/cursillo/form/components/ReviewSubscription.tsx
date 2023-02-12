@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form'
 
-import { Card, CardHeader, CardBody, Text, CardFooter, Flex, Button } from '@chakra-ui/react'
+import { CardBody, CardFooter, Flex, Button } from '@chakra-ui/react'
 
-import { PageSubtitle } from '@common/components'
+import { CardTitle } from '@common/components'
 
 import { Gender } from '@common/@types'
 
@@ -23,14 +23,10 @@ export const ReviewData = ({ gender, handleNextStep, handlePrevStep }: ReviewDat
   const formValues = getValues()
 
   return (
-    <Card
-      bg='transparent'
-      boxShadow='2xl'
+    <CardTitle
+      title='Inscrição'
+      subtitle='Revise os dados e clique em avançar para escolher a forma de pagamento'
     >
-      <CardHeader>
-        <PageSubtitle>Revisão dos dados</PageSubtitle>
-        <Text>Revise os dados e clique em avançar para escolher a forma de pagamento</Text>
-      </CardHeader>
       <CardBody pt={0}>
         <ReviewPersonData
           data={formValues}
@@ -55,6 +51,6 @@ export const ReviewData = ({ gender, handleNextStep, handlePrevStep }: ReviewDat
           <Button onClick={handleNextStep}>Avançar</Button>
         </Flex>
       </CardFooter>
-    </Card>
+    </CardTitle>
   )
 }

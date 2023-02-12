@@ -1,109 +1,66 @@
-import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { generate } from 'short-uuid'
 
-import { Card, CardHeader, Heading, CardBody, Button, CardFooter, Flex, Box, Image } from '@chakra-ui/react'
+import { CardBody, Button, CardFooter, Flex, Box, Select } from '@chakra-ui/react'
 
-import { IfComponent, PageSubtitle } from '@common/components'
+import { FieldController, IfComponent, CardTitle } from '@common/components'
 
 import { PaymentMethods } from '@common/@types'
 import { PAYMENT_METHODS } from '@common/constants'
 
 import { NewCursilhistForm } from './Form'
-import { ButtonPayment } from './payments/ButtonPayment'
+import { PaymentExplanation } from './payments/PaymentExplanation'
 
 type PaymentDataProps = {
   handleNextStep: () => void
   handlePrevStep: () => void
 }
 
-const PAYMENT_METHOD_SHOW = {
-  pix: (
-    <Box>
-      <Heading
-        textAlign='center'
-        as='h4'
-        fontSize='sm'
-        color='gray.500'
-      >
-        Leia o QrCode, efetue o pagamento.
-      </Heading>
-      <Image
-        src='/assets/qrCodePix.png'
-        mt={6}
-        mx='auto'
-        alt='QrCode pagamento via pix'
-      />
-    </Box>
-  ),
-  credit: (
-    <Box>
-      <Heading
-        textAlign='center'
-        as='h4'
-        fontSize='sm'
-        color='gray.500'
-      >
-        Redirecionando para o pagamento
-      </Heading>
-    </Box>
-  ),
-  money: (
-    <Box>
-      <Heading
-        textAlign='center'
-        as='h4'
-        fontSize='sm'
-        color='gray.500'
-      >
-        Pagamento em dinheiro no local
-      </Heading>
-    </Box>
-  )
-} as const
-
-export const PaymentData = ({ handleNextStep, handlePrevStep }: PaymentDataProps) => {
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethods | ''>('')
-
-  const { setValue } = useFormContext<NewCursilhistForm>()
-
-  const handleSetPaymentMethod = async (method: PaymentMethods) => {
-    setPaymentMethod(method)
-    setValue('paymentMethod', method)
-  }
+export const PaymentData = ({ handlePrevStep }: PaymentDataProps) => {
+  const {
+    register,
+    watch,
+    formState: { errors, isSubmitting, isDirty, isValid }
+  } = useFormContext<NewCursilhistForm>()
+  const payment = watch('paymentMethod')
 
   return (
-    <Card
-      bg='transparent'
-      boxShadow='2xl'
+    <CardTitle
+      title='Inscrição'
+      subtitle='Escolha a forma de pagamento'
     >
-      <CardHeader>
-        <PageSubtitle>Método de pagamento</PageSubtitle>
-      </CardHeader>
       <CardBody pt={0}>
         <Flex
           direction={['column', 'row']}
-          align='center'
-          justify='space-evenly'
-          mt={8}
+          align='flex-start'
         >
-          {PAYMENT_METHODS?.map((method) => (
-            <ButtonPayment
-              key={generate()}
-              label={method.label}
-              iconType={method.iconType}
-              onClick={() => handleSetPaymentMethod(method.iconType)}
-            />
-          ))}
+          <Box w={['full', '27.5rem']}>
+            <FieldController
+              label='Qual a forma de pagamento?'
+              error={errors?.paymentMethod?.message as string}
+            >
+              <Select
+                {...register('paymentMethod')}
+                placeholder='Selecione uma opção'
+              >
+                {PAYMENT_METHODS.map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
+            </FieldController>
+          </Box>
         </Flex>
         <Flex
           align='center'
-          justify='center'
           mt={8}
         >
           <IfComponent
-            conditional={Boolean(paymentMethod)}
-            component={PAYMENT_METHOD_SHOW[paymentMethod as PaymentMethods]}
+            conditional={Boolean(payment)}
+            component={<PaymentExplanation payment={payment as PaymentMethods} />}
           />
         </Flex>
       </CardBody>
@@ -120,9 +77,15 @@ export const PaymentData = ({ handleNextStep, handlePrevStep }: PaymentDataProps
           >
             Voltar
           </Button>
-          <Button onClick={handleNextStep}>Avançar</Button>
+          <Button
+            type='submit'
+            isLoading={isSubmitting}
+            isDisabled={!isDirty || !isValid}
+          >
+            Finalizar
+          </Button>
         </Flex>
       </CardFooter>
-    </Card>
+    </CardTitle>
   )
 }
