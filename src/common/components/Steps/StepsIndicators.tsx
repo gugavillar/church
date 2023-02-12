@@ -34,7 +34,7 @@ const completeStepProps = {
 }
 
 const lastStepProps = {
-  bg: 'green',
+  bg: 'green.500',
   color: 'white',
   border: 'none'
 }

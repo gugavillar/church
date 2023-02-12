@@ -68,7 +68,8 @@ const formatDataToDatabase = (values: NewCursilhistForm, gender: Gender) => {
     ...(values?.spouse?.phone && { spouse: { ...values?.spouse, phone: formatToNumber(values?.spouse?.phone) } }),
     ...(values?.closeRelative?.phone && {
       closeRelative: { ...values?.closeRelative, phone: formatToNumber(values?.closeRelative?.phone) }
-    })
+    }),
+    paymentStatus: 'em_aberto'
   }
 }
 
@@ -140,7 +141,7 @@ export const Form = ({ children, cursilhist }: FormProps) => {
         description: 'Falha ao tentar salvar. Tente novamente'
       })
     } finally {
-      push('/eventos/cursilho')
+      push(`/eventos/cursilho?payment=${formattedData.paymentMethod}`)
     }
   }
   return (

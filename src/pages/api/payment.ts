@@ -35,8 +35,8 @@ const PaymentNext = async (req: NextApiRequest, res: NextApiResponse) => {
       customer: stripeCustomerCreate?.id ?? data.stripeId,
       line_items,
       mode: 'payment',
-      success_url: `${url}?user_id=${ref}&success=true`,
-      cancel_url: `${url}?user_id=${ref}&success=false`
+      success_url: `${process.env.NEXT_PUBLIC_HOST}/eventos/cursilho?payment=credit`,
+      cancel_url: `${url}?user_id=${ref}&payment=false`
     })
 
     res.status(200).json({ sessionId: stripeCheckoutSession.id })

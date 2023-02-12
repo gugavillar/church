@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { Fragment } from 'react'
 
 import { SimpleGrid, Box } from '@chakra-ui/react'
@@ -6,6 +7,7 @@ import { PageTitle, PageSubtitle } from '@common/components'
 
 import { ACTUAL_YEAR } from '@common/constants'
 import { useDatabaseAccessError } from '@common/hooks'
+import { useSuccessPayment } from '@common/hooks/useSuccessPayment'
 
 import { CursilloLinkCards } from './components/CursilloLinkCards'
 
@@ -30,9 +32,18 @@ type CursilloProps = {
 }
 
 const Cursillo = ({ isOpenMaleSubscription, isOpenFemaleSubscription }: CursilloProps) => {
+  const { query } = useRouter()
+
+  const description =
+    query?.payment === 'money' ? 'Procure o responsável para efetuar o pagamento' : 'Pagamento confirmado'
+
   useDatabaseAccessError({ ...cursilhistsErrorParams })
   useDatabaseAccessError({ ...isOpenMaleSubscriptionErrorParams })
   useDatabaseAccessError({ ...isOpenFemaleSubscriptionErrorParams })
+  useSuccessPayment({
+    key: 'payment',
+    description
+  })
   return (
     <Fragment>
       <PageTitle>Cursilho de cristandade {ACTUAL_YEAR}</PageTitle>
