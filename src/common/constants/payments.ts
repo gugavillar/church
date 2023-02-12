@@ -1,5 +1,5 @@
 export const PAYMENT_METHODS = [
-  { label: 'PIX', iconType: 'pix' },
-  { label: 'Cartão', iconType: 'credit' },
-  { label: 'Dinheiro', iconType: 'money' }
+  { label: 'PIX', value: 'pix' },
+  { label: 'Cartão', value: 'credit' },
+  { label: 'Dinheiro', value: 'money' }
 ] as const

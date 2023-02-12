@@ -103,5 +103,6 @@ export const newCursilhistFormValidation = yup.object({
       is: (hasDietOrFoodRestriction: '0' | '1') => hasDietOrFoodRestriction === '1',
       then: yup.string().required()
     }),
-  wish: yup.string().required()
+  wish: yup.string().required(),
+  paymentMethod: yup.string().oneOf(['pix', 'credit', 'money']).default(undefined)
 })

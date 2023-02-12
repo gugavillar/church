@@ -47,7 +47,7 @@ export type NewCursilhistForm = {
   hasDietOrFoodRestriction?: '1' | '0'
   dietOrFoodRestriction?: string
   wish: string
-  paymentMethod?: PaymentMethods
+  paymentMethod: PaymentMethods
 }
 
 type FormProps = {
@@ -99,7 +99,7 @@ export const defaultFormValues = {
   hasDietOrFoodRestriction: undefined,
   dietOrFoodRestriction: undefined,
   wish: '',
-  paymentMethod: ''
+  paymentMethod: undefined
 }
 
 export const Form = ({ children, cursilhist }: FormProps) => {

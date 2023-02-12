@@ -9,7 +9,6 @@ import { Gender } from '@common/@types'
 import { ACTUAL_YEAR } from '@common/constants'
 import { useSteps } from '@common/hooks'
 
-import { ConcludedSubscription } from './components/ConcludedSubscription'
 import { Form, NewCursilhistForm } from './components/Form'
 import { CursilloFormSubscription } from './components/FormSubscription'
 import { Instructions } from './components/Instructions'
@@ -61,9 +60,6 @@ const NewCursilhist = ({ cursilhist, stepProgress }: NewCursilhistProps) => {
             handleNextStep={nextStep}
           />
         )
-      },
-      {
-        content: <ConcludedSubscription handlePrevStep={prevStep} />
       }
     ]
   }, [nextStep, prevStep, query.gender])
