@@ -126,6 +126,7 @@ export const Form = ({ children, cursilhist }: FormProps) => {
           })
           const stripe = await getStripeJs()
           await stripe?.redirectToCheckout({ sessionId })
+          push(`/eventos/cursilho?payment=${formattedData.paymentMethod}`)
         } catch {
           toast({
             ...ERROR_TOAST,
@@ -140,8 +141,6 @@ export const Form = ({ children, cursilhist }: FormProps) => {
         title: 'Ocorreu uma falha',
         description: 'Falha ao tentar salvar. Tente novamente'
       })
-    } finally {
-      push(`/eventos/cursilho?payment=${formattedData.paymentMethod}`)
     }
   }
   return (
